@@ -64,7 +64,7 @@ class CandidateTable extends React.Component {
       <Candidate name={writeInCandidate} key={999}/>
     );
     return (
-      <table className="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+      <table style={{float: " left"}} className="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
         <thead>
           {head}
         </thead>
