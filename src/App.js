@@ -4,14 +4,23 @@ import './App.css';
 const tdStyle = {
   textAlign: "left",
 };
-
+function alertClick() {
+    var selection = document.getElementById("cand");
+    console.log(selection);
+    if(selection && selection.checked) {
+        console.log("I'm checked")
+    }
+}
 class Candidate extends React.Component {
+  /*handleClick(){
+      console.log("Select me");
+  }*/
   render() {
     return (
       <tr>
-        <td style={tdStyle} className="mdl-data-table__cel--non-numeric">
+        <td nowrap style={tdStyle} className="mdl-data-table__cel--non-numeric">
             <label className="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-              <input type="checkbox" className="mdl-checkbox__input"/>
+              <input type="checkbox" className="mdl-checkbox__input" id="cand" onClick={alertClick()}/>
                 <span className="mdl-checkbox__label">{this.props.name}</span>
             </label>
         </td>
@@ -27,12 +36,11 @@ const writeInCandidate =
       <label className="mdl-textfield__label" htmlFor="sample3">Write-in Candidate</label>
     </div>
   </form>
+
 class CandidateTable extends React.Component {
   render () {
     var head;
-    console.log(this.props);
       for(let i=0;i<this.props.choiceNo;i++){
-        console.log(i);
         head=<tr>
         <th className="mdl-data-table__cell--non-numberic">
         Choice #{i+1}
