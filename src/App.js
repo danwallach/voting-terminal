@@ -4,6 +4,7 @@ import './App.css';
 const tdStyle = {
   textAlign: "left",
 };
+
 class Candidate extends React.Component {
   render() {
     return (
@@ -29,7 +30,17 @@ const writeInCandidate =
 class CandidateTable extends React.Component {
   render () {
     var head;
-    switch (this.props.choiceNo) {
+    console.log(this.props);
+      for(let i=0;i<this.props.choiceNo;i++){
+        console.log(i);
+        head=<tr>
+        <th className="mdl-data-table__cell--non-numberic">
+        Choice #{i+1}
+        <p>Choose a candidate. Choice may not be same as previous choice</p>
+        </th>
+        </tr>
+      }
+    /*switch (this.props.choiceNo) {
       case 1:
         head = <tr>
           <th className="mdl-data-table__cell--non-numberic">
@@ -55,7 +66,7 @@ class CandidateTable extends React.Component {
         </tr>;
         break;
       default:
-    }
+    }*/
     var rows = [];
     this.props.candidates.forEach((candidate, index) => {
       rows.push(<Candidate name={candidate} key={index}/>);
