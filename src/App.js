@@ -64,7 +64,7 @@ class CandidateTable extends React.Component {
       <Candidate name={writeInCandidate} key={999}/>
     );
     return (
-      <table style={{float: " left"}} className="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+      <table style={{float: "left"}} className="mdl-data-table mdl-js-data-table mdl-shadow--2dp mdl-cell">
         <thead>
           {head}
         </thead>
@@ -84,9 +84,11 @@ class Race extends React.Component {
       <div>
         <h2>{this.props.name}</h2>
         <p>Vote your first, second, and third choices</p>
-        <CandidateTable candidates={CANDIDATES} choiceNo={1}/>
-        <CandidateTable candidates={CANDIDATES} choiceNo={2}/>
-        <CandidateTable candidates={CANDIDATES} choiceNo={3}/>
+        <div className="mdl-grid">
+          <CandidateTable candidates={CANDIDATES} choiceNo={1}/>
+          <CandidateTable candidates={CANDIDATES} choiceNo={2}/>
+          <CandidateTable candidates={CANDIDATES} choiceNo={3}/>
+        </div>
       </div>
     )
   }
