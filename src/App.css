@@ -2,6 +2,10 @@ table {
   table-layout: fixed;
 }
 
+.mdl-data-table td {
+  text-align: left;
+}
+
 th {
   word-wrap: break-word;
   white-space: normal;

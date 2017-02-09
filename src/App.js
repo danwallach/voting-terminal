@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 
-const tdStyle = {
-  textAlign: "left",
-};
 class Candidate extends React.Component {
   render() {
     return (
       <tr>
-        <td style={tdStyle} className="mdl-data-table__cel--non-numeric">
+        <td className="mdl-data-table__cel--non-numeric">
             <label className="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
               <input type="checkbox" className="mdl-checkbox__input"/>
                 <span className="mdl-checkbox__label">{this.props.name}</span>
