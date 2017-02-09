@@ -24,13 +24,15 @@ class Candidate extends React.Component {
       }
     }
     alert(this.state.value)
+    alert(this.props.checkValue)
   }
   render() {
     return (
       <tr>
       <td nowrap style={tdStyle} className="mdl-data-table__cel--non-numeric">
       <label className="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-      <input type="checkbox" className="mdl-checkbox__input" onClick={() => this.handleClicked()}/>
+      <input type="checkbox" className="mdl-checkbox__input"
+      onClick={() => this.props.onClick()}/>
       <span className="mdl-checkbox__label">{this.props.name}</span>
       </label>
       </td>
@@ -48,14 +50,17 @@ const writeInCandidate =
   </form>
 
 class CandidateTable extends React.Component {
+  renderCandidate(candidate, index){
+    var checkBoxValues = [0, 0, 0, 0, 0, 0]
+    return <Candidate name={candidate}
+    key={index}
+    checkValue={checkBoxValues[index]}
+    onClick={() => this.handleClick(index)}
+      />;
+  }
 
-  constructor(){
-    super();
-    var checks = []
-
-    this,props.candidates.forEach((candidate,index) => {
-      checks.push(0);
-    }
+  handleClick(i){
+    alert(i)
   }
   render () {
     var head;
@@ -69,7 +74,7 @@ class CandidateTable extends React.Component {
       }
     var rows = [];
     this.props.candidates.forEach((candidate, index) => {
-      rows.push(<Candidate name={candidate} key={index}/>);
+      rows.push(this.renderCandidate(candidate, index));
     });
     rows.push(
       <Candidate name={writeInCandidate} key={999}/>
