@@ -4,36 +4,46 @@ import './App.css';
 const tdStyle = {
   textAlign: "left",
 };
-function alertClick() {
-    var selection = document.getElementById("cand");
-    console.log(selection);
-    if(selection && selection.checked) {
-        console.log("I'm checked")
-    }
-}
+
 class Candidate extends React.Component {
-  /*handleClick(){
-      console.log("Select me");
-  }*/
+  constructor() {
+    super();
+    this.state = {
+      value: 'unchecked',
+    }
+  }
+  checkClicked(){
+    if(this.state.value === 'unchecked'){
+      this.state = {
+        value: 'checked'
+      }
+    }
+    else{
+      this.state = {
+        value: 'unchecked'
+      }
+    }
+    alert(this.state.value)
+  }
   render() {
     return (
       <tr>
-        <td nowrap style={tdStyle} className="mdl-data-table__cel--non-numeric">
-            <label className="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-              <input type="checkbox" className="mdl-checkbox__input" id="cand" onClick={alertClick()}/>
-                <span className="mdl-checkbox__label">{this.props.name}</span>
-            </label>
-        </td>
+      <td nowrap style={tdStyle} className="mdl-data-table__cel--non-numeric">
+      <label className="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+      <input type="checkbox" className="mdl-checkbox__input" onClick={() => this.checkClicked()}/>
+      <span className="mdl-checkbox__label">{this.props.name}</span>
+      </label>
+      </td>
       </tr>
     );
   }
 }
 
 const writeInCandidate =
-  <form action="#">
+    <form action="#">
     <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-      <input className="mdl-textfield__input" type="text" id="sample3" />
-      <label className="mdl-textfield__label" htmlFor="sample3">Write-in Candidate</label>
+    <input className="mdl-textfield__input" type="text" id="sample3" />
+    <label className="mdl-textfield__label" htmlFor="sample3">Write-in Candidate</label>
     </div>
   </form>
 
