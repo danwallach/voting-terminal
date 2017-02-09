@@ -61,7 +61,7 @@ class CandidateTable extends React.Component {
       <Candidate name={writeInCandidate} key={999}/>
     );
     return (
-      <table style={{float: "left"}} className="mdl-data-table mdl-js-data-table mdl-shadow--2dp mdl-cell">
+      <table style={{float: "left"}} className="mdl-data-table mdl-js-data-table mdl-shadow--2dp mdl-cell mdl-cell--8-col-tablet">
         <thead>
           {head}
         </thead>
@@ -79,8 +79,8 @@ class Race extends React.Component {
   render() {
     return (
       <div className="mdl-cell mdl-cell--12-col">
-        <h2>{this.props.name}</h2>
-        <p>Vote your first, second, and third choices</p>
+        <h2 className="mdl-typography--subhead">{this.props.name}</h2>
+        <p className="mdl-typography--body-1">Vote your first, second, and third choices</p>
         <div className="mdl-grid">
           <CandidateTable candidates={CANDIDATES} choiceNo={1}/>
           <CandidateTable candidates={CANDIDATES} choiceNo={2}/>
@@ -95,7 +95,7 @@ class LevelOfGovernment extends Component {
   render() {
     return (
       <div className="mdl-cell mdl-cell--12-col">
-        <h1>{this.props.governmentLevel}</h1>
+        <h1 className="mdl-typography--title">{this.props.governmentLevel}</h1>
         <Race name="Favorite Nature Setting" />
       </div>
     )
