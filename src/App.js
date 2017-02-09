@@ -54,7 +54,7 @@ class CandidateTable extends React.Component {
     var checks = []
 
     this,props.candidates.forEach((candidate,index) => {
-      checks.push(0)
+      checks.push(0);
     }
   }
   render () {
