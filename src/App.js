@@ -78,7 +78,7 @@ var CANDIDATES = ["Ocean", "Mountain", "Lake", "Forest", "Beach"];
 class Race extends React.Component {
   render() {
     return (
-      <div>
+      <div className="mdl-cell mdl-cell--12-col">
         <h2>{this.props.name}</h2>
         <p>Vote your first, second, and third choices</p>
         <div className="mdl-grid">
@@ -91,12 +91,23 @@ class Race extends React.Component {
   }
 }
 
+class LevelOfGovernment extends Component {
+  render() {
+    return (
+      <div className="mdl-cell mdl-cell--12-col">
+        <h1>{this.props.governmentLevel}</h1>
+        <Race name="Favorite Nature Setting" />
+      </div>
+    )
+  }
+}
+
+
 class App extends Component {
   render() {
     return (
-      <div>
-        <h1>City and County</h1>
-        <Race name="Favorite Nature Setting" />
+      <div className="mdl-grid">
+        <LevelOfGovernment governmentLevel="City and County" />
       </div>
     );
   }
