@@ -6,26 +6,6 @@ const tdStyle = {
 };
 
 class Candidate extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      value: 'unchecked',
-    }
-  }
-  handleClicked(){
-    if(this.state.value === 'unchecked'){
-      this.state = {
-        value: 'checked'
-      }
-    }
-    else{
-      this.state = {
-        value: 'unchecked'
-      }
-    }
-    alert(this.state.value)
-    alert(this.props.checkValue)
-  }
   render() {
     return (
       <tr>
@@ -49,18 +29,26 @@ const writeInCandidate =
     </div>
   </form>
 
+var CHECKBOXVALUES = [[1, 0, 0, 0, 0, 0],[0,0,0,0,0,0],[0,0,0,0,0,0]]
+
 class CandidateTable extends React.Component {
   renderCandidate(candidate, index){
-    var checkBoxValues = [0, 0, 0, 0, 0, 0]
     return <Candidate name={candidate}
     key={index}
-    checkValue={checkBoxValues[index]}
+    checkValue={CHECKBOXVALUES[index]}
     onClick={() => this.handleClick(index)}
       />;
   }
 
   handleClick(i){
-    alert(i)
+    if(CHECKBOXVALUES[this.props.choiceNo-1][i]===1){
+      CHECKBOXVALUES[this.props.choiceNo-1][i]=0
+    }
+    else{
+      CHECKBOXVALUES[this.props.choiceNo-1][i]=1
+    }
+    alert(CHECKBOXVALUES)
+    alert(this.props.choiceNo)
   }
   render () {
     var head;
@@ -77,7 +65,7 @@ class CandidateTable extends React.Component {
       rows.push(this.renderCandidate(candidate, index));
     });
     rows.push(
-      <Candidate name={writeInCandidate} key={999}/>
+      <Candidate name={writeInCandidate} key={999} onClick={() => this.handleClick(6)} />
     );
     return (
       <table style={{float: " left"}} className="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
