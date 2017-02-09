@@ -12,7 +12,7 @@ class Candidate extends React.Component {
       value: 'unchecked',
     }
   }
-  checkClicked(){
+  handleClicked(){
     if(this.state.value === 'unchecked'){
       this.state = {
         value: 'checked'
@@ -30,7 +30,7 @@ class Candidate extends React.Component {
       <tr>
       <td nowrap style={tdStyle} className="mdl-data-table__cel--non-numeric">
       <label className="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-      <input type="checkbox" className="mdl-checkbox__input" onClick={() => this.checkClicked()}/>
+      <input type="checkbox" className="mdl-checkbox__input" onClick={() => this.handleClicked()}/>
       <span className="mdl-checkbox__label">{this.props.name}</span>
       </label>
       </td>
@@ -48,6 +48,15 @@ const writeInCandidate =
   </form>
 
 class CandidateTable extends React.Component {
+
+  constructor(){
+    super();
+    var checks = []
+
+    this,props.candidates.forEach((candidate,index) => {
+      checks.push(0)
+    }
+  }
   render () {
     var head;
       for(let i=0;i<this.props.choiceNo;i++){
@@ -58,33 +67,6 @@ class CandidateTable extends React.Component {
         </th>
         </tr>
       }
-    /*switch (this.props.choiceNo) {
-      case 1:
-        head = <tr>
-          <th className="mdl-data-table__cell--non-numberic">
-            First Choice
-            <p>Vote for One</p>
-          </th>
-        </tr>;
-        break;
-      case 2:
-        head = <tr>
-          <th className="mdl-data-table__cell--non-numberic">
-            Second Choice
-            <p>Vote for One: Must be different than your first choice</p>
-          </th>
-        </tr>;
-        break;
-      case 3:
-        head = <tr>
-          <th className="mdl-data-table__cell--non-numberic">
-            Third Choice
-            <p>Vote for One: Must be different than your first and second choices</p>
-          </th>
-        </tr>;
-        break;
-      default:
-    }*/
     var rows = [];
     this.props.candidates.forEach((candidate, index) => {
       rows.push(<Candidate name={candidate} key={index}/>);
