@@ -20,7 +20,7 @@ const writeInCandidate =
   <form action="#">
     <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
       <input className="mdl-textfield__input" type="text" id="sample3" />
-      <label className="mdl-textfield__label" htmlFor="sample3">Write-in Candidate</label>
+      <label className="mdl-textfield__label" htmlFor="sample3">Write-in candidate</label>
     </div>
   </form>
 class CandidateTable extends React.Component {
