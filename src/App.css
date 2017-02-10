@@ -6,13 +6,13 @@ table {
   table-layout: fixed;
 }
 
-.mdl-data-table td {
-  text-align: left;
-}
-
 .mdl-data-table th {
   height: 97px;
   vertical-align: top;
   word-wrap: break-word;
   white-space: normal;
+}
+
+.mdl-data-table td {
+  text-align: left;
 }
