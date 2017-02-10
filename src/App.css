@@ -15,4 +15,11 @@ table {
 
 .mdl-data-table td {
   text-align: left;
+  /* FIXME: Hack to fix write-in candidate's td not expanding. */
+  height: 67px;
+}
+
+/* FIXME: Hack to fix write-in candidate's td not expanding. */
+.mdl-textfield {
+  margin-top: -20px;
 }
