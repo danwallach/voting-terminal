@@ -18,7 +18,6 @@ class Candidate extends React.Component {
       <span className="mdl-checkbox__label">
       {this.props.name}
       {this.props.checkValue}
-      {this.props.test_thingy_value}
       </span>
       </label>
       </td>
@@ -37,31 +36,12 @@ const writeInCandidate =
 
 
 class CandidateTable extends React.Component {
-  constructor(){
-    super();
-    this.state = {
-      test_variable: [1,0,0,0,0,0],
-    };
-  }
   renderCandidate(candidate, index){
     return <Candidate name={candidate}
     key={index}
-    indexValue={index}
-    tableValue={this.props.choiceNo-1}
     checkValue={this.props.check_table[index]}
-    test_thingy_value = {this.state.test_variable[index]}
-    onClick={() => this.props.parentRender()}
+    onClick={() => this.props.parentRender(this.props.choiceNo-1, index)}
       />;
-  }
-
-  handleClick(index){
-
-    alert("Middle level onClick called candidate at ");
-    var fwaaahhh = this.state.test_variable.slice();
-    alert(fwaaahhh)
-    fwaaahhh = [0,0,0,0,0,0]
-    alert(fwaaahhh)
-    this.setState({test_variable: fwaaahhh});
   }
   render () {
     var head;
@@ -99,7 +79,7 @@ class Race extends React.Component {
   constructor(){
     super();
     this.state = {
-      check_box_values: [[1,0,0,0,0,0],[0,1,0,0,0,0],[0,0,1,0,0,0]],
+      check_box_values: [[1,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]],
     };
   }
   render() {
@@ -107,15 +87,28 @@ class Race extends React.Component {
       <div>
         <h2>{this.props.name}</h2>
         <p>Vote your first, second, and third choices</p>
-        <CandidateTable check_table={this.state.check_box_values[0]} parentRender={() => this.reRenderAll()} candidates={CANDIDATES} choiceNo={1}/>
-        <CandidateTable check_table={this.state.check_box_values[1]} parentRender={() => this.reRenderAll()} candidates={CANDIDATES} choiceNo={2}/>
-        <CandidateTable check_table={this.state.check_box_values[2]} parentRender={() => this.reRenderAll()} candidates={CANDIDATES} choiceNo={3}/>
+        <CandidateTable check_table={this.state.check_box_values[0]} parentRender={(t,i) => this.reRenderAll(t,i)} candidates={CANDIDATES} choiceNo={1}/>
+        <CandidateTable check_table={this.state.check_box_values[1]} parentRender={(t,i) => this.reRenderAll(t,i)} candidates={CANDIDATES} choiceNo={2}/>
+        <CandidateTable check_table={this.state.check_box_values[2]} parentRender={(t,i) => this.reRenderAll(t,i)} candidates={CANDIDATES} choiceNo={3}/>
       </div>
     )
   }
-  reRenderAll(){
+  checkUsingArray(){
+
+  }
+  reRenderAll(table_index, index){
+    document.querySelector('.mdl-js-checkbox').MaterialCheckbox.check();
     var temp_prevent_mutation = this.state.check_box_values.slice();
-    temp_prevent_mutation= [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]
+    //alert(table_index)
+    //alert(index)
+    for(var i = 0; i < temp_prevent_mutation.length; i++){
+      for(var j = 0; j< temp_prevent_mutation[i].length; j++){
+        if(i===table_index||j===index){
+          temp_prevent_mutation[i][j]=0;
+        }
+      }
+    }
+    temp_prevent_mutation[table_index][index] = 1 - temp_prevent_mutation[table_index][index]
     this.setState({check_box_values: temp_prevent_mutation})
   }
 }
