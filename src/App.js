@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-
+// eslint-disable-next-line
 var CHECKBOXVALUES = [[1, 0, 0, 0, 0, 0],[0,0,0,0,1,0],[0,0,0,0,0,0]]
 const tdStyle = {
   textAlign: "left",
@@ -14,11 +14,11 @@ class Candidate extends React.Component {
       <label className="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
       <input type="checkbox" className="mdl-checkbox__input"
       onClick={() => this.props.onClick()}
-      checked={CHECKBOXVALUES[this.props.tableValue][this.props.indexValue]===0? "" : "checked"}
       />
       <span className="mdl-checkbox__label">
       {this.props.name}
-      {CHECKBOXVALUES[this.props.tableValue][this.props.indexValue]}
+      {this.props.checkValue}
+      {this.props.test_thingy_value}
       </span>
       </label>
       </td>
@@ -26,7 +26,7 @@ class Candidate extends React.Component {
     );
   }
 }
-
+// eslint-disable-next-line
 const writeInCandidate =
     <form action="#">
     <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -37,36 +37,31 @@ const writeInCandidate =
 
 
 class CandidateTable extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      test_variable: [1,0,0,0,0,0],
+    };
+  }
   renderCandidate(candidate, index){
     return <Candidate name={candidate}
     key={index}
     indexValue={index}
     tableValue={this.props.choiceNo-1}
-    onClick={() => this.handleClick(index)}
+    checkValue={this.props.check_table[index]}
+    test_thingy_value = {this.state.test_variable[index]}
+    onClick={() => this.props.parentRender()}
       />;
   }
 
   handleClick(index){
-    const table = this.props.choiceNo - 1;
-    this.forceUpdate();
-    if(CHECKBOXVALUES[table][index]===1){
-      CHECKBOXVALUES[table][index]=0
-    }
-    else{
-      CHECKBOXVALUES[table][index]=1
-    }//TODO NO MAGIC NUMBERS
-    for(let i =0;i < 3; i++){
-      if(i!==table){
-        CHECKBOXVALUES[i][index]=0;
-      }
-    }
-    for(let i = 0; i < 6; i++){
-      if(i!==index){
-        CHECKBOXVALUES[table][i]=0;
-      }
-    }
-    alert(CHECKBOXVALUES)
-    this.props.parentRender();
+
+    alert("Middle level onClick called candidate at ");
+    var fwaaahhh = this.state.test_variable.slice();
+    alert(fwaaahhh)
+    fwaaahhh = [0,0,0,0,0,0]
+    alert(fwaaahhh)
+    this.setState({test_variable: fwaaahhh});
   }
   render () {
     var head;
@@ -101,21 +96,27 @@ class CandidateTable extends React.Component {
 var CANDIDATES = ["Ocean", "Mountain", "Lake", "Forest", "Beach","Flarp"];
 
 class Race extends React.Component {
-  reRenderAll(){
-    alert("Updating")
-    //this.forceUpdate();
-    this.forceUpdate();
+  constructor(){
+    super();
+    this.state = {
+      check_box_values: [[1,0,0,0,0,0],[0,1,0,0,0,0],[0,0,1,0,0,0]],
+    };
   }
   render() {
     return (
       <div>
         <h2>{this.props.name}</h2>
         <p>Vote your first, second, and third choices</p>
-        <CandidateTable parentRender={this.reRenderAll} candidates={CANDIDATES} choiceNo={1}/>
-        <CandidateTable parentRender={this.reRenderAll} candidates={CANDIDATES} chocandidates={CANDIDATES} choiceNo={2}/>
-        <CandidateTable parentRender={this.reRenderAll} candidates={CANDIDATES} choiceNo={3}/>
+        <CandidateTable check_table={this.state.check_box_values[0]} parentRender={() => this.reRenderAll()} candidates={CANDIDATES} choiceNo={1}/>
+        <CandidateTable check_table={this.state.check_box_values[1]} parentRender={() => this.reRenderAll()} candidates={CANDIDATES} choiceNo={2}/>
+        <CandidateTable check_table={this.state.check_box_values[2]} parentRender={() => this.reRenderAll()} candidates={CANDIDATES} choiceNo={3}/>
       </div>
     )
+  }
+  reRenderAll(){
+    var temp_prevent_mutation = this.state.check_box_values.slice();
+    temp_prevent_mutation= [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]
+    this.setState({check_box_values: temp_prevent_mutation})
   }
 }
 
