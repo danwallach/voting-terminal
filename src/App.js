@@ -128,12 +128,13 @@ class Race extends React.Component {
     //It represents the checked or unchecked values of all the checkboxes
     //It can be directly changed to change any of the checkboxes
     //It is hardcoded currently. Making it dynamic would take some code tweaking
+    var temp_array=new Array(3);
+    for(let i=0; i <temp_array.length; i++){
+      temp_array[i] = new Array(CANDIDATES.length);
+      temp_array[i].fill(0)
+    }
     this.state = {
-      check_box_values: [
-        [0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0]
-      ]
+      check_box_values: temp_array,
     };
   }
   render() {
