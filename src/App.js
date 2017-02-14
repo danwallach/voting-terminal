@@ -70,7 +70,7 @@ class CandidateTable extends React.Component {
   }
 }
 
-var CANDIDATES = ["Ocean", "Mountain", "Lake", "Forest", "Beach","Flarp"];
+var CANDIDATES = ["Barack H. Obama - DEM", "George W. Bush - REP", "William J. Clinton - DEM", "George H. W. Bush - DEM", "Ronald W. Reagan - REP","James E. Carter - DEM" ];
 
 class Race extends React.Component {
   constructor(){
