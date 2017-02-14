@@ -76,7 +76,7 @@ class Race extends React.Component {
   constructor(){
     super();
     this.state = {
-      check_box_values: [[1,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]],
+      check_box_values: [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]],
     };
   }
   render() {
