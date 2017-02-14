@@ -33,14 +33,12 @@ class CandidateTable extends React.Component {
   }
   render () {
     var head;
-      for(let i=0;i<this.props.choiceNo;i++){
-        head=<tr>
-        <th className="mdl-data-table__cell--non-numberic">
-        Choice #{i+1}
-        <p>Choose a candidate. Choice may not be same as previous choice</p>
-        </th>
-        </tr>
-      }
+    head=<tr>
+    <th className="mdl-data-table__cell--non-numberic">
+    Choice #{this.props.choiceNo}
+    <p>Choose a candidate. Choice may not be same as previous choice</p>
+    </th>
+    </tr>
     var rows = [];
     this.props.candidates.forEach((candidate, index) => {
       rows.push(this.renderCandidate(candidate, index));
