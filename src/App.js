@@ -23,21 +23,12 @@ class Candidate extends React.Component {
   }
 }
 
-const writeInCandidate =
-    <form action="#">
-    <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-      <input className="mdl-textfield__input" type="text" id="sample3" />
-      <label className="mdl-textfield__label" htmlFor="sample3">Write-in candidate</label>
-    </div>
-  </form>
-
-
 class CandidateTable extends React.Component {
   renderCandidate(candidate, index){
     return <Candidate name={candidate}
     key={index}
     checkValue={this.props.check_table[index]}
-    onClick={() => this.props.parentRender(this.props.choiceNo-1, index)}
+    onClick={() => this.props.onClick(this.props.choiceNo-1, index)}
       />;
   }
   render () {
@@ -54,9 +45,6 @@ class CandidateTable extends React.Component {
     this.props.candidates.forEach((candidate, index) => {
       rows.push(this.renderCandidate(candidate, index));
     });
-    /*rows.push(
-      <Candidate name={writeInCandidate} key={999} onClick={() => this.handleClick(6)} />
-    );*/
     return (
       <table style={{float: "left"}} className="mdl-data-table mdl-js-data-table mdl-shadow--2dp mdl-cell mdl-cell--8-col-tablet">
         <thead>
@@ -85,20 +73,15 @@ class Race extends React.Component {
         <h2 className="mdl-typography--subhead">{this.props.name}</h2>
         <p className="mdl-typography--body-1">Vote your first, second, and third choices</p>
         <div>
-        <CandidateTable check_table={this.state.check_box_values[0]} parentRender={(t,i) => this.reRenderAll(t,i)} candidates={CANDIDATES} choiceNo={1}/>
-        <CandidateTable check_table={this.state.check_box_values[1]} parentRender={(t,i) => this.reRenderAll(t,i)} candidates={CANDIDATES} choiceNo={2}/>
-        <CandidateTable check_table={this.state.check_box_values[2]} parentRender={(t,i) => this.reRenderAll(t,i)} candidates={CANDIDATES} choiceNo={3}/>
+        <CandidateTable check_table={this.state.check_box_values[0]} onClick={(t,i) => this.handleClick(t,i)} candidates={CANDIDATES} choiceNo={1}/>
+        <CandidateTable check_table={this.state.check_box_values[1]} onClick={(t,i) => this.handleClick(t,i)} candidates={CANDIDATES} choiceNo={2}/>
+        <CandidateTable check_table={this.state.check_box_values[2]} onClick={(t,i) => this.handleClick(t,i)} candidates={CANDIDATES} choiceNo={3}/>
         </div>
       </div>
     )
   }
-  checkUsingArray(){
-
-  }
-  reRenderAll(table_index, index){
+  handleClick(table_index, index){
     var temp_prevent_mutation = this.state.check_box_values.slice();
-    //alert(table_index)
-    //alert(index)
     for(var i = 0; i < temp_prevent_mutation.length; i++){
       for(var j = 0; j< temp_prevent_mutation[i].length; j++){
         if(i===table_index ^ j===index){
