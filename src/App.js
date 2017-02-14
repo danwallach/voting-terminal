@@ -119,7 +119,7 @@ class LevelOfGovernment extends Component {
     return (
       <div className="mdl-cell mdl-cell--12-col">
         <h1 className="mdl-typography--title">{this.props.governmentLevel}</h1>
-        <Race name="Favorite Nature Setting" />
+        <Race name="U.S. President" />
       </div>
     )
   }
@@ -130,7 +130,7 @@ class App extends Component {
   render() {
     return (
       <div className="mdl-grid">
-        <LevelOfGovernment governmentLevel="City and County" />
+        <LevelOfGovernment governmentLevel="Federal" />
       </div>
     );
   }
