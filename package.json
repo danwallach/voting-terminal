@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "react": "^15.4.2",
-    "react-deep-force-update": "^2.0.1",
     "react-dom": "^15.4.2"
   },
   "scripts": {
