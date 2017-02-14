@@ -101,7 +101,7 @@ class Race extends React.Component {
     //alert(index)
     for(var i = 0; i < temp_prevent_mutation.length; i++){
       for(var j = 0; j< temp_prevent_mutation[i].length; j++){
-        if(i===table_index||j===index){
+        if(i===table_index ^ j===index){
           temp_prevent_mutation[i][j]=0;
         }
       }
