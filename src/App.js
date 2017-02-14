@@ -1,36 +1,33 @@
 import React, { Component } from 'react';
 import './App.css';
-// eslint-disable-next-line
-var CHECKBOXVALUES = [[1, 0, 0, 0, 0, 0],[0,0,0,0,1,0],[0,0,0,0,0,0]]
-const tdStyle = {
-  textAlign: "left",
-};
 
 class Candidate extends React.Component {
   render() {
     return (
       <tr>
-      <td nowrap style={tdStyle} className="mdl-data-table__cel--non-numeric">
-      <label className="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-      <input type="checkbox" className="mdl-checkbox__input" checked={this.props.checkValue}
-      onClick={() => this.props.onClick()}
-      />
-      <span className="mdl-checkbox__label">
-      {this.props.name}
-      {this.props.checkValue}
-      </span>
-      </label>
-      </td>
+        <td className="mdl-data-table__cel--non-numeric">
+          <label className="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+            <input
+              type="checkbox"
+              className="mdl-checkbox__input"
+              checked={this.props.checkValue}
+              onClick={() => this.props.onClick()}
+            />
+            <span className="mdl-checkbox__label">
+              {this.props.name}
+            </span>
+          </label>
+        </td>
       </tr>
     );
   }
 }
-// eslint-disable-next-line
+
 const writeInCandidate =
     <form action="#">
     <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-    <input className="mdl-textfield__input" type="text" id="sample3" />
-    <label className="mdl-textfield__label" htmlFor="sample3">Write-in Candidate</label>
+      <input className="mdl-textfield__input" type="text" id="sample3" />
+      <label className="mdl-textfield__label" htmlFor="sample3">Write-in candidate</label>
     </div>
   </form>
 
@@ -61,7 +58,7 @@ class CandidateTable extends React.Component {
       <Candidate name={writeInCandidate} key={999} onClick={() => this.handleClick(6)} />
     );*/
     return (
-      <table style={{float: " left"}} className="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+      <table style={{float: "left"}} className="mdl-data-table mdl-js-data-table mdl-shadow--2dp mdl-cell mdl-cell--8-col-tablet">
         <thead>
           {head}
         </thead>
@@ -84,12 +81,14 @@ class Race extends React.Component {
   }
   render() {
     return (
-      <div>
-        <h2>{this.props.name}</h2>
-        <p>Vote your first, second, and third choices</p>
+      <div className="mdl-cell mdl-cell--12-col">
+        <h2 className="mdl-typography--subhead">{this.props.name}</h2>
+        <p className="mdl-typography--body-1">Vote your first, second, and third choices</p>
+        <div>
         <CandidateTable check_table={this.state.check_box_values[0]} parentRender={(t,i) => this.reRenderAll(t,i)} candidates={CANDIDATES} choiceNo={1}/>
         <CandidateTable check_table={this.state.check_box_values[1]} parentRender={(t,i) => this.reRenderAll(t,i)} candidates={CANDIDATES} choiceNo={2}/>
         <CandidateTable check_table={this.state.check_box_values[2]} parentRender={(t,i) => this.reRenderAll(t,i)} candidates={CANDIDATES} choiceNo={3}/>
+        </div>
       </div>
     )
   }
@@ -115,12 +114,23 @@ class Race extends React.Component {
   }
 }
 
+class LevelOfGovernment extends Component {
+  render() {
+    return (
+      <div className="mdl-cell mdl-cell--12-col">
+        <h1 className="mdl-typography--title">{this.props.governmentLevel}</h1>
+        <Race name="Favorite Nature Setting" />
+      </div>
+    )
+  }
+}
+
+
 class App extends Component {
   render() {
     return (
-      <div>
-        <h1>City and County</h1>
-        <Race name="Favorite Nature Setting" />
+      <div className="mdl-grid">
+        <LevelOfGovernment governmentLevel="City and County" />
       </div>
     );
   }

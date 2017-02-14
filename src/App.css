@@ -1,24 +1,25 @@
-.App {
+body {
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+table {
+  table-layout: fixed;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.mdl-data-table th {
+  height: 97px;
+  vertical-align: top;
+  word-wrap: break-word;
+  white-space: normal;
 }
 
-.App-intro {
-  font-size: large;
+.mdl-data-table td {
+  text-align: left;
+  /* FIXME: Hack to fix write-in candidate's td not expanding. */
+  height: 67px;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+/* FIXME: Hack to fix write-in candidate's td not expanding. */
+.mdl-textfield {
+  margin-top: -20px;
 }
