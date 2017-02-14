@@ -12,7 +12,7 @@ class Candidate extends React.Component {
       <tr>
       <td nowrap style={tdStyle} className="mdl-data-table__cel--non-numeric">
       <label className="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-      <input type="checkbox" className="mdl-checkbox__input"
+      <input type="checkbox" className="mdl-checkbox__input" checked={this.props.checkValue}
       onClick={() => this.props.onClick()}
       />
       <span className="mdl-checkbox__label">
@@ -97,7 +97,6 @@ class Race extends React.Component {
 
   }
   reRenderAll(table_index, index){
-    document.querySelector('.mdl-js-checkbox').MaterialCheckbox.check();
     var temp_prevent_mutation = this.state.check_box_values.slice();
     //alert(table_index)
     //alert(index)
@@ -110,6 +109,9 @@ class Race extends React.Component {
     }
     temp_prevent_mutation[table_index][index] = 1 - temp_prevent_mutation[table_index][index]
     this.setState({check_box_values: temp_prevent_mutation})
+  }
+  componentDidUpdate() {
+    document.querySelectorAll('.mdl-js-checkbox').forEach((element) => element.MaterialCheckbox.checkToggleState());
   }
 }
 
