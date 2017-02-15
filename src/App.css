@@ -1,11 +1,3 @@
-body {
-  text-align: center;
-}
-
-table {
-  table-layout: fixed;
-}
-
 .mdl-data-table th {
   height: 97px;
   vertical-align: top;
@@ -13,13 +5,6 @@ table {
   white-space: normal;
 }
 
-.mdl-data-table td {
-  text-align: left;
-  /* FIXME: Hack to fix write-in candidate's td not expanding. */
-  height: 67px;
-}
-
-/* FIXME: Hack to fix write-in candidate's td not expanding. */
-.mdl-textfield {
-  margin-top: -20px;
+.mdl-data-table tbody tr {
+  height: 92px;
 }

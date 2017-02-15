@@ -61,7 +61,8 @@ class Candidate extends React.Component {
               onClick={() => this.props.onClick()}
             />
             <span className="mdl-checkbox__label">
-              {this.props.name}
+              <p className="mdl-typography--body-1 mdl-typography--text-capitalize mdl-typography--text-left">{this.props.name}</p>
+              <p className="mdl-typography--caption mdl-typography--caption mdl-typography--text-capitalize mdl-typography--text-right"></p>
             </span>
           </label>
         </td>
@@ -95,9 +96,9 @@ class CandidateTable extends React.Component {
     var head;
     head = (
       <tr>
-        <th className="mdl-data-table__cell--non-numberic">
-          Choice #{this.props.choiceNo}
-          <p>Choose a candidate. Choice may not be same as previous choice</p>
+        <th>
+          <p className="mdl-typography--body-2 mdl-typography--text-left">Choice #{this.props.choiceNo}</p>
+          <p className="mdl-typography--body-1 mdl-typography--text-left">Choose a candidate. Choice may not be same as previous choice</p>
         </th>
       </tr>
     );
@@ -145,8 +146,8 @@ class Race extends React.Component {
     //Certain properties are passed down, see CandidateTable for more info
     return (
       <div className="mdl-cell mdl-cell--12-col">
-        <h2 className="mdl-typography--subhead">{this.props.name}</h2>
-        <p className="mdl-typography--body-1">
+        <h2 className="mdl-typography--subhead mdl-typography--text-center mdl-typography--text-capitalize">{this.props.name}</h2>
+        <p className="mdl-typography--body-1 mdl-typography--text-center">
           Vote your first, second, and third choices
         </p>
         <div>
@@ -203,7 +204,7 @@ class LevelOfGovernment extends Component {
   render() {
     return (
       <div className="mdl-cell mdl-cell--12-col">
-        <h1 className="mdl-typography--title">{this.props.governmentLevel}</h1>
+        <h1 className="mdl-typography--title mdl-typography--text-center mdl-typography--text-capitalize">{this.props.governmentLevel}</h1>
         <Race name="U.S. President" />
       </div>
     );
