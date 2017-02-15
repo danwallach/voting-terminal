@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import '../node_modules/roboto-fontface/css/roboto/roboto-fontface.css'
+import './material.min.css'
+import './material.min.js'
 import './App.css';
 
 class Candidate extends React.Component {
