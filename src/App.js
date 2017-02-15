@@ -3,7 +3,7 @@ import "../node_modules/roboto-fontface/css/roboto/roboto-fontface.css";
 import "./material.min.css";
 import "./material.min.js";
 import "./App.css";
-import election from "./election.json"
+import election from "./election.json";
 /* Welcome to the voting terminal San Francisco Style code
  * This code is based off of React, a javascript framework
  * React philosophy indicates that javascript, html, and JSX should all be in the same file
@@ -221,16 +221,17 @@ class Office extends React.Component {
 class Contest extends Component {
   render() {
     return (
-        <Office office={this.props.contest.office} candidates={this.props.contest.candidates}/>
+      <Office
+        office={this.props.contest.office}
+        candidates={this.props.contest.candidates}
+      />
     );
   }
 }
 
 class Election extends Component {
   render() {
-    return (
-      <Contest contest={election.contests[0]} />
-    );
+    return <Contest contest={election.contests[0]} />;
   }
 }
 
