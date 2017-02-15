@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import '../node_modules/roboto-fontface/css/roboto/roboto-fontface.css'
-import './material.min.css'
-import './material.min.js'
-import './App.css';
+import React, { Component } from "react";
+import "../node_modules/roboto-fontface/css/roboto/roboto-fontface.css";
+import "./material.min.css";
+import "./material.min.js";
+import "./App.css";
 /* Welcome to the voting terminal San Francisco Style code
  * This code is based off of React, a javascript framework
  * React philosophy indicates that javascript, html, and JSX should all be in the same file
@@ -61,8 +61,14 @@ class Candidate extends React.Component {
               onClick={() => this.props.onClick()}
             />
             <span className="mdl-checkbox__label">
-              <p className="mdl-typography--body-1 mdl-typography--text-capitalize mdl-typography--text-left">{this.props.name}</p>
-              <p className="mdl-typography--caption mdl-typography--caption mdl-typography--text-capitalize mdl-typography--text-right"></p>
+              <p
+                className="mdl-typography--body-1 mdl-typography--text-capitalize mdl-typography--text-left"
+              >
+                {this.props.name}
+              </p>
+              <p
+                className="mdl-typography--caption mdl-typography--caption mdl-typography--text-capitalize mdl-typography--text-right"
+              />
             </span>
           </label>
         </td>
@@ -97,8 +103,12 @@ class CandidateTable extends React.Component {
     head = (
       <tr>
         <th>
-          <p className="mdl-typography--body-2 mdl-typography--text-left">Choice #{this.props.choiceNo}</p>
-          <p className="mdl-typography--body-1 mdl-typography--text-left">Choose a candidate. Choice may not be same as previous choice</p>
+          <p className="mdl-typography--body-2 mdl-typography--text-left">
+            Choice #{this.props.choiceNo}
+          </p>
+          <p className="mdl-typography--body-1 mdl-typography--text-left">
+            Choose a candidate. Choice may not be same as previous choice
+          </p>
         </th>
       </tr>
     );
@@ -132,13 +142,13 @@ class Race extends React.Component {
     //It represents the checked or unchecked values of all the checkboxes
     //It can be directly changed to change any of the checkboxes
     //It is hardcoded currently. Making it dynamic would take some code tweaking
-    var temp_array=new Array(3);
-    for(let i=0; i <temp_array.length; i++){
+    var temp_array = new Array(3);
+    for (let i = 0; i < temp_array.length; i++) {
       temp_array[i] = new Array(CANDIDATES.length);
-      temp_array[i].fill(0)
+      temp_array[i].fill(0);
     }
     this.state = {
-      check_box_values: temp_array,
+      check_box_values: temp_array
     };
   }
   render() {
@@ -146,7 +156,11 @@ class Race extends React.Component {
     //Certain properties are passed down, see CandidateTable for more info
     return (
       <div className="mdl-cell mdl-cell--12-col">
-        <h2 className="mdl-typography--subhead mdl-typography--text-center mdl-typography--text-capitalize">{this.props.name}</h2>
+        <h2
+          className="mdl-typography--subhead mdl-typography--text-center mdl-typography--text-capitalize"
+        >
+          {this.props.name}
+        </h2>
         <p className="mdl-typography--body-1 mdl-typography--text-center">
           Vote your first, second, and third choices
         </p>
@@ -204,7 +218,11 @@ class LevelOfGovernment extends Component {
   render() {
     return (
       <div className="mdl-cell mdl-cell--12-col">
-        <h1 className="mdl-typography--title mdl-typography--text-center mdl-typography--text-capitalize">{this.props.governmentLevel}</h1>
+        <h1
+          className="mdl-typography--title mdl-typography--text-center mdl-typography--text-capitalize"
+        >
+          {this.props.governmentLevel}
+        </h1>
         <Race name="U.S. President" />
       </div>
     );
