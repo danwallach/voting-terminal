@@ -1,5 +1,8 @@
-import React, { Component } from "react";
-import "./App.css";
+import React, { Component } from 'react';
+import '../node_modules/roboto-fontface/css/roboto/roboto-fontface.css'
+import './material.min.css'
+import './material.min.js'
+import './App.css';
 /* Welcome to the voting terminal San Francisco Style code
  * This code is based off of React, a javascript framework
  * React philosophy indicates that javascript, html, and JSX should all be in the same file
