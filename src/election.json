@@ -1,0 +1,34 @@
+{
+  "contests": [
+    {
+      "office": "U.S. President",
+      "candidates": [
+        {
+          "name": "Barack H. Obama",
+          "party": "Democratic"
+        },
+        {
+          "name": "George W. Bush",
+          "party": "Republican"
+        },
+        {
+          "name": "William J. Clinton",
+          "party": "Democratic"
+        },
+        {
+          "name": "George H. W. Bush",
+          "party": "Republican"
+        },
+        {
+          "name": "Ronald W. Reagan",
+          "party": "Republican"
+        },
+        {
+          "name": "James E. Carter",
+          "party": "Democratic"
+        }
+      ]
+    }
+  ]
+}
+
