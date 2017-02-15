@@ -69,7 +69,7 @@ class Candidate extends React.Component {
                 {this.props.name}
               </p>
               <p
-                className="mdl-typography--caption mdl-typography--caption mdl-typography--text-capitalize mdl-typography--text-left"
+                className="mdl-typography--caption  mdl-typography--text-capitalize mdl-typography--text-right"
               >
                 {this.props.party}
               </p>
