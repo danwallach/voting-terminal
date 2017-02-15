@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../node_modules/roboto-fontface/css/roboto/roboto-fontface.css";
-import "./material.css";
-import "./material.js";
+import "./material.min.css";
+import "./material.min.js";
 import "./App.css";
 import election from "./election.json";
 /* Welcome to the voting terminal San Francisco Style code
