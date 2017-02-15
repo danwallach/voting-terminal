@@ -5,6 +5,14 @@
   white-space: normal;
 }
 
-.mdl-data-table tbody tr {
-  height: 92px;
+.mdl-data-table tbody tr td {
+  padding-top: 36px;
+}
+
+label.mdl-checkbox {
+  height: auto;
+}
+
+.mdl-checkbox__label p {
+  margin-bottom: 4px;
 }
