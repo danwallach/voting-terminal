@@ -36,7 +36,7 @@ import election from "./election.json";
  * unchecks or checks the various checkboxes based on the values from the array
  */
 
-//Candidates, hardcoded
+//Candidates, hardcoded. This list has been deprecated, this App now imports from election.json
 var CANDIDATES = [
   "Barack H. Obama - DEM",
   "George W. Bush - REP",
