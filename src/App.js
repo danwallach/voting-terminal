@@ -36,17 +36,6 @@ import election from "./election.json";
  * unchecks or checks the various checkboxes based on the values from the array
  */
 
-//Candidates, hardcoded. This list has been deprecated, this App now imports from election.json
-// eslint-disable-next-line
-var CANDIDATES = [
-  "Barack H. Obama - DEM",
-  "George W. Bush - REP",
-  "William J. Clinton - DEM",
-  "George H. W. Bush - DEM",
-  "Ronald W. Reagan - REP",
-  "James E. Carter - DEM"
-];
-
 class Candidate extends React.Component {
   //Creates a candidate. Contains a checkbox and a candidate title
   //Contains the proporties onClick and checked
