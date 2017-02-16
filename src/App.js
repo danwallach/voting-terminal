@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../node_modules/roboto-fontface/css/roboto/roboto-fontface.css";
-import "../node_modules/material-design-icons/"
+import "../node_modules/material-design-icons/";
 import "./material.css";
 import "./material.js";
 import "./App.css";
@@ -37,6 +37,7 @@ import election from "./election.json";
  */
 
 //Candidates, hardcoded. This list has been deprecated, this App now imports from election.json
+// eslint-disable-next-line
 var CANDIDATES = [
   "Barack H. Obama - DEM",
   "George W. Bush - REP",
@@ -117,6 +118,7 @@ class CandidateTable extends React.Component {
         </th>
       </tr>
     );
+
     //Creates an array of candidates, calls renderCandidate function
     var rows = [];
     this.props.candidates.forEach((candidate, index) => {
@@ -152,11 +154,14 @@ class Office extends React.Component {
       temp_array[i] = new Array(this.props.candidates.length);
       temp_array[i].fill(0);
     }
+    var table_reveal_temp = [1, 0, 0];
     this.state = {
-      check_box_values: temp_array
+      check_box_values: temp_array,
+      table_reveal_values: table_reveal_temp
     };
   }
   render() {
+    var tables=[];
     //Creation of three (San Fran allows 3) candidate tables
     //Certain properties are passed down, see CandidateTable for more info
     return (
@@ -175,18 +180,21 @@ class Office extends React.Component {
             onClick={(t, i) => this.handleClick(t, i)}
             candidates={this.props.candidates}
             choiceNo={1}
+            is_table_revealed={this.state.table_reveal_values[0]}
           />
           <CandidateTable
             this_table_check_values={this.state.check_box_values[1]}
             onClick={(t, i) => this.handleClick(t, i)}
             candidates={this.props.candidates}
             choiceNo={2}
+            is_table_revealed={this.state.table_reveal_values[1]}
           />
           <CandidateTable
             this_table_check_values={this.state.check_box_values[2]}
             onClick={(t, i) => this.handleClick(t, i)}
             candidates={this.props.candidates}
             choiceNo={3}
+            is_table_revealed={this.state.table_reveal_values[2]}
           />
         </div>
       </div>
@@ -199,6 +207,8 @@ class Office extends React.Component {
   //The focused box itself will be toggled
   handleClick(table_index, index) {
     var temp_prevent_mutation = this.state.check_box_values.slice();
+    var reveal_values_temp = this.state.table_reveal_values.slice();
+    reveal_values_temp[table_index + 1] = 1;
     for (var i = 0; i < temp_prevent_mutation.length; i++) {
       for (var j = 0; j < temp_prevent_mutation[i].length; j++) {
         if (i === table_index ^ j === index) {
@@ -208,7 +218,10 @@ class Office extends React.Component {
     }
     temp_prevent_mutation[table_index][index] = 1 -
       temp_prevent_mutation[table_index][index];
-    this.setState({ check_box_values: temp_prevent_mutation });
+    this.setState({
+      check_box_values: temp_prevent_mutation,
+      table_reveal_values: reveal_values_temp
+    });
   }
   //This function listens for an update and then searches through the document for all checkboxes
   //Each checkboxe is then updated
