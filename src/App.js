@@ -93,6 +93,7 @@ class CandidateTable extends React.Component {
    */
   renderCandidate(name, party, index) {
     //Creation of a candidate, sending down properties
+    //Remember, key={index}
     return (
       <Candidate
         name={name}
@@ -124,16 +125,24 @@ class CandidateTable extends React.Component {
     this.props.candidates.forEach((candidate, index) => {
       rows.push(this.renderCandidate(candidate.name, candidate.party, index));
     });
+    var style;
+    if (this.props.is_table_revealed) {
+      style = {};
+    } else {
+      style = {
+        display: "none"
+      };
+    }
     //Returns an HTML table with the header and candidate array
     return (
       <table
         style={{ float: "left" }}
         className="mdl-data-table mdl-js-data-table mdl-shadow--2dp mdl-cell mdl-cell--8-col-tablet"
       >
-        <thead>
+        <thead style={style}>
           {head}
         </thead>
-        <tbody>
+        <tbody style={style}>
           {rows}
         </tbody>
       </table>
@@ -160,8 +169,23 @@ class Office extends React.Component {
       table_reveal_values: table_reveal_temp
     };
   }
+  renderCandidateTable(index) {
+    return (
+      <CandidateTable
+        this_table_check_values={this.state.check_box_values[index]}
+        onClick={(t, i) => this.handleClick(t, i)}
+        candidates={this.props.candidates}
+        choiceNo={index + 1}
+        key={index}
+        is_table_revealed={this.state.table_reveal_values[index]}
+      />
+    );
+  }
   render() {
-    var tables=[];
+    var tables = [];
+    for (let i = 0; i < 3; i++) {
+      tables.push(this.renderCandidateTable(i));
+    }
     //Creation of three (San Fran allows 3) candidate tables
     //Certain properties are passed down, see CandidateTable for more info
     return (
@@ -175,27 +199,7 @@ class Office extends React.Component {
           Vote your first, second, and third choices
         </p>
         <div>
-          <CandidateTable
-            this_table_check_values={this.state.check_box_values[0]}
-            onClick={(t, i) => this.handleClick(t, i)}
-            candidates={this.props.candidates}
-            choiceNo={1}
-            is_table_revealed={this.state.table_reveal_values[0]}
-          />
-          <CandidateTable
-            this_table_check_values={this.state.check_box_values[1]}
-            onClick={(t, i) => this.handleClick(t, i)}
-            candidates={this.props.candidates}
-            choiceNo={2}
-            is_table_revealed={this.state.table_reveal_values[1]}
-          />
-          <CandidateTable
-            this_table_check_values={this.state.check_box_values[2]}
-            onClick={(t, i) => this.handleClick(t, i)}
-            candidates={this.props.candidates}
-            choiceNo={3}
-            is_table_revealed={this.state.table_reveal_values[2]}
-          />
+          {tables}
         </div>
       </div>
     );
