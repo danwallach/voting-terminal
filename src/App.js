@@ -125,14 +125,15 @@ class CandidateTable extends React.Component {
     this.props.candidates.forEach((candidate, index) => {
       rows.push(this.renderCandidate(candidate.name, candidate.party, index));
     });
-    var style;
-    if (this.props.is_table_revealed) {
-      style = {};
-    } else {
-      style = {
-        display: "none"
-      };
-    }
+    var style={};
+    //This code is only used in Claudia-reveal style
+    //if (this.props.is_table_revealed) {
+    //  style = {};
+    //} else {
+    //  style = {
+    //    display: "none"
+    //  };
+    //}
     //Returns an HTML table with the header and candidate array
     return (
       <table
@@ -169,6 +170,7 @@ class Office extends React.Component {
       table_reveal_values: table_reveal_temp
     };
   }
+  //creates one candidate table
   renderCandidateTable(index) {
     return (
       <CandidateTable
@@ -182,6 +184,7 @@ class Office extends React.Component {
     );
   }
   render() {
+    //Creates an array of three candidate tables
     var tables = [];
     for (let i = 0; i < 3; i++) {
       tables.push(this.renderCandidateTable(i));
