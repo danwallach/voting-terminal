@@ -36,16 +36,6 @@ import election from "./election.json";
  * unchecks or checks the various checkboxes based on the values from the array
  */
 
-//Candidates, hardcoded. This list has been deprecated, this App now imports from election.json
-var CANDIDATES = [
-  "Barack H. Obama - DEM",
-  "George W. Bush - REP",
-  "William J. Clinton - DEM",
-  "George H. W. Bush - DEM",
-  "Ronald W. Reagan - REP",
-  "James E. Carter - DEM"
-];
-
 class Candidate extends React.Component {
   //Creates a candidate. Contains a checkbox and a candidate title
   //Contains the proporties onClick and checked
@@ -156,7 +146,24 @@ class Office extends React.Component {
       check_box_values: temp_array
     };
   }
+  //creates one candidate table
+  renderCandidateTable(index) {
+    return (
+      <CandidateTable
+        this_table_check_values={this.state.check_box_values[index]}
+        onClick={(t, i) => this.handleClick(t, i)}
+        candidates={this.props.candidates}
+        choiceNo={index + 1}
+        key={index}
+      />
+    );
+  }
   render() {
+    //Creates an array of three candidate tables
+    var tables = [];
+    for (let i = 0; i < 3; i++) {
+      tables.push(this.renderCandidateTable(i));
+    }
     //Creation of three (San Fran allows 3) candidate tables
     //Certain properties are passed down, see CandidateTable for more info
     return (
@@ -170,24 +177,7 @@ class Office extends React.Component {
           Vote your first, second, and third choices
         </p>
         <div>
-          <CandidateTable
-            this_table_check_values={this.state.check_box_values[0]}
-            onClick={(t, i) => this.handleClick(t, i)}
-            candidates={this.props.candidates}
-            choiceNo={1}
-          />
-          <CandidateTable
-            this_table_check_values={this.state.check_box_values[1]}
-            onClick={(t, i) => this.handleClick(t, i)}
-            candidates={this.props.candidates}
-            choiceNo={2}
-          />
-          <CandidateTable
-            this_table_check_values={this.state.check_box_values[2]}
-            onClick={(t, i) => this.handleClick(t, i)}
-            candidates={this.props.candidates}
-            choiceNo={3}
-          />
+          {tables}
         </div>
       </div>
     );
