@@ -82,7 +82,6 @@ class CandidateTable extends React.Component {
    */
   renderCandidate(name, party, index) {
     //Creation of a candidate, sending down properties
-    //Remember, key={index}
     return (
       <Candidate
         name={name}
@@ -114,25 +113,16 @@ class CandidateTable extends React.Component {
     this.props.candidates.forEach((candidate, index) => {
       rows.push(this.renderCandidate(candidate.name, candidate.party, index));
     });
-    var style={};
-    //This code is only used in Claudia-reveal style
-    //if (this.props.is_table_revealed) {
-    //  style = {};
-    //} else {
-    //  style = {
-    //    display: "none"
-    //  };
-    //}
     //Returns an HTML table with the header and candidate array
     return (
       <table
         style={{ float: "left" }}
         className="mdl-data-table mdl-js-data-table mdl-shadow--2dp mdl-cell mdl-cell--8-col-tablet"
       >
-        <thead style={style}>
+        <thead>
           {head}
         </thead>
-        <tbody style={style}>
+        <tbody>
           {rows}
         </tbody>
       </table>
@@ -168,7 +158,6 @@ class Office extends React.Component {
         candidates={this.props.candidates}
         choiceNo={index + 1}
         key={index}
-        is_table_revealed={this.state.table_reveal_values[index]}
       />
     );
   }
