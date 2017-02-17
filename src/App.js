@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../node_modules/roboto-fontface/css/roboto/roboto-fontface.css";
-import "../node_modules/material-design-icons/";
+import "../node_modules/material-design-icons/"
 import "./material.css";
 import "./material.js";
 import "./App.css";
@@ -107,7 +107,6 @@ class CandidateTable extends React.Component {
         </th>
       </tr>
     );
-
     //Creates an array of candidates, calls renderCandidate function
     var rows = [];
     this.props.candidates.forEach((candidate, index) => {
@@ -143,10 +142,8 @@ class Office extends React.Component {
       temp_array[i] = new Array(this.props.candidates.length);
       temp_array[i].fill(0);
     }
-    var table_reveal_temp = [1, 0, 0];
     this.state = {
-      check_box_values: temp_array,
-      table_reveal_values: table_reveal_temp
+      check_box_values: temp_array
     };
   }
   //creates one candidate table
@@ -192,8 +189,6 @@ class Office extends React.Component {
   //The focused box itself will be toggled
   handleClick(table_index, index) {
     var temp_prevent_mutation = this.state.check_box_values.slice();
-    var reveal_values_temp = this.state.table_reveal_values.slice();
-    reveal_values_temp[table_index + 1] = 1;
     for (var i = 0; i < temp_prevent_mutation.length; i++) {
       for (var j = 0; j < temp_prevent_mutation[i].length; j++) {
         if (i === table_index ^ j === index) {
@@ -203,10 +198,7 @@ class Office extends React.Component {
     }
     temp_prevent_mutation[table_index][index] = 1 -
       temp_prevent_mutation[table_index][index];
-    this.setState({
-      check_box_values: temp_prevent_mutation,
-      table_reveal_values: reveal_values_temp
-    });
+    this.setState({ check_box_values: temp_prevent_mutation });
   }
   //This function listens for an update and then searches through the document for all checkboxes
   //Each checkboxe is then updated
