@@ -114,25 +114,26 @@ class CandidateTable extends React.Component {
     this.props.candidates.forEach((candidate, index) => {
       rows.push(this.renderCandidate(candidate.name, candidate.party, index));
     });
-    var style={};
+    var style={float: "left"};
     //This code is only used in Claudia-reveal style
     //if (this.props.is_table_revealed) {
-    //  style = {};
+    //  style = {float: "left"};
     //} else {
     //  style = {
+    //    float: "left",
     //    display: "none"
     //  };
     //}
     //Returns an HTML table with the header and candidate array
     return (
       <table
-        style={{ float: "left" }}
+        style={style}
         className="mdl-data-table mdl-js-data-table mdl-shadow--2dp mdl-cell mdl-cell--8-col-tablet"
       >
-        <thead style={style}>
+        <thead>
           {head}
         </thead>
-        <tbody style={style}>
+        <tbody>
           {rows}
         </tbody>
       </table>
