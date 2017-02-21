@@ -121,14 +121,24 @@ class CandidateTable extends React.Component {
     if (this.props.choiceNo !== 3) {
       rows.push(<button onClick={() => this.props.onNext()}>Next</button>);
     }
+		var style;
+		if(this.props.valid){
+			style = {
+				float: "left",
+			}
+		}
+		else{
+			style = {
+				display: "none",
+			}
+		}
     //Returns an HTML table with the header and candidate array
     return (
       <table
-        style={{ float: "left" }}
+        style={style}
         className="mdl-data-table mdl-js-data-table mdl-shadow--2dp mdl-cell mdl-cell--8-col-tablet"
       >
         <thead>
-          {this.props.valid}
           {head}
         </thead>
         <tbody>
@@ -192,13 +202,14 @@ class Office extends React.Component {
   //All boxes in the row and column of the focused box will be set to 0
   //The focused box itself will be toggled
   handleNext(index) {
+		if(this.state.final_choices[index]){
     var valid_temp = this.state.table_valids.slice();
     valid_temp[index] = 0;
     valid_temp[index + 1] = 1;
     this.setState({
       table_valids: valid_temp
     });
-  }
+  }}
   handlePrevious(index) {
     var valid_temp = this.state.table_valids.slice();
     valid_temp[index] = 0;
@@ -216,8 +227,8 @@ class Office extends React.Component {
         choices_temp[i] = null;
       }
     }
-    for (var i = 0; i < 3; i++) {
-      for (var j = 0; j < this.props.candidates.length; j++) {
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < this.props.candidates.length; j++) {
         if (i === table_index ^ j === index) {
           document.getElementById(
             String(i) + this.props.candidates[j].name
@@ -232,9 +243,32 @@ class Office extends React.Component {
   //This function listens for an update and then searches through the document for all checkboxes
   //Each checkboxe is then updated
   componentDidUpdate() {
+		for(let i=0;i<3;i++){
+			for(let j=0;j<this.props.candidates.length;j++){
+				document.getElementById(String(i)+this.props.candidates[j].name).disabled=false;
+			}
+		}
+    for (let j = 0; j < this.props.candidates.length; j++) {
+      if (this.props.candidates[j].name === this.state.final_choices[0]) {
+        document.getElementById(
+          "1" + this.props.candidates[j].name
+        ).disabled = true;
+        document.getElementById(
+          "2" + this.props.candidates[j].name
+        ).disabled = true;
+      }
+      if (this.props.candidates[j].name === this.state.final_choices[1]) {
+        document.getElementById(
+          "2" + this.props.candidates[j].name
+        ).disabled = true;
+      }
+    }
     document
       .querySelectorAll(".mdl-js-checkbox")
       .forEach(element => element.MaterialCheckbox.checkToggleState());
+    document
+      .querySelectorAll(".mdl-js-checkbox")
+      .forEach(element => element.MaterialCheckbox.checkDisabled());
   }
 }
 
