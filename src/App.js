@@ -203,7 +203,6 @@ class Office extends React.Component {
   //This function listens for an update and then searches through the document for all checkboxes
   //Each checkboxe is then updated
   componentDidUpdate() {
-    console.log(this.state.final_choices);
     document
       .querySelectorAll(".mdl-js-checkbox")
       .forEach(element => element.MaterialCheckbox.checkToggleState());
