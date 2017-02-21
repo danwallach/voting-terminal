@@ -41,16 +41,16 @@ class Candidate extends React.Component {
   //Contains the proporties onClick and checked
   //checked tells the candidate whether its box should be checked
   //onClick passes a click event up to candidateTable with no parameters
+  //						checked={this.props.this_candidate_checked}
   render() {
     return (
       <tr>
         <td className="mdl-data-table__cel--non-numeric">
           <label className="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
             <input
-              id={this.props.choiceNo + this.props.name}
+              id={this.props.tableNo + this.props.name}
               type="checkbox"
               className="mdl-checkbox__input"
-							checked={this.props.this_candidate_checked}
               onClick={() => this.props.onClick()}
             />
             <span className="mdl-checkbox__label">
@@ -190,17 +190,9 @@ class Office extends React.Component {
   //All boxes in the row and column of the focused box will be set to 0
   //The focused box itself will be toggled
   handleClick(table_index, index) {
-    var temp_prevent_mutation = this.state.check_box_values.slice();
-    for (var i = 0; i < temp_prevent_mutation.length; i++) {
-      for (var j = 0; j < temp_prevent_mutation[i].length; j++) {
-        if (i === table_index ^ j === index) {
-          temp_prevent_mutation[i][j] = 0;
-        }
-      }
-    }
-    temp_prevent_mutation[table_index][index] = 1 -
-      temp_prevent_mutation[table_index][index];
-    this.setState({ check_box_values: temp_prevent_mutation });
+    document
+      .querySelectorAll(".mdl-js-checkbox")
+      .forEach(element => element.MaterialCheckbox.checkToggleState());
   }
   //This function listens for an update and then searches through the document for all checkboxes
   //Each checkboxe is then updated
