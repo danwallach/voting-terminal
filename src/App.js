@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../node_modules/roboto-fontface/css/roboto/roboto-fontface.css";
-import "../node_modules/material-design-icons/"
+import "../node_modules/material-design-icons/";
 import "./material.css";
 import "./material.js";
 import "./App.css";
@@ -47,9 +47,10 @@ class Candidate extends React.Component {
         <td className="mdl-data-table__cel--non-numeric">
           <label className="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
             <input
+              id={this.props.choiceNo + this.props.name}
               type="checkbox"
               className="mdl-checkbox__input"
-              checked={this.props.this_candidate_checked}
+							checked={this.props.this_candidate_checked}
               onClick={() => this.props.onClick()}
             />
             <span className="mdl-checkbox__label">
@@ -87,6 +88,7 @@ class CandidateTable extends React.Component {
         name={name}
         party={party}
         key={index}
+        tableNo={this.props.choiceNo - 1}
         this_candidate_checked={this.props.this_table_check_values[index]}
         onClick={() => this.props.onClick(this.props.choiceNo - 1, index)}
       />
