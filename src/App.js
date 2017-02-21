@@ -113,6 +113,14 @@ class CandidateTable extends React.Component {
     this.props.candidates.forEach((candidate, index) => {
       rows.push(this.renderCandidate(candidate.name, candidate.party, index));
     });
+    if (this.props.choiceNo !== 1) {
+      rows.push(
+        <button onClick={() => this.props.onPrevious()}>Previous</button>
+      );
+    }
+    if (this.props.choiceNo !== 3) {
+      rows.push(<button onClick={() => this.props.onNext()}>Next</button>);
+    }
     //Returns an HTML table with the header and candidate array
     return (
       <table
@@ -120,6 +128,7 @@ class CandidateTable extends React.Component {
         className="mdl-data-table mdl-js-data-table mdl-shadow--2dp mdl-cell mdl-cell--8-col-tablet"
       >
         <thead>
+          {this.props.valid}
           {head}
         </thead>
         <tbody>
@@ -135,7 +144,8 @@ class Office extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      final_choices: [null, null, null]
+      final_choices: [null, null, null],
+      table_valids: [1, 0, 0]
     };
   }
   //creates one candidate table
@@ -143,8 +153,11 @@ class Office extends React.Component {
     return (
       <CandidateTable
         onClick={(t, i) => this.handleClick(t, i)}
+        onNext={() => this.handleNext(index)}
+        onPrevious={() => this.handlePrevious(index)}
         candidates={this.props.candidates}
         choiceNo={index + 1}
+        valid={this.state.table_valids[index]}
         key={index}
       />
     );
@@ -178,6 +191,22 @@ class Office extends React.Component {
   //handleClick will then change the state of the checkboxvalues array
   //All boxes in the row and column of the focused box will be set to 0
   //The focused box itself will be toggled
+  handleNext(index) {
+    var valid_temp = this.state.table_valids.slice();
+    valid_temp[index] = 0;
+    valid_temp[index + 1] = 1;
+    this.setState({
+      table_valids: valid_temp
+    });
+  }
+  handlePrevious(index) {
+    var valid_temp = this.state.table_valids.slice();
+    valid_temp[index] = 0;
+    valid_temp[index - 1] = 1;
+    this.setState({
+      table_valids: valid_temp
+    });
+  }
   handleClick(table_index, index) {
     var cand_name = this.props.candidates[index].name;
     var choices_temp = this.state.final_choices.slice();
