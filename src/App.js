@@ -89,7 +89,6 @@ class CandidateTable extends React.Component {
         party={party}
         key={index}
         tableNo={this.props.choiceNo - 1}
-        this_candidate_checked={this.props.this_table_check_values[index]}
         onClick={() => this.props.onClick(this.props.choiceNo - 1, index)}
       />
     );
@@ -135,24 +134,14 @@ class Office extends React.Component {
   //Office is the logic layer that contains and distributes most of the information
   constructor(props) {
     super(props);
-    //Creation of the master values array
-    //It represents the checked or unchecked values of all the checkboxes
-    //It can be directly changed to change any of the checkboxes
-    //It is hardcoded currently. Making it dynamic would take some code tweaking
-    var temp_array = new Array(3);
-    for (let i = 0; i < temp_array.length; i++) {
-      temp_array[i] = new Array(this.props.candidates.length);
-      temp_array[i].fill(0);
-    }
     this.state = {
-      check_box_values: temp_array
+			final_choices: [null,null,null],
     };
   }
   //creates one candidate table
   renderCandidateTable(index) {
     return (
       <CandidateTable
-        this_table_check_values={this.state.check_box_values[index]}
         onClick={(t, i) => this.handleClick(t, i)}
         candidates={this.props.candidates}
         choiceNo={index + 1}
@@ -191,6 +180,13 @@ class Office extends React.Component {
   //The focused box itself will be toggled
   handleClick(table_index, index) {
 		var cand_name = this.props.candidates[index].name;
+		var choices_temp=this.state.final_choices.slice();
+		choices_temp[table_index]=cand_name;
+		for(let i=0;i<3;i++){
+			if(i!==table_index&& choices_temp[i]===choices_temp[table_index]){
+				choices_temp[i]=null;
+			}
+		}
 		for(var i=0;i<3;i++){
 			for(var j=0;j<this.props.candidates.length;j++){
 				if(i ===table_index ^ j===index){
@@ -198,13 +194,14 @@ class Office extends React.Component {
 				}
 			}
 		}
-    document
-      .querySelectorAll(".mdl-js-checkbox")
-      .forEach(element => element.MaterialCheckbox.checkToggleState());
+		this.setState({
+			final_choices: choices_temp,
+		});
   }
   //This function listens for an update and then searches through the document for all checkboxes
   //Each checkboxe is then updated
   componentDidUpdate() {
+		console.log(this.state.final_choices);
     document
       .querySelectorAll(".mdl-js-checkbox")
       .forEach(element => element.MaterialCheckbox.checkToggleState());
