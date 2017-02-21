@@ -135,7 +135,7 @@ class Office extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-			final_choices: [null,null,null],
+      final_choices: [null, null, null]
     };
   }
   //creates one candidate table
@@ -179,29 +179,31 @@ class Office extends React.Component {
   //All boxes in the row and column of the focused box will be set to 0
   //The focused box itself will be toggled
   handleClick(table_index, index) {
-		var cand_name = this.props.candidates[index].name;
-		var choices_temp=this.state.final_choices.slice();
-		choices_temp[table_index]=cand_name;
-		for(let i=0;i<3;i++){
-			if(i!==table_index&& choices_temp[i]===choices_temp[table_index]){
-				choices_temp[i]=null;
-			}
-		}
-		for(var i=0;i<3;i++){
-			for(var j=0;j<this.props.candidates.length;j++){
-				if(i ===table_index ^ j===index){
-					document.getElementById(String(i)+this.props.candidates[j].name).checked=false;
-				}
-			}
-		}
-		this.setState({
-			final_choices: choices_temp,
-		});
+    var cand_name = this.props.candidates[index].name;
+    var choices_temp = this.state.final_choices.slice();
+    choices_temp[table_index] = cand_name;
+    for (let i = 0; i < 3; i++) {
+      if (i !== table_index && choices_temp[i] === choices_temp[table_index]) {
+        choices_temp[i] = null;
+      }
+    }
+    for (var i = 0; i < 3; i++) {
+      for (var j = 0; j < this.props.candidates.length; j++) {
+        if (i === table_index ^ j === index) {
+          document.getElementById(
+            String(i) + this.props.candidates[j].name
+          ).checked = false;
+        }
+      }
+    }
+    this.setState({
+      final_choices: choices_temp
+    });
   }
   //This function listens for an update and then searches through the document for all checkboxes
   //Each checkboxe is then updated
   componentDidUpdate() {
-		console.log(this.state.final_choices);
+    console.log(this.state.final_choices);
     document
       .querySelectorAll(".mdl-js-checkbox")
       .forEach(element => element.MaterialCheckbox.checkToggleState());
