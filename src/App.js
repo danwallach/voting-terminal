@@ -115,28 +115,39 @@ class CandidateTable extends React.Component {
     });
     if (this.props.choiceNo !== 1) {
       rows.push(
-        <button onClick={() => this.props.onPrevious()}>Previous</button>
+        <button
+          className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+          onClick={() => this.props.onPrevious()}
+        >
+          Previous
+        </button>
       );
     }
     if (this.props.choiceNo !== 3) {
-      rows.push(<button onClick={() => this.props.onNext()}>Next</button>);
+      rows.push(
+        <button
+          className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+          onClick={() => this.props.onNext()}
+        >
+          Next
+        </button>
+      );
     }
-		var style;
-		if(this.props.valid){
-			style = {
-				float: "left",
-			}
-		}
-		else{
-			style = {
-				display: "none",
-			}
-		}
+    var style;
+    if (this.props.valid) {
+      style = {
+        float: "center"
+      };
+    } else {
+      style = {
+        display: "none"
+      };
+    }
     //Returns an HTML table with the header and candidate array
     return (
       <table
         style={style}
-        className="mdl-data-table mdl-js-data-table mdl-shadow--2dp mdl-cell mdl-cell--8-col-tablet"
+        className="mdl-data-table mdl-js-data-table mdl-shadow--2dp mdl-cell--8-col mdl-cell--8-col-tablet"
       >
         <thead>
           {head}
@@ -202,14 +213,15 @@ class Office extends React.Component {
   //All boxes in the row and column of the focused box will be set to 0
   //The focused box itself will be toggled
   handleNext(index) {
-		if(this.state.final_choices[index]){
-    var valid_temp = this.state.table_valids.slice();
-    valid_temp[index] = 0;
-    valid_temp[index + 1] = 1;
-    this.setState({
-      table_valids: valid_temp
-    });
-  }}
+    if (this.state.final_choices[index]) {
+      var valid_temp = this.state.table_valids.slice();
+      valid_temp[index] = 0;
+      valid_temp[index + 1] = 1;
+      this.setState({
+        table_valids: valid_temp
+      });
+    }
+  }
   handlePrevious(index) {
     var valid_temp = this.state.table_valids.slice();
     valid_temp[index] = 0;
@@ -243,11 +255,14 @@ class Office extends React.Component {
   //This function listens for an update and then searches through the document for all checkboxes
   //Each checkboxe is then updated
   componentDidUpdate() {
-		for(let i=0;i<3;i++){
-			for(let j=0;j<this.props.candidates.length;j++){
-				document.getElementById(String(i)+this.props.candidates[j].name).disabled=false;
-			}
-		}
+		console.log(this.state.final_choices);
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < this.props.candidates.length; j++) {
+        document.getElementById(
+          String(i) + this.props.candidates[j].name
+        ).disabled = false;
+      }
+    }
     for (let j = 0; j < this.props.candidates.length; j++) {
       if (this.props.candidates[j].name === this.state.final_choices[0]) {
         document.getElementById(
