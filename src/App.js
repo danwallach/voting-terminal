@@ -190,6 +190,14 @@ class Office extends React.Component {
   //All boxes in the row and column of the focused box will be set to 0
   //The focused box itself will be toggled
   handleClick(table_index, index) {
+		var cand_name = this.props.candidates[index].name;
+		for(var i=0;i<3;i++){
+			for(var j=0;j<this.props.candidates.length;j++){
+				if(i ===table_index ^ j===index){
+					document.getElementById(String(i)+this.props.candidates[j].name).checked=false;
+				}
+			}
+		}
     document
       .querySelectorAll(".mdl-js-checkbox")
       .forEach(element => element.MaterialCheckbox.checkToggleState());
