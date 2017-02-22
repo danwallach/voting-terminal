@@ -4,9 +4,10 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "@kadira/storybook": "^2.21.0",
     "gh-pages": "^0.12.0",
-    "react-scripts": "0.8.5",
-    "@kadira/storybook": "^2.21.0"
+    "prettier": "^0.18.0",
+    "react-scripts": "0.8.5"
   },
   "dependencies": {
     "material-design-icons": "^3.0.1",
