@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../node_modules/roboto-fontface/css/roboto/roboto-fontface.css";
-import "../node_modules/material-design-icons/"
+import "../node_modules/material-design-icons/";
 import "./material.css";
 import "./material.js";
 import "./App.css";
@@ -41,15 +41,16 @@ class Candidate extends React.Component {
   //Contains the proporties onClick and checked
   //checked tells the candidate whether its box should be checked
   //onClick passes a click event up to candidateTable with no parameters
+  //						checked={this.props.this_candidate_checked}
   render() {
     return (
       <tr>
         <td className="mdl-data-table__cel--non-numeric">
           <label className="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
             <input
+              id={this.props.tableNo + this.props.name}
               type="checkbox"
               className="mdl-checkbox__input"
-              checked={this.props.this_candidate_checked}
               onClick={() => this.props.onClick()}
             />
             <span className="mdl-checkbox__label">
@@ -87,7 +88,7 @@ class CandidateTable extends React.Component {
         name={name}
         party={party}
         key={index}
-        this_candidate_checked={this.props.this_table_check_values[index]}
+        tableNo={this.props.choiceNo - 1}
         onClick={() => this.props.onClick(this.props.choiceNo - 1, index)}
       />
     );
@@ -133,24 +134,14 @@ class Office extends React.Component {
   //Office is the logic layer that contains and distributes most of the information
   constructor(props) {
     super(props);
-    //Creation of the master values array
-    //It represents the checked or unchecked values of all the checkboxes
-    //It can be directly changed to change any of the checkboxes
-    //It is hardcoded currently. Making it dynamic would take some code tweaking
-    var temp_array = new Array(3);
-    for (let i = 0; i < temp_array.length; i++) {
-      temp_array[i] = new Array(this.props.candidates.length);
-      temp_array[i].fill(0);
-    }
     this.state = {
-      check_box_values: temp_array
+      final_choices: [null, null, null]
     };
   }
   //creates one candidate table
   renderCandidateTable(index) {
     return (
       <CandidateTable
-        this_table_check_values={this.state.check_box_values[index]}
         onClick={(t, i) => this.handleClick(t, i)}
         candidates={this.props.candidates}
         choiceNo={index + 1}
@@ -188,17 +179,26 @@ class Office extends React.Component {
   //All boxes in the row and column of the focused box will be set to 0
   //The focused box itself will be toggled
   handleClick(table_index, index) {
-    var temp_prevent_mutation = this.state.check_box_values.slice();
-    for (var i = 0; i < temp_prevent_mutation.length; i++) {
-      for (var j = 0; j < temp_prevent_mutation[i].length; j++) {
+    var cand_name = this.props.candidates[index].name;
+    var choices_temp = this.state.final_choices.slice();
+    choices_temp[table_index] = cand_name;
+    for (let i = 0; i < 3; i++) {
+      if (i !== table_index && choices_temp[i] === choices_temp[table_index]) {
+        choices_temp[i] = null;
+      }
+    }
+    for (var i = 0; i < 3; i++) {
+      for (var j = 0; j < this.props.candidates.length; j++) {
         if (i === table_index ^ j === index) {
-          temp_prevent_mutation[i][j] = 0;
+          document.getElementById(
+            String(i) + this.props.candidates[j].name
+          ).checked = false;
         }
       }
     }
-    temp_prevent_mutation[table_index][index] = 1 -
-      temp_prevent_mutation[table_index][index];
-    this.setState({ check_box_values: temp_prevent_mutation });
+    this.setState({
+      final_choices: choices_temp
+    });
   }
   //This function listens for an update and then searches through the document for all checkboxes
   //Each checkboxe is then updated
