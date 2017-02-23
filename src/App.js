@@ -148,13 +148,17 @@ class ArrowButton extends React.Component {
     var dex = this.props.buttonNo;
     var fnl_chc = this.props.final_choices;
     var valid;
-    valid = (tb_vld[dex] || tb_vld[dex + 1]) &&
-      fnl_chc[dex] &&
-      !fnl_chc[dex + 1];
     if (tb_vld_num - dex > 0) {
       title = "Previous";
       next_or_previous = 1;
     }
+		if(next_or_previous){
+    valid = (tb_vld[dex] || tb_vld[dex + 1]);
+		}
+		else{
+    valid = (tb_vld[dex] || tb_vld[dex + 1]) &&
+      fnl_chc[dex];
+		}
     disabled = !valid;
     return (
       <button
