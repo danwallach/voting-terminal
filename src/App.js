@@ -113,36 +113,10 @@ class CandidateTable extends React.Component {
     this.props.candidates.forEach((candidate, index) => {
       rows.push(this.renderCandidate(candidate.name, candidate.party, index));
     });
-    if (this.props.choiceNo !== 1) {
-      rows.push(
-        <button
-          className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
-          onClick={() => this.props.onPrevious()}
-        >
-          Previous
-        </button>
-      );
-    }
-    if (this.props.choiceNo !== 3) {
-      rows.push(
-        <button
-          className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
-          onClick={() => this.props.onNext()}
-        >
-          Next
-        </button>
-      );
-    }
     var style;
-    if (this.props.valid) {
-      style = {
-        float: "center"
-      };
-    } else {
-      style = {
-        display: "none"
-      };
-    }
+    style = {
+      float: "left"
+    };
     //Returns an HTML table with the header and candidate array
     return (
       <table
@@ -156,6 +130,42 @@ class CandidateTable extends React.Component {
           {rows}
         </tbody>
       </table>
+    );
+  }
+}
+class ArrowButton extends React.Component {
+  render() {
+    var disabled = true;
+    var title = "Next";
+    var tb_vld = this.props.table_valids;
+    var tb_vld_num;
+    var next_or_previous = 0;
+    for (let i = 0; i < tb_vld.length; i++) {
+      if (tb_vld[i]) {
+        tb_vld_num = i;
+      }
+    }
+    var dex = this.props.buttonNo;
+    var fnl_chc = this.props.final_choices;
+    var valid;
+    valid = (tb_vld[dex] || tb_vld[dex + 1]) &&
+      fnl_chc[dex] &&
+      !fnl_chc[dex + 1];
+    if (tb_vld_num - dex > 0) {
+      title = "Previous";
+      next_or_previous = 1;
+    }
+    disabled = !valid;
+    return (
+      <button
+        id={this.props.buttonNo + "button"}
+        className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+        onClick={() =>
+          this.props.onClick(this.props.buttonNo, next_or_previous)}
+        disabled={disabled}
+      >
+        {title}
+      </button>
     );
   }
 }
@@ -178,6 +188,7 @@ class Office extends React.Component {
         onPrevious={() => this.handlePrevious(index)}
         candidates={this.props.candidates}
         choiceNo={index + 1}
+        final_choices={this.state.final_choices}
         valid={this.state.table_valids[index]}
         key={index}
       />
@@ -189,6 +200,26 @@ class Office extends React.Component {
     for (let i = 0; i < 3; i++) {
       tables.push(this.renderCandidateTable(i));
     }
+    tables.splice(
+      1,
+      0,
+      <ArrowButton
+        buttonNo={0}
+        final_choices={this.state.final_choices}
+        table_valids={this.state.table_valids}
+        onClick={(i, n) => this.handleButton(i, n)}
+      />
+    );
+    tables.splice(
+      3,
+      0,
+      <ArrowButton
+        buttonNo={1}
+        final_choices={this.state.final_choices}
+        table_valids={this.state.table_valids}
+        onClick={(i, n) => this.handleButton(i, n)}
+      />
+    );
     //Creation of three (San Fran allows 3) candidate tables
     //Certain properties are passed down, see CandidateTable for more info
     return (
@@ -207,40 +238,34 @@ class Office extends React.Component {
       </div>
     );
   }
+  handleButton(i, next_or_previous) {
+    var temp_table_valid = this.state.table_valids.slice();
+    if (next_or_previous) {
+      temp_table_valid[i + 1] = 0;
+      temp_table_valid[i] = 1;
+    } else {
+      temp_table_valid[i] = 0;
+      temp_table_valid[i + 1] = 1;
+    }
+    this.setState({
+      table_valids: temp_table_valid
+    });
+  }
   //Whenever a candidate detects a click, it sends that fact to CandidateTable
   //CandidateTable sends that up to Office with the table_index and index
   //handleClick will then change the state of the checkboxvalues array
   //All boxes in the row and column of the focused box will be set to 0
   //The focused box itself will be toggled
-  handleNext(index) {
-    if (this.state.final_choices[index]) {
-      var valid_temp = this.state.table_valids.slice();
-      valid_temp[index] = 0;
-      valid_temp[index + 1] = 1;
-      this.setState({
-        table_valids: valid_temp
-      });
-    }
-  }
-  handlePrevious(index) {
-    var valid_temp = this.state.table_valids.slice();
-    valid_temp[index] = 0;
-    valid_temp[index - 1] = 1;
-    this.setState({
-      table_valids: valid_temp
-    });
-  }
   handleClick(table_index, index) {
     var cand_name = this.props.candidates[index].name;
     var choices_temp = this.state.final_choices.slice();
-		if(choices_temp[table_index]===cand_name){
-			choices_temp[table_index]=null;
-		}
-		else{
-			choices_temp[table_index]=cand_name;
-		}
+    if (choices_temp[table_index] === cand_name) {
+      choices_temp[table_index] = null;
+    } else {
+      choices_temp[table_index] = cand_name;
+    }
     for (let i = 0; i < 3; i++) {
-      if (i!==table_index && choices_temp[i] === choices_temp[table_index]) {
+      if (i !== table_index && choices_temp[i] === choices_temp[table_index]) {
         choices_temp[i] = null;
       }
     }
@@ -257,10 +282,22 @@ class Office extends React.Component {
       final_choices: choices_temp
     });
   }
+  componentDidMount() {
+    for (let j = 0; j < 3; j++) {
+      if (1 - this.state.table_valids[j]) {
+        for (let k = 0; k < this.props.candidates.length; k++) {
+          document.getElementById(
+            String(j) + this.props.candidates[k].name
+          ).disabled = true;
+        }
+      }
+    }
+  }
   //This function listens for an update and then searches through the document for all checkboxes
   //Each checkboxe is then updated
   componentDidUpdate() {
-		console.log(this.state.final_choices);
+    console.log(this.state.final_choices);
+    console.log(this.state.table_valids);
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < this.props.candidates.length; j++) {
         document.getElementById(
@@ -281,6 +318,15 @@ class Office extends React.Component {
         document.getElementById(
           "2" + this.props.candidates[j].name
         ).disabled = true;
+      }
+    }
+    for (let j = 0; j < 3; j++) {
+      if (1 - this.state.table_valids[j]) {
+        for (let k = 0; k < this.props.candidates.length; k++) {
+          document.getElementById(
+            String(j) + this.props.candidates[k].name
+          ).disabled = true;
+        }
       }
     }
     document
