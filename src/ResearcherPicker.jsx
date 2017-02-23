@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 import "../node_modules/roboto-fontface/css/roboto/roboto-fontface.css";
 import "../node_modules/material-design-icons/iconfont/material-icons.css";
 import "./material.css";
@@ -8,7 +9,7 @@ import researchers from "./researchers.json";
 export default function ResearcherPicker() {
   const body = researchers.reduce(
     (rows, researcher) => rows.concat(
-      <a href="#">
+      <Link to={researcher.route}>
         <div className="mdl-list__item mdl-card__actions mdl-card--border">
           <span className="mdl-list__item-primary-content">
             <i
@@ -21,7 +22,7 @@ export default function ResearcherPicker() {
             <span>{researcher.name}</span>
           </span>
         </div>
-      </a>
+      </Link>
     ),
     []
   );

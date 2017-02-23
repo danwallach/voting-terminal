@@ -1,14 +1,17 @@
 [
   {
     "name": "San Francisco",
-    "avatarUrl": "https://lonelyplanetimages.imgix.net/a/g/hi/t/9cf024dfd5c0bcb2b17f4785340145ea-san-francisco.jpg"
+    "avatarUrl": "https://lonelyplanetimages.imgix.net/a/g/hi/t/9cf024dfd5c0bcb2b17f4785340145ea-san-francisco.jpg",
+    "route": "/sf"
   },
   {
     "name": "Claudia Ziegler Acemyan",
-    "avatarUrl": "https://static1.squarespace.com/static/57dc47f8f7e0ab7419292565/t/57dca3e4414fb54619526e04/1478019138904/?format=300w"
+    "avatarUrl": "https://static1.squarespace.com/static/57dc47f8f7e0ab7419292565/t/57dca3e4414fb54619526e04/1478019138904/?format=300w",
+    "route": "/claudia"
   },
   {
     "name": "Philip Kortum",
-    "avatarUrl": "http://www.ruf.rice.edu/~pkortum/images/kortum.jpg"
+    "avatarUrl": "http://www.ruf.rice.edu/~pkortum/images/kortum.jpg",
+    "route": "/phil"
   }
 ]

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import election from "./election.json";
 import SFOffice from "./SFOffice.jsx"
+import "./App.css"
 /* Welcome to the voting terminal San Francisco Style code
  * This code is based off of React, a javascript framework
  * React philosophy indicates that javascript, html, and JSX should all be in the same file
@@ -53,8 +54,8 @@ class Election extends Component {
 class App extends Component {
   render() {
     return (
-      <div className="mdl-grid">
-        <Election />
+      <div>
+        {this.props.children}
       </div>
     );
   }
