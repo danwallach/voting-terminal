@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import CandidateTable from "./CandidateTable"
-import "./Office.css";
 import election from "./election.json";
 
 class Office extends React.Component {

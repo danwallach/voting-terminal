@@ -1,5 +1,6 @@
 import React from "react";
 import Candidate from "./Candidate";
+import "./Office.css";
 
 export default class CandidateTable extends React.Component {
   /*Creates a table with a header and a few Candidate objects
@@ -23,15 +24,25 @@ export default class CandidateTable extends React.Component {
   }
   render() {
     //Creating the head of the table
-    var head;
-    head = (
+    const toOrdinal = {
+      1: "First",
+      2: "Second",
+      3: "Third"
+    };
+    const instructions = {
+      1: "Vote for One",
+      2: "Vote for One: Must be different than your first choice",
+      3: "Vote for One: Must be different than your first and second choices"
+    };
+    const head = (
       <tr>
         <th>
-          <p className="mdl-typography--body-2 mdl-typography--text-left">
-            Choice #{this.props.choiceNo}
+          <p className="mdl-typography--display-1 mdl-typography--text-left">
+            {this.props.choiceNo}
+            <span style={{paddingLeft: "1ex"}} className="mdl-typography--title">{toOrdinal[this.props.choiceNo] + " Choice"}</span>
           </p>
           <p className="mdl-typography--body-1 mdl-typography--text-left">
-            Choose a candidate. Choice may not be same as previous choice
+            {instructions[this.props.choiceNo]}
           </p>
         </th>
       </tr>
