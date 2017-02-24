@@ -3,68 +3,9 @@ import "../node_modules/roboto-fontface/css/roboto/roboto-fontface.css";
 import "../node_modules/material-design-icons/iconfont/material-icons.css";
 import "./material.css";
 import "./material.js";
-import Candidate from "./Candidate"
+import CandidateTable from "./CandidateTable"
 import "./Office.css";
 import election from "./election.json";
-
-
-class CandidateTable extends React.Component {
-  /*Creates a table with a header and a few Candidate objects
-   *Contains the properties onClick, this_table_check_values, and candidates
-   *when onClick is called by child candidate, the function is sent up to Office
-   *the function is sent with parameters indicating which table was clicked, and the index within that table
-   *this_table_check_values has the check values for each table,
-   *This is sent down to each candidate
-   *The candidates names are also sent down to each candidate
-   */
-  renderCandidate(name, party, index) {
-    //Creation of a candidate, sending down properties
-    return (
-      <Candidate
-        name={name}
-        party={party}
-        key={index}
-        tableNo={this.props.choiceNo - 1}
-        onClick={() => this.props.onClick(this.props.choiceNo - 1, index)}
-      />
-    );
-  }
-  render() {
-    //Creating the head of the table
-    var head;
-    head = (
-      <tr>
-        <th>
-          <p className="mdl-typography--body-2 mdl-typography--text-left">
-            Choice #{this.props.choiceNo}
-          </p>
-          <p className="mdl-typography--body-1 mdl-typography--text-left">
-            Choose a candidate. Choice may not be same as previous choice
-          </p>
-        </th>
-      </tr>
-    );
-    //Creates an array of candidates, calls renderCandidate function
-    var rows = [];
-    this.props.candidates.forEach((candidate, index) => {
-      rows.push(this.renderCandidate(candidate.name, candidate.party, index));
-    });
-    //Returns an HTML table with the header and candidate array
-    return (
-      <table
-        style={{ float: "left" }}
-        className="mdl-data-table mdl-js-data-table mdl-shadow--2dp mdl-cell mdl-cell--8-col-tablet"
-      >
-        <thead>
-          {head}
-        </thead>
-        <tbody>
-          {rows}
-        </tbody>
-      </table>
-    );
-  }
-}
 
 class Office extends React.Component {
   //Office is the logic layer that contains and distributes most of the information
