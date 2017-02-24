@@ -32,12 +32,12 @@ class Office extends React.Component {
     return (
       <div className="mdl-cell mdl-cell--12-col">
         <h2
-          className="mdl-typography--title mdl-typography--text-center mdl-typography--text-capitalize"
+          className="mdl-typography--title mdl-typography--text-center"
         >
           {this.props.office}
         </h2>
         <p className="mdl-typography--body-1 mdl-typography--text-center">
-          Vote your first, second, and third choices
+          Vote for your first, second, and third choices
         </p>
         <div>
           {tables}
