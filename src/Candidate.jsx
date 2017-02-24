@@ -12,7 +12,7 @@ export default class Candidate extends React.Component {
         <td className="mdl-data-table__cel--non-numeric">
           <label className="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
             <input
-              id={this.props.tableNo + this.props.name}
+              id={this.props.tableNo + this.props.candidate.name}
               type="checkbox"
               className="mdl-checkbox__input"
               onClick={() => this.props.onClick()}
