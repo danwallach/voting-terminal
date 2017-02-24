@@ -10,12 +10,11 @@ export default class CandidateTable extends React.Component {
    *This is sent down to each candidate
    *The candidates names are also sent down to each candidate
    */
-  renderCandidate(name, party, index) {
+  renderCandidate(candidate, index) {
     //Creation of a candidate, sending down properties
     return (
       <Candidate
-        name={name}
-        party={party}
+        candidate={candidate}
         key={index}
         tableNo={this.props.choiceNo - 1}
         onClick={() => this.props.onClick(this.props.choiceNo - 1, index)}
@@ -40,7 +39,7 @@ export default class CandidateTable extends React.Component {
     //Creates an array of candidates, calls renderCandidate function
     var rows = [];
     this.props.candidates.forEach((candidate, index) => {
-      rows.push(this.renderCandidate(candidate.name, candidate.party, index));
+      rows.push(this.renderCandidate(candidate, index));
     });
     //Returns an HTML table with the header and candidate array
     return (

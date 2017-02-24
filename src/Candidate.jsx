@@ -18,15 +18,17 @@ export default class Candidate extends React.Component {
               onClick={() => this.props.onClick()}
             />
             <span className="mdl-checkbox__label">
-              <p
-                className="mdl-typography--body-1 mdl-typography--text-capitalize mdl-typography--text-left"
-              >
-                {this.props.name}
+              <p className="mdl-typography--body-1 mdl-typography--text-left">
+                {this.props.candidate.name}
               </p>
-              <p
-                className="mdl-typography--caption  mdl-typography--text-capitalize mdl-typography--text-right"
-              >
-                {this.props.party}
+              <p className="mdl-typography--caption mdl-typography--text-left">
+                {this.props.candidate.term}
+                <span
+                  style={{ float: "right" }}
+                  className="mdl-typography--caption"
+                >
+                  {this.props.candidate.party}
+                </span>
               </p>
             </span>
           </label>
