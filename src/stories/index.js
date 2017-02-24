@@ -21,10 +21,10 @@ storiesOf('SanFranciscoDesign', module)
 
 storiesOf('Candidate', module)
   .add('default', () => (
-    <Candidate name="Barack Obama" party="Democratic" />
+    <Candidate candidate={{"name": "Barack Obama", "party": "Democratic", "term": "2009–2017"}} />
   ))
 
 storiesOf('CandidateTable', module)
   .add('default', () => (
-    <CandidateTable choiceNo={1} candidates={[{"name": "Barack Obama", "party": "Democratic"}]} />
+    <CandidateTable choiceNo={1} candidates={[{"name": "Barack Obama", "party": "Democratic", "term": "2009–2017"}]} />
   ))
