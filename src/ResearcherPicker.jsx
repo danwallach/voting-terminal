@@ -1,9 +1,5 @@
 import React from "react";
 import { Link } from "react-router";
-import "../node_modules/roboto-fontface/css/roboto/roboto-fontface.css";
-import "../node_modules/material-design-icons/iconfont/material-icons.css";
-import "./material.css";
-import "./material.js";
 import researchers from "./researchers.json";
 
 export default function ResearcherPicker() {

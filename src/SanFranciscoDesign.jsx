@@ -1,8 +1,4 @@
 import React, { Component } from "react";
-import "../node_modules/roboto-fontface/css/roboto/roboto-fontface.css";
-import "../node_modules/material-design-icons/iconfont/material-icons.css";
-import "./material.css";
-import "./material.js";
 import CandidateTable from "./CandidateTable"
 import "./Office.css";
 import election from "./election.json";
