@@ -1,6 +1,4 @@
-import React, { Component } from "react";
-import election from "./election.json";
-import SFOffice from "./SFOffice.jsx"
+import React from "react";
 import "./App.css"
 /* Welcome to the voting terminal San Francisco Style code
  * This code is based off of React, a javascript framework
@@ -33,31 +31,9 @@ import "./App.css"
  * unchecks or checks the various checkboxes based on the values from the array
  */
 
-
-class Contest extends Component {
+class App extends React.Component {
   render() {
-    return (
-      <SFOffice
-        office={this.props.contest.office}
-        candidates={this.props.contest.candidates}
-      />
-    );
-  }
-}
-
-class Election extends Component {
-  render() {
-    return <Contest contest={election.contests[0]} />;
-  }
-}
-
-class App extends Component {
-  render() {
-    return (
-      <div>
-        {this.props.children}
-      </div>
-    );
+    return this.props.children;
   }
 }
 

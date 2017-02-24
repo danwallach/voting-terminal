@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import "../node_modules/roboto-fontface/css/roboto/roboto-fontface.css";
-import "../node_modules/material-design-icons/";
-import "./material.css";
-import "./material.js";
+//import "../node_modules/roboto-fontface/css/roboto/roboto-fontface.css";
+//import "../node_modules/material-design-icons/";
+//import "./material.css";
+//import "./material.js";
 import "./Office.css";
 import election from "./election.json";
 
@@ -100,7 +100,7 @@ class CandidateTable extends React.Component {
   }
 }
 
-export default class SFOffice extends React.Component {
+class Office extends React.Component {
   //Office is the logic layer that contains and distributes most of the information
   constructor(props) {
     super(props);
@@ -176,5 +176,32 @@ export default class SFOffice extends React.Component {
     document
       .querySelectorAll(".mdl-js-checkbox")
       .forEach(element => element.MaterialCheckbox.checkToggleState());
+  }
+}
+
+class Contest extends Component {
+  render() {
+    return (
+      <Office
+        office={this.props.contest.office}
+        candidates={this.props.contest.candidates}
+      />
+    );
+  }
+}
+
+class Election extends Component {
+  render() {
+    return <Contest contest={election.contests[0]} />;
+  }
+}
+
+export default class SanFranciscoDesign extends Component {
+  render() {
+    return (
+      <div className="mdl-grid">
+        <Election />
+      </div>
+    );
   }
 }
