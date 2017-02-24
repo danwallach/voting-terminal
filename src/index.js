@@ -9,6 +9,7 @@ import App from "./App";
 import ResearcherPicker from "./ResearcherPicker";
 import SanFranciscoDesign from "./SanFranciscoDesign";
 import ClaudiaZieglerAcemyanDesign from "./ClaudiaZieglerAcemyanDesign";
+import PhilipKortumDesign from "./PhilipKortumDesign";
 import "./index.css";
 
 ReactDOM.render(
@@ -17,6 +18,7 @@ ReactDOM.render(
       <IndexRoute component={ResearcherPicker} />
       <Route path="/sf" component={SanFranciscoDesign} />
       <Route path="/claudia" component={ClaudiaZieglerAcemyanDesign} />
+      <Route path="/phil" component={PhilipKortumDesign} />
     </Route>
   </Router>,
   document.getElementById("root")
