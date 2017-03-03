@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.css"
+import "./App.css";
 /* Welcome to the voting terminal San Francisco Style code
  * This code is based off of React, a javascript framework
  * React philosophy indicates that javascript, html, and JSX should all be in the same file

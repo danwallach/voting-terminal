@@ -1,5 +1,5 @@
-import React, { Component }from 'react';
-import CandidateTable from './CandidateTable';
+import React, { Component } from "react";
+import CandidateTable from "./CandidateTable";
 import election from "./election.json";
 
 class ArrowButton extends React.Component {
@@ -21,26 +21,31 @@ class ArrowButton extends React.Component {
       title = "Previous";
       next_or_previous = 1;
     }
-		if(next_or_previous){
-    valid = (tb_vld[dex] || tb_vld[dex + 1]);
-		}
-		else{
-    valid = (tb_vld[dex] || tb_vld[dex + 1]) &&
-      fnl_chc[dex];
-		}
+    if (next_or_previous) {
+      valid = tb_vld[dex] || tb_vld[dex + 1];
+    } else {
+      valid = (tb_vld[dex] || tb_vld[dex + 1]) && fnl_chc[dex];
+    }
     disabled = !valid;
     return (
-      <div className="mdl-cell mdl-cell--1-col" style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-      <button
-        id={this.props.buttonNo + "button"}
-        className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
-        onClick={() =>
-          this.props.onClick(this.props.buttonNo, next_or_previous)}
-        disabled={disabled}
+      <div
+        className="mdl-cell mdl-cell--1-col"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"
+        }}
       >
-        {title}
-      </button>
-    </div>
+        <button
+          id={this.props.buttonNo + "button"}
+          className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+          onClick={() =>
+            this.props.onClick(this.props.buttonNo, next_or_previous)}
+          disabled={disabled}
+        >
+          {title}
+        </button>
+      </div>
     );
   }
 }

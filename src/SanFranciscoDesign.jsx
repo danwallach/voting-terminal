@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import CandidateTable from "./CandidateTable"
+import CandidateTable from "./CandidateTable";
 import election from "./election.json";
 
 class Office extends React.Component {
@@ -31,18 +31,16 @@ class Office extends React.Component {
     //Certain properties are passed down, see CandidateTable for more info
     return (
       <div>
-        <h2
-          className="mdl-typography--title mdl-typography--text-center"
-        >
+        <h2 className="mdl-typography--title mdl-typography--text-center">
           {this.props.office}
         </h2>
         <p className="mdl-typography--body-1 mdl-typography--text-center">
           Vote for your first, second, and third choices
         </p>
-      <div className="mdl-grid">
-        {tables}
+        <div className="mdl-grid">
+          {tables}
+        </div>
       </div>
-    </div>
     );
   }
   //Whenever a candidate detects a click, it sends that fact to CandidateTable
@@ -100,8 +98,6 @@ class Election extends Component {
 
 export default class SanFranciscoDesign extends Component {
   render() {
-    return (
-        <Election />
-    );
+    return <Election />;
   }
 }

@@ -39,7 +39,12 @@ export default class CandidateTable extends React.Component {
         <th>
           <p className="mdl-typography--display-1 mdl-typography--text-left">
             {this.props.choiceNo}
-            <span style={{paddingLeft: "1ex"}} className="mdl-typography--title">{toOrdinal[this.props.choiceNo] + " Choice"}</span>
+            <span
+              style={{ paddingLeft: "1ex" }}
+              className="mdl-typography--title"
+            >
+              {toOrdinal[this.props.choiceNo] + " Choice"}
+            </span>
           </p>
           <p className="mdl-typography--body-1 mdl-typography--text-left">
             {instructions[this.props.choiceNo]}
@@ -54,22 +59,24 @@ export default class CandidateTable extends React.Component {
     });
     //Returns an HTML table with the header and candidate array
     return (
-      <div className={`mdl-cell mdl-cell--${this.props.size}-col mdl-cell--8-col-tablet`}
+      <div
+        className={
+          `mdl-cell mdl-cell--${this.props.size}-col mdl-cell--8-col-tablet`
+        }
         style={this.props.style}
       >
-      <table
-        className="mdl-data-table mdl-js-data-table mdl-shadow--2dp"
-        style={{width: "100%"}}
-      >
-        <thead>
-          {head}
-        </thead>
-        <tbody>
-          {rows}
-        </tbody>
-      </table>
-    </div>
+        <table
+          className="mdl-data-table mdl-js-data-table mdl-shadow--2dp"
+          style={{ width: "100%" }}
+        >
+          <thead>
+            {head}
+          </thead>
+          <tbody>
+            {rows}
+          </tbody>
+        </table>
+      </div>
     );
   }
 }
-

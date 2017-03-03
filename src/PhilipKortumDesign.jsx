@@ -14,33 +14,33 @@ class Office extends React.Component {
   //creates one candidate table
   renderCandidateTable(index) {
     return (
-      <div style={this.state.table_valids[index] ? {} : {display: "none"}}>
-      <div className="mdl-grid">
-      <CandidateTable
-        onClick={(t, i) => this.handleClick(t, i)}
-        onNext={() => this.handleNext(index)}
-        onPrevious={() => this.handlePrevious(index)}
-        candidates={this.props.candidates}
-        choiceNo={index + 1}
-        valid={this.state.table_valids[index]}
-        key={index}
-        size={8}
-      />
-    </div>
-      <div>
-        <button
-          className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
-          onClick={() => this.handlePrevious(index)}
-        >
-          Previous
-        </button>
-        <button
-          className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
-          onClick={() => this.handleNext(index)}
-        >
-          Next
-        </button>
-      </div>
+      <div style={this.state.table_valids[index] ? {} : { display: "none" }}>
+        <div className="mdl-grid">
+          <CandidateTable
+            onClick={(t, i) => this.handleClick(t, i)}
+            onNext={() => this.handleNext(index)}
+            onPrevious={() => this.handlePrevious(index)}
+            candidates={this.props.candidates}
+            choiceNo={index + 1}
+            valid={this.state.table_valids[index]}
+            key={index}
+            size={8}
+          />
+        </div>
+        <div>
+          <button
+            className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+            onClick={() => this.handlePrevious(index)}
+          >
+            Previous
+          </button>
+          <button
+            className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+            onClick={() => this.handleNext(index)}
+          >
+            Next
+          </button>
+        </div>
       </div>
     );
   }
@@ -94,14 +94,13 @@ class Office extends React.Component {
   handleClick(table_index, index) {
     var cand_name = this.props.candidates[index].name;
     var choices_temp = this.state.final_choices.slice();
-		if(choices_temp[table_index]===cand_name){
-			choices_temp[table_index]=null;
-		}
-		else{
-			choices_temp[table_index]=cand_name;
-		}
+    if (choices_temp[table_index] === cand_name) {
+      choices_temp[table_index] = null;
+    } else {
+      choices_temp[table_index] = cand_name;
+    }
     for (let i = 0; i < 3; i++) {
-      if (i!==table_index && choices_temp[i] === choices_temp[table_index]) {
+      if (i !== table_index && choices_temp[i] === choices_temp[table_index]) {
         choices_temp[i] = null;
       }
     }
@@ -121,7 +120,7 @@ class Office extends React.Component {
   //This function listens for an update and then searches through the document for all checkboxes
   //Each checkboxe is then updated
   componentDidUpdate() {
-		console.log(this.state.final_choices);
+    console.log(this.state.final_choices);
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < this.props.candidates.length; j++) {
         document.getElementById(
@@ -179,4 +178,3 @@ export default class PhilipKortumDesign extends Component {
     );
   }
 }
-
