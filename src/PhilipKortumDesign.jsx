@@ -14,6 +14,8 @@ class Office extends React.Component {
   //creates one candidate table
   renderCandidateTable(index) {
     return (
+      <div style={this.state.table_valids[index] ? {} : {display: "none"}}>
+      <div className="mdl-grid">
       <CandidateTable
         onClick={(t, i) => this.handleClick(t, i)}
         onNext={() => this.handleNext(index)}
@@ -22,7 +24,24 @@ class Office extends React.Component {
         choiceNo={index + 1}
         valid={this.state.table_valids[index]}
         key={index}
+        size={8}
       />
+    </div>
+      <div>
+        <button
+          className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+          onClick={() => this.handlePrevious(index)}
+        >
+          Previous
+        </button>
+        <button
+          className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+          onClick={() => this.handleNext(index)}
+        >
+          Next
+        </button>
+      </div>
+      </div>
     );
   }
   render() {
@@ -34,7 +53,7 @@ class Office extends React.Component {
     //Creation of three (San Fran allows 3) candidate tables
     //Certain properties are passed down, see CandidateTable for more info
     return (
-      <div className="mdl-cell mdl-cell--12-col">
+      <div>
         <h2
           className="mdl-typography--title mdl-typography--text-center mdl-typography--text-capitalize"
         >
@@ -43,7 +62,7 @@ class Office extends React.Component {
         <p className="mdl-typography--body-1 mdl-typography--text-center">
           Vote your first, second, and third choices
         </p>
-        <div>
+        <div className="mdl-grid">
           {tables}
         </div>
       </div>

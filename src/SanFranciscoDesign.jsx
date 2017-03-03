@@ -30,7 +30,7 @@ class Office extends React.Component {
     //Creation of three (San Fran allows 3) candidate tables
     //Certain properties are passed down, see CandidateTable for more info
     return (
-      <div className="mdl-cell mdl-cell--12-col">
+      <div>
         <h2
           className="mdl-typography--title mdl-typography--text-center"
         >
@@ -39,10 +39,10 @@ class Office extends React.Component {
         <p className="mdl-typography--body-1 mdl-typography--text-center">
           Vote for your first, second, and third choices
         </p>
-        <div>
-          {tables}
-        </div>
+      <div className="mdl-grid">
+        {tables}
       </div>
+    </div>
     );
   }
   //Whenever a candidate detects a click, it sends that fact to CandidateTable
@@ -101,9 +101,7 @@ class Election extends Component {
 export default class SanFranciscoDesign extends Component {
   render() {
     return (
-      <div className="mdl-grid">
         <Election />
-      </div>
     );
   }
 }

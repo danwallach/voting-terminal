@@ -30,6 +30,7 @@ class ArrowButton extends React.Component {
 		}
     disabled = !valid;
     return (
+      <div className="mdl-cell mdl-cell--1-col" style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
       <button
         id={this.props.buttonNo + "button"}
         className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
@@ -39,6 +40,7 @@ class ArrowButton extends React.Component {
       >
         {title}
       </button>
+    </div>
     );
   }
 }
@@ -64,6 +66,7 @@ class Office extends React.Component {
         final_choices={this.state.final_choices}
         valid={this.state.table_valids[index]}
         key={index}
+        size={3}
       />
     );
   }
@@ -96,7 +99,7 @@ class Office extends React.Component {
     //Creation of three (San Fran allows 3) candidate tables
     //Certain properties are passed down, see CandidateTable for more info
     return (
-      <div className="mdl-cell mdl-cell--12-col">
+      <div>
         <h2
           className="mdl-typography--title mdl-typography--text-center mdl-typography--text-capitalize"
         >
@@ -105,7 +108,7 @@ class Office extends React.Component {
         <p className="mdl-typography--body-1 mdl-typography--text-center">
           Vote your first, second, and third choices
         </p>
-        <div>
+        <div className="mdl-grid">
           {tables}
         </div>
       </div>

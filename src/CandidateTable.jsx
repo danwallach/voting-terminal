@@ -54,9 +54,12 @@ export default class CandidateTable extends React.Component {
     });
     //Returns an HTML table with the header and candidate array
     return (
+      <div className={`mdl-cell mdl-cell--${this.props.size}-col mdl-cell--8-col-tablet`}
+        style={this.props.style}
+      >
       <table
-        style={{ float: "left" }}
-        className="mdl-data-table mdl-js-data-table mdl-shadow--2dp mdl-cell mdl-cell--8-col-tablet"
+        className="mdl-data-table mdl-js-data-table mdl-shadow--2dp"
+        style={{width: "100%"}}
       >
         <thead>
           {head}
@@ -65,6 +68,7 @@ export default class CandidateTable extends React.Component {
           {rows}
         </tbody>
       </table>
+    </div>
     );
   }
 }
