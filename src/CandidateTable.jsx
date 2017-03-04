@@ -30,8 +30,8 @@ export default class CandidateTable extends React.Component {
       3: "Third"
     };
     const instructions = {
-      1: "Vote for One",
-      2: "Vote for One: Must be different than your first choice",
+      1: ["Vote for One", <span style={{visibility: "hidden"}}>: Must be different than your first and second choices</span>],
+      2: ["Vote for One: Must be different than your first choice", <span style={{visibility: "hidden"}}>and second s</span>],
       3: "Vote for One: Must be different than your first and second choices"
     };
     const head = (
