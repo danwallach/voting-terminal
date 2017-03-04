@@ -14,7 +14,7 @@ class Office extends React.Component {
   //creates one candidate table
   renderCandidateTable(index) {
     return (
-      <div style={this.state.table_valids[index] ? {} : { display: "none" }}>
+      <div style={this.state.table_valids[index] ? {} : {display: "none"}}>
         <div className="mdl-grid">
           <CandidateTable
             onClick={(t, i) => this.handleClick(t, i)}
@@ -31,12 +31,14 @@ class Office extends React.Component {
           <button
             className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
             onClick={() => this.handlePrevious(index)}
+            style={index !== 0 ? {visibility: "visible"} : {visibility: "hidden"}}
           >
             Previous
           </button>
           <button
             className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
             onClick={() => this.handleNext(index)}
+            style={Object.assign({}, {float: "right"}, index !== 2 ? {visibility: "visible"} : {visibility: "hidden"})}
           >
             Next
           </button>
@@ -62,9 +64,7 @@ class Office extends React.Component {
         <p className="mdl-typography--body-1 mdl-typography--text-center">
           Vote your first, second, and third choices
         </p>
-        <div className="mdl-grid">
           {tables}
-        </div>
       </div>
     );
   }
@@ -172,9 +172,7 @@ class Election extends Component {
 export default class PhilipKortumDesign extends Component {
   render() {
     return (
-      <div className="mdl-grid">
         <Election />
-      </div>
     );
   }
 }
