@@ -24,7 +24,7 @@ class Office extends React.Component {
             choiceNo={index + 1}
             valid={this.state.table_valids[index]}
             key={index}
-            size={8}
+            size={12}
           />
         </div>
         <div>
