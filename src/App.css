@@ -1,18 +1,5 @@
-.mdl-data-table th {
-  height: 97px;
-  vertical-align: top;
-  word-wrap: break-word;
-  white-space: normal;
-}
-
-.mdl-data-table tbody tr td {
-  padding-top: 36px;
-}
-
-label.mdl-checkbox {
-  height: auto;
-}
-
-.mdl-checkbox__label p {
-  margin-bottom: 0px;
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

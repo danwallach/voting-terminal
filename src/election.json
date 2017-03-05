@@ -1,31 +1,37 @@
 {
   "contests": [
     {
-      "office": "U.S. President",
+      "office": "Best Former President",
       "candidates": [
         {
-          "name": "Barack H. Obama",
-          "party": "Democratic"
+          "name": "Barack Obama",
+          "party": "Democratic",
+          "term": "2009–2017"
         },
         {
           "name": "George W. Bush",
-          "party": "Republican"
+          "party": "Republican",
+          "term": "2001–2009"
         },
         {
-          "name": "William J. Clinton",
-          "party": "Democratic"
+          "name": "Bill Clinton",
+          "party": "Democratic",
+          "term": "1993–2001"
         },
         {
           "name": "George H. W. Bush",
-          "party": "Republican"
+          "party": "Republican",
+          "term": "1989–1993"
         },
         {
-          "name": "Ronald W. Reagan",
-          "party": "Republican"
+          "name": "Ronald Reagan",
+          "party": "Republican",
+          "term": "1981–1989"
         },
         {
-          "name": "James E. Carter",
-          "party": "Democratic"
+          "name": "Jimmy Carter",
+          "party": "Democratic",
+          "term": "1977–1981"
         }
       ]
     }
