@@ -53,8 +53,11 @@ class ArrowButton extends React.Component {
 class Office extends React.Component {
   //Office is the logic layer that contains and distributes most of the information
   constructor(props) {
+    var timings_temp = [];
+    timings_temp.push(["Begin", new Date().getTime()]);
     super(props);
     this.state = {
+      timings: timings_temp,
       final_choices: [null, null, null],
       table_valids: [1, 0, 0]
     };
@@ -121,14 +124,19 @@ class Office extends React.Component {
   }
   handleButton(i, next_or_previous) {
     var temp_table_valid = this.state.table_valids.slice();
+    var timings_temp = this.state.timings.slice();
     if (next_or_previous) {
+      timings_temp.push(["Previous",new Date().getTime()]);
       temp_table_valid[i + 1] = 0;
       temp_table_valid[i] = 1;
     } else {
+      timings_temp.push(["Next",new Date().getTime()]);
       temp_table_valid[i] = 0;
       temp_table_valid[i + 1] = 1;
     }
+    console.log(timings_temp);
     this.setState({
+      timings: timings_temp,
       table_valids: temp_table_valid
     });
   }
@@ -138,6 +146,8 @@ class Office extends React.Component {
   //All boxes in the row and column of the focused box will be set to 0
   //The focused box itself will be toggled
   handleClick(table_index, index) {
+    var timings_temp = this.state.timings.slice();
+    timings_temp.push([table_index,index,new Date().getTime()]);
     var cand_name = this.props.candidates[index].name;
     var choices_temp = this.state.final_choices.slice();
     if (choices_temp[table_index] === cand_name) {
@@ -160,6 +170,7 @@ class Office extends React.Component {
       }
     }
     this.setState({
+      timings: timings_temp,
       final_choices: choices_temp
     });
   }
