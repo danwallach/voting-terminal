@@ -19,7 +19,7 @@ export default class Candidate extends React.Component {
           <FormField style={{width: "100%"}}>
             <Checkbox
               id={this.props.tableNo + this.props.candidate.name}
-              onClick={() => this.props.onClick()}
+              onChange={() => this.props.onClick()}
             />
             <CheckboxLabel for={this.props.tableNo + this.props.candidate.name}>
               <p className="mdl-typography--body-1 mdl-typography--text-left">
