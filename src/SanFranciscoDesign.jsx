@@ -2,6 +2,15 @@ import React, { Component } from "react";
 import CandidateTable from "./CandidateTable";
 import election from "./election.json";
 
+class SubmitButton extends React.Component{
+  render(){
+    return (
+    <button
+      onClick={() => this.props.onClick()}
+      >Hello</button>
+    );
+  }
+}
 class Office extends React.Component {
   //Office is the logic layer that contains and distributes most of the information
   constructor(props) {
@@ -24,12 +33,19 @@ class Office extends React.Component {
       />
     );
   }
+  handleSubmit(){
+    alert("Sumbit");
+  }
   render() {
     //Creates an array of three candidate tables
     var tables = [];
     for (let i = 0; i < 3; i++) {
       tables.push(this.renderCandidateTable(i));
     }
+    tables.push(<SubmitButton
+      onClick={() => this.handleSubmit()}
+      />);
+
     //Creation of three (San Fran allows 3) candidate tables
     //Certain properties are passed down, see CandidateTable for more info
     return (
