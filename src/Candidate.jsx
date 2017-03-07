@@ -4,6 +4,8 @@ import Checkbox from './components/Checkbox';
 import CheckboxLabel from './components/CheckboxLabel';
 import FormField from './components/FormField';
 
+import './Candidate.css'
+
 export default class Candidate extends React.Component {
   //Creates a candidate. Contains a checkbox and a candidate title
   //Contains the proporties onClick and checked
