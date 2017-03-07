@@ -6,7 +6,10 @@ class Office extends React.Component {
   //Office is the logic layer that contains and distributes most of the information
   constructor(props) {
     super(props);
+    var timings_temp = [];
+    timings_temp.push(["Begin",new Date().getTime()]);
     this.state = {
+      timings: timings_temp,
       final_choices: [null, null, null]
     };
   }
@@ -49,6 +52,8 @@ class Office extends React.Component {
   //All boxes in the row and column of the focused box will be set to 0
   //The focused box itself will be toggled
   handleClick(table_index, index) {
+    var timings_temp = this.state.timings.slice();
+    timings_temp.push([table_index,index,new Date().getTime()]);
     var cand_name = this.props.candidates[index].name;
     var choices_temp = this.state.final_choices.slice();
     choices_temp[table_index] = cand_name;
@@ -66,7 +71,9 @@ class Office extends React.Component {
         }
       }
     }
+    console.log(timings_temp);
     this.setState({
+      timings: timings_temp,
       final_choices: choices_temp
     });
   }
