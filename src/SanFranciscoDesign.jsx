@@ -71,7 +71,6 @@ class Office extends React.Component {
         }
       }
     }
-    console.log(timings_temp);
     this.setState({
       timings: timings_temp,
       final_choices: choices_temp

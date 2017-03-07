@@ -134,7 +134,6 @@ class Office extends React.Component {
       temp_table_valid[i] = 0;
       temp_table_valid[i + 1] = 1;
     }
-    console.log(timings_temp);
     this.setState({
       timings: timings_temp,
       table_valids: temp_table_valid
@@ -188,8 +187,6 @@ class Office extends React.Component {
   //This function listens for an update and then searches through the document for all checkboxes
   //Each checkboxe is then updated
   componentDidUpdate() {
-    console.log(this.state.final_choices);
-    console.log(this.state.table_valids);
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < this.props.candidates.length; j++) {
         document.getElementById(
