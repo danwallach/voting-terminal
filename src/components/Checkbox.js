@@ -192,7 +192,16 @@ export default class Checkbox extends PureComponent {
   componentDidMount() {
     this.foundation.init();
     this.rippleFoundation.init();
-  }
+    if (this.state.disabledInternal) {
+      this.setState(prevState => ({
+        classes: prevState.classes.add("disabled")
+      }))
+    } else {
+      this.setState(prevState => ({
+        classes: prevState.classes.remove("disabled")
+      }))
+
+  }}
   componentWillUnmount() {
     this.rippleFoundation.destroy();
     this.foundation.destroy();
@@ -208,6 +217,15 @@ export default class Checkbox extends PureComponent {
     }
     if (props.disabled !== this.props.disabled) {
       this.setState({disabledInternal: props.disabled})
+      if (props.disabled) {
+        this.setState(prevState => ({
+          classes: prevState.classes.add("disabled")
+        }))
+      } else {
+        this.setState(prevState => ({
+          classes: prevState.classes.remove("disabled")
+        }))
+      }
     }
   }
 

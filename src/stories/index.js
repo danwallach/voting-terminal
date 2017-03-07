@@ -45,3 +45,27 @@ storiesOf('Checkbox', module)
       </CheckboxLabel>
     </FormField>
   ))
+  .add('checked', () => (
+    <FormField>
+      <Checkbox id="default-checkbox" checked={true}/>
+      <CheckboxLabel for="default-checkbox">
+        Label
+      </CheckboxLabel>
+    </FormField>
+  ))
+  .add('disabled', () => (
+    <FormField>
+      <Checkbox id="default-checkbox" disabled={true}/>
+      <CheckboxLabel for="default-checkbox">
+        Label
+      </CheckboxLabel>
+    </FormField>
+  ))
+  .add('checked disabled', () => (
+    <FormField>
+      <Checkbox id="default-checkbox" checked={true} disabled={true}/>
+      <CheckboxLabel for="default-checkbox">
+        Label
+      </CheckboxLabel>
+    </FormField>
+  ))

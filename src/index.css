@@ -15,3 +15,7 @@ div.mdc-form-field {
 label {
   width: 100%;
 }
+
+div.disabled+label {
+  opacity: .38;
+}
