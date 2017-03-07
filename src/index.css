@@ -7,3 +7,11 @@ body {
 :root {
   --mdc-theme-primary: #8BC34A;
 }
+
+div.mdc-form-field {
+  width: 100%;
+}
+
+label {
+  width: 100%;
+}

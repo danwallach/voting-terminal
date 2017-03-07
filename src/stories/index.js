@@ -14,7 +14,7 @@ import "../../node_modules/material-design-icons/iconfont/material-icons.css";
 import "../../node_modules/material-components-web/dist/material-components-web.min.css";
 import "../material.css";
 import "../material.js";
-import "./index.css"
+import "../index.css"
 
 storiesOf('ResearcherPicker', module)
   .add('default', () => (

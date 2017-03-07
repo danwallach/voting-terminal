@@ -14,7 +14,7 @@ export default class Candidate extends React.Component {
     return (
       <tr>
         <td className="mdl-data-table__cell--non-numeric">
-          <FormField>
+          <FormField style={{width: "100%"}}>
             <Checkbox
               id={this.props.tableNo + this.props.candidate.name}
               onClick={() => this.props.onClick()}
