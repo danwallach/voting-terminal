@@ -13,7 +13,7 @@ export default class Candidate extends React.Component {
   render() {
     return (
       <tr>
-        <td className="mdl-data-table__cel--non-numeric">
+        <td className="mdl-data-table__cell--non-numeric">
           <FormField>
             <Checkbox
               id={this.props.tableNo + this.props.candidate.name}
