@@ -1,5 +1,9 @@
 import React from "react";
 
+import Checkbox from './components/Checkbox';
+import CheckboxLabel from './components/CheckboxLabel';
+import FormField from './components/FormField';
+
 export default class Candidate extends React.Component {
   //Creates a candidate. Contains a checkbox and a candidate title
   //Contains the proporties onClick and checked
@@ -10,14 +14,12 @@ export default class Candidate extends React.Component {
     return (
       <tr>
         <td className="mdl-data-table__cel--non-numeric">
-          <label className="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-            <input
+          <FormField>
+            <Checkbox
               id={this.props.tableNo + this.props.candidate.name}
-              type="checkbox"
-              className="mdl-checkbox__input"
               onClick={() => this.props.onClick()}
             />
-            <span className="mdl-checkbox__label">
+            <CheckboxLabel for={this.props.tableNo + this.props.candidate.name}>
               <p className="mdl-typography--body-1 mdl-typography--text-left">
                 {this.props.candidate.name}
               </p>
@@ -30,8 +32,8 @@ export default class Candidate extends React.Component {
                   {this.props.candidate.party}
                 </span>
               </p>
-            </span>
-          </label>
+            </CheckboxLabel>
+          </FormField>
         </td>
       </tr>
     );
