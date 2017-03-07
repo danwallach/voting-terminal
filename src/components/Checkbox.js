@@ -156,7 +156,7 @@ export default class Checkbox extends PureComponent {
     // Within render, we generate the html needed to render a proper MDC-Web checkbox.
     return (
       <div ref="root" className={`mdc-checkbox ${this.state.classes.toJS().join(' ')}`}>
-        <input ref={input => this.refs.nativeCb}
+        <input ref="nativeCb"
                id={this.props.id}
                type="checkbox"
                className="mdc-checkbox__native-control"
