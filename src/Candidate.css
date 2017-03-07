@@ -1,0 +1,15 @@
+div.mdc-form-field {
+  width: 100%;
+}
+
+label {
+  width: 100%;
+}
+
+div.disabled+label {
+  opacity: .38;
+}
+
+.mdc-checkbox-label p {
+  margin-bottom: 0px;
+}
