@@ -22,6 +22,7 @@ class Office extends React.Component {
             onPrevious={() => this.handlePrevious(index)}
             candidates={this.props.candidates}
             choiceNo={index + 1}
+            choice={this.state.final_choices[index]}
             valid={this.state.table_valids[index]}
             key={index}
             size={12}
