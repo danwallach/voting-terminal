@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import CandidateTable from "./CandidateTable";
 import election from "./election.json";
+import FileSaver from "file-saver";
 
 class SubmitButton extends React.Component{
   render(){
     return (
     <button
       onClick={() => this.props.onClick()}
-      >Hello</button>
+      >Submit</button>
     );
   }
 }
@@ -34,7 +35,8 @@ class Office extends React.Component {
     );
   }
   handleSubmit(){
-    alert("Sumbit");
+    var blob = new Blob([JSON.stringify(this.state.timings)], {typ: "text/plain; charset=utf-8"});
+    FileSaver.saveAs(blob,"SF"+String(new Date().getTime())+".txt");
   }
   render() {
     //Creates an array of three candidate tables
