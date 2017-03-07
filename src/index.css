@@ -3,3 +3,7 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+:root {
+  --mdc-theme-primary: #8BC34A;
+}

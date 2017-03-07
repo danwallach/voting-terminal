@@ -14,6 +14,7 @@ import "../../node_modules/material-design-icons/iconfont/material-icons.css";
 import "../../node_modules/material-components-web/dist/material-components-web.min.css";
 import "../material.css";
 import "../material.js";
+import "./index.css"
 
 storiesOf('ResearcherPicker', module)
   .add('default', () => (
@@ -38,9 +39,9 @@ storiesOf('CandidateTable', module)
 storiesOf('Checkbox', module)
   .add('default', () => (
     <FormField>
-      <Checkbox checked={true} disabled={true} />
-      <CheckboxLabel>
-        Disabled.
+      <Checkbox id="default-checkbox" />
+      <CheckboxLabel for="default-checkbox">
+        Label
       </CheckboxLabel>
     </FormField>
   ))
