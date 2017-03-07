@@ -19,6 +19,7 @@ export default class CandidateTable extends React.Component {
         key={index}
         tableNo={this.props.choiceNo - 1}
         onClick={() => this.props.onClick(this.props.choiceNo - 1, index)}
+        checked={this.props.choice === candidate.name ? true : false}
       />
     );
   }

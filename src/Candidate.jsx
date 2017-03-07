@@ -20,6 +20,7 @@ export default class Candidate extends React.Component {
             <Checkbox
               id={this.props.tableNo + this.props.candidate.name}
               onChange={() => this.props.onClick()}
+              checked={this.props.checked}
             />
             <CheckboxLabel for={this.props.tableNo + this.props.candidate.name}>
               <p className="mdl-typography--body-1 mdl-typography--text-left">

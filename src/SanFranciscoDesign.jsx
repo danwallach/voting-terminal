@@ -7,7 +7,7 @@ class Office extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      final_choices: [null, null, null]
+      choices: [null, null, null]
     };
   }
   //creates one candidate table
@@ -17,6 +17,7 @@ class Office extends React.Component {
         onClick={(t, i) => this.handleClick(t, i)}
         candidates={this.props.candidates}
         choiceNo={index + 1}
+        choice={this.state.choices[index]}
         key={index}
       />
     );
@@ -50,7 +51,7 @@ class Office extends React.Component {
   //The focused box itself will be toggled
   handleClick(table_index, index) {
     var cand_name = this.props.candidates[index].name;
-    var choices_temp = this.state.final_choices.slice();
+    var choices_temp = this.state.choices.slice();
     choices_temp[table_index] = cand_name;
     for (let i = 0; i < 3; i++) {
       if (i !== table_index && choices_temp[i] === choices_temp[table_index]) {
@@ -67,7 +68,7 @@ class Office extends React.Component {
       }
     }
     this.setState({
-      final_choices: choices_temp
+      choices: choices_temp
     });
   }
   //This function listens for an update and then searches through the document for all checkboxes
