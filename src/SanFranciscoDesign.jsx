@@ -51,7 +51,11 @@ class Office extends React.Component {
   handleClick(table_index, index) {
     var cand_name = this.props.candidates[index].name;
     var choices_temp = this.state.final_choices.slice();
-    choices_temp[table_index] = cand_name;
+    if (choices_temp[table_index] === cand_name) {
+      choices_temp[table_index] = null;
+    } else {
+      choices_temp[table_index] = cand_name;
+    }
     for (let i = 0; i < 3; i++) {
       if (i !== table_index && choices_temp[i] === choices_temp[table_index]) {
         choices_temp[i] = null;
