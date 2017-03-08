@@ -26,14 +26,28 @@ storiesOf('SanFranciscoDesign', module)
     <SanFranciscoDesign />
   ))
 
-storiesOf('Candidate', module)
-  .add('default', () => (
-    <Candidate candidate={{"name": "Barack Obama", "party": "Democratic", "term": "2009–2017"}} />
-  ))
-
 storiesOf('CandidateTable', module)
   .add('default', () => (
     <CandidateTable choiceNo={1} candidates={[{"name": "Barack Obama", "party": "Democratic", "term": "2009–2017"}]} />
+  ))
+
+const candidate = {
+  "name": "Barack Obama",
+  "party": "Democratic",
+  "term": "2009–2017",
+}
+storiesOf('Candidate', module)
+  .add('default', () => (
+    <Candidate candidate={candidate} />
+  ))
+  .add('disabled', () => (
+    <Candidate candidate={candidate} disabled={true} />
+  ))
+  .add('bold', () => (
+    <Candidate candidate={candidate} checked={true} bold={true} />
+  ))
+  .add('bold disabled', () => (
+    <Candidate candidate={candidate} checked={true} bold={true} disabled={true} />
   ))
 
 storiesOf('Checkbox', module)

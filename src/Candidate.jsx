@@ -1,38 +1,45 @@
 import React from "react";
 
-import Checkbox from './components/Checkbox';
-import CheckboxLabel from './components/CheckboxLabel';
-import FormField from './components/FormField';
+import Checkbox from "./components/Checkbox";
+import CheckboxLabel from "./components/CheckboxLabel";
+import FormField from "./components/FormField";
 
-import './Candidate.css'
+import "./Candidate.css";
 
-export default class Candidate extends React.Component {
+const defaultProps = {
+  checked: false,
+  disabled: false,
+  bold: false
+};
+
+class Candidate extends React.Component {
   //Creates a candidate. Contains a checkbox and a candidate title
   //Contains the proporties onClick and checked
   //checked tells the candidate whether its box should be checked
   //onClick passes a click event up to candidateTable with no parameters
-  //						checked={this.props.this_candidate_checked}
   render() {
+    const { candidate, index, checked, disabled, bold } = this.props;
     return (
       <tr>
         <td className="mdl-data-table__cell--non-numeric">
-          <FormField style={{width: "100%"}}>
+          <FormField style={{ width: "100%" }}>
             <Checkbox
-              id={this.props.tableNo + this.props.candidate.name}
+              id={`${index} ${candidate.name}`}
               onChange={() => this.props.onClick()}
-              checked={this.props.checked}
+              checked={checked}
+              disabled={disabled}
             />
-            <CheckboxLabel for={this.props.tableNo + this.props.candidate.name}>
-              <p className="mdl-typography--body-1 mdl-typography--text-left">
-                {this.props.candidate.name}
+            <CheckboxLabel for={`${index} ${candidate.name}`}>
+              <p
+                className="mdc-typography--title"
+                style={bold ? { fontWeight: 700 } : { fontWeight: 400 }}
+              >
+                {candidate.name}
               </p>
-              <p className="mdl-typography--caption mdl-typography--text-left">
-                {this.props.candidate.term}
-                <span
-                  style={{ float: "right" }}
-                  className="mdl-typography--caption"
-                >
-                  {this.props.candidate.party}
+              <p className={`mdc-typography--body${bold ? "2" : "1"}`}>
+                {candidate.term}
+                <span style={{ float: "right" }}>
+                  {candidate.party}
                 </span>
               </p>
             </CheckboxLabel>
@@ -42,3 +49,7 @@ export default class Candidate extends React.Component {
     );
   }
 }
+
+Candidate.defaultProps = defaultProps;
+
+export default Candidate;
