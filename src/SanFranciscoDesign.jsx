@@ -17,7 +17,7 @@ class Office extends React.Component {
   renderCandidateTable(index) {
     return (
       <CandidateTable
-        onClick={(t, i) => this.handleClick(t, i)}
+        onClick={this.handleClick}
         candidates={this.props.candidates}
         choiceNo={index + 1}
         choice={this.state.choices[index]}
@@ -52,7 +52,7 @@ class Office extends React.Component {
   //handleClick will then change the state of the checkboxvalues array
   //All boxes in the row and column of the focused box will be set to 0
   //The focused box itself will be toggled
-  handleClick(table_index, index) {
+  handleClick = (table_index, index) => {
     var timings_temp = this.state.timings.slice();
     timings_temp.push([table_index,index,new Date().getTime()]);
     var cand_name = this.props.candidates[index].name;

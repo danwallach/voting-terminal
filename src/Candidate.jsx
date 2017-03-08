@@ -18,14 +18,14 @@ class Candidate extends React.Component {
   //checked tells the candidate whether its box should be checked
   //onClick passes a click event up to candidateTable with no parameters
   render() {
-    const { candidate, index, checked, disabled, bold } = this.props;
+    const { candidate, index, checked, disabled, bold, onClick } = this.props;
     return (
       <tr>
         <td className="mdl-data-table__cell--non-numeric">
           <FormField style={{ width: "100%" }}>
             <Checkbox
               id={`${index} ${candidate.name}`}
-              onChange={() => this.props.onClick()}
+              onChange={onClick}
               checked={checked}
               disabled={disabled}
             />
