@@ -72,13 +72,6 @@ class Office extends React.Component {
       choices: choices_temp
     });
   }
-  //This function listens for an update and then searches through the document for all checkboxes
-  //Each checkboxe is then updated
-  componentDidUpdate() {
-    document
-      .querySelectorAll(".mdl-js-checkbox")
-      .forEach(element => element.MaterialCheckbox.checkToggleState());
-  }
 }
 
 class Contest extends Component {
