@@ -16,6 +16,14 @@ import "../material.css";
 import "../material.js";
 import "../index.css"
 
+const candidates = [{
+  "name": "Barack Obama",
+  "party": "Democratic",
+  "term": "2009–2017",
+}];
+
+const candidate = candidates[0];
+
 storiesOf('ResearcherPicker', module)
   .add('default', () => (
     <ResearcherPicker />
@@ -28,14 +36,15 @@ storiesOf('SanFranciscoDesign', module)
 
 storiesOf('CandidateTable', module)
   .add('default', () => (
-    <CandidateTable choiceNo={1} candidates={[{"name": "Barack Obama", "party": "Democratic", "term": "2009–2017"}]} />
+    <CandidateTable choiceNo={1} candidates={candidates} />
+  ))
+  .add('disabled', () => (
+    <CandidateTable choiceNo={1} candidates={candidates} disabled={true}/>
+  ))
+  .add('inFocus', () => (
+    <CandidateTable choiceNo={1} candidates={candidates} inFocus={true}/>
   ))
 
-const candidate = {
-  "name": "Barack Obama",
-  "party": "Democratic",
-  "term": "2009–2017",
-}
 storiesOf('Candidate', module)
   .add('default', () => (
     <Candidate candidate={candidate} />

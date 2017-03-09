@@ -1,8 +1,13 @@
 import React from "react";
 import Candidate from "./Candidate";
-import "./Office.css";
+import "./CandidateTable.css";
 
-export default class CandidateTable extends React.Component {
+const defaultProps ={
+  disabled: false,
+  inFocus: false,
+}
+
+class CandidateTable extends React.Component {
   /*Creates a table with a header and a few Candidate objects
    *Contains the properties onClick, this_table_check_values, and candidates
    *when onClick is called by child candidate, the function is sent up to Office
@@ -24,6 +29,7 @@ export default class CandidateTable extends React.Component {
     );
   }
   render() {
+    const {disabled, inFocus} = this.props;
     //Creating the head of the table
     const toOrdinal = {
       1: "First",
@@ -38,16 +44,16 @@ export default class CandidateTable extends React.Component {
     const head = (
       <tr>
         <th>
-          <p className="mdl-typography--display-1 mdl-typography--text-left">
+          <p className="mdc-typography--display3" style={{textAlign: "left"}}>
             {this.props.choiceNo}
             <span
               style={{ paddingLeft: "1ex" }}
-              className="mdl-typography--title"
+              className="mdc-typography--display1"
             >
-              {toOrdinal[this.props.choiceNo] + " Choice"}
+              {`${toOrdinal[this.props.choiceNo]} Choice`}
             </span>
           </p>
-          <p className="mdl-typography--body-1 mdl-typography--text-left">
+          <p className="mdc-typography--subheading2" style={{textAlign: "left"}}>
             {instructions[this.props.choiceNo]}
           </p>
         </th>
@@ -62,12 +68,11 @@ export default class CandidateTable extends React.Component {
     return (
       <div
         className={
-          `mdl-cell mdl-cell--${this.props.size}-col mdl-cell--8-col-tablet`
+          `mdl-cell mdl-cell--${this.props.size}-col mdl-cell--8-col-tablet ${disabled && "disabled"}`
         }
-        style={this.props.style}
       >
         <table
-          className="mdl-data-table mdl-js-data-table mdl-shadow--2dp"
+          className={`mdl-data-table mdl-js-data-table mdc-elevation-transition mdc-elevation--z${inFocus ? 8 : 2}`}
           style={{ width: "100%" }}
         >
           <thead>
@@ -81,3 +86,8 @@ export default class CandidateTable extends React.Component {
     );
   }
 }
+
+CandidateTable.defaultProps = defaultProps
+
+export default CandidateTable;
+
