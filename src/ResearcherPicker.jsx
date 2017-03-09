@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router";
-import researchers from "./researchers.json";
+import { MDCTextfield } from '@material/textfield/dist/mdc.textfield';
 
-export default function ResearcherPicker() {
+import researchers from "./researchers.json";
+import "./ResearcherPicker.css";
+
+function ResearcherPicker() {
   const body = researchers.reduce(
     (rows, researcher) => rows.concat(
       <Link to={researcher.route}>
@@ -24,11 +27,32 @@ export default function ResearcherPicker() {
   );
   console.log(body);
   return (
+    <div>
     <div className="mdl-card mdl-shadow--2dp">
       <div className="mdl-card__title">
         <h2 className="mdl-card__title-text">Choose a researcher</h2>
       </div>
       {body}
     </div>
+    <div className="subject-number-container">
+      <Textfield>Subject number</Textfield>
+    </div>
+  </div>
   );
 }
+
+class Textfield extends React.Component {
+  componentDidMount() {
+    MDCTextfield.attachTo(document.querySelector('.mdc-textfield'));
+  }
+  render() {
+    return (
+      <label className="mdc-textfield">
+        <input type="number" className="mdc-textfield__input" />
+          <span className="mdc-textfield__label">{this.props.children}</span>
+      </label>
+    )
+  }
+}
+
+export default ResearcherPicker;
