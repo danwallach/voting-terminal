@@ -67,7 +67,7 @@ class ArrowButton extends React.Component {
         <div>
           <button
             id={this.props.buttonNo + "button"}
-            className={`mdl-button mdl-js-button mdl-button--raised ${title === "arrow_forward" && "mdl-button--colored"} mdl-js-ripple-effect`}
+            className={`mdl-button mdl-js-button mdl-button--raised ${title === "arrow_forward" && "mdl-button--colored mdc-elevation--z12"} mdl-js-ripple-effect`}
             onClick={() =>
               this.props.onClick(this.props.buttonNo, next_or_previous)}
               disabled={disabled}
@@ -99,6 +99,8 @@ class Office extends React.Component {
   }
   //creates one candidate table
   renderCandidateTable(index) {
+    const {table_valids, final_choices} = this.state;
+    const inFocus = table_valids.indexOf(1);
     return (
       <CandidateTable
         onClick={(t, i) => this.handleClick(t, i)}
@@ -111,6 +113,7 @@ class Office extends React.Component {
         previousChoices={this.state.final_choices.slice(0, index)}
         boldSelectedCandidate={true}
         hidePreviouslySelectedCheckboxes={true}
+        inFocus={index === inFocus && final_choices[index] === null ? true : false}
         size={3}
       />
     );

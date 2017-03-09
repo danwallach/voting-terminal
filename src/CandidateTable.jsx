@@ -79,7 +79,7 @@ class CandidateTable extends React.Component {
         }
       >
         <table
-          className={`mdl-data-table mdl-js-data-table mdc-elevation-transition mdc-elevation--z${inFocus ? 8 : 2}`}
+          className={`mdl-data-table mdl-js-data-table mdc-elevation-transition mdc-elevation--z${inFocus ? 12 : 2}`}
           style={{ width: "100%" }}
         >
           <thead>
