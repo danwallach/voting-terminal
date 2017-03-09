@@ -51,7 +51,7 @@ class Office extends React.Component {
         </div>
         <div>
           <SubmitButton
-            final_choices={this.state.final_choices}
+            final_choices={this.state.choices}
             onClick={() => this.handleSubmit()}
           />
         </div>

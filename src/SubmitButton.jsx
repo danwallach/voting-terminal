@@ -1,7 +1,5 @@
 import React from "react"
 
-
-
 class SubmitButton extends React.Component{
   render(){
         var choices = this.props.final_choices;

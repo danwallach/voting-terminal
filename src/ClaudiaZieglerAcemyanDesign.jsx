@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import CandidateTable from "./CandidateTable";
 
 import FileSaver from "file-saver";
-import SubmitButton from "./SubmitButton";=======
+import SubmitButton from "./SubmitButton"
 
 import DesignHeading from "./DesignHeading";
 import ArrowButton from "./ArrowButton";
