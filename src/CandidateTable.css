@@ -1,0 +1,39 @@
+.mdl-data-table th {
+  vertical-align: top;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: .38;
+}
+
+.mdl-data-table.mdc-elevation--z8 {
+  box-shadow:
+  0px 5px 5px -3px rgba(76, 175, 80, .2),
+  0px 8px 10px 1px rgba(76, 175, 80, .14),
+  0px 3px 14px 2px rgba(76, 175, 80, .12);
+}
+
+.mdl-data-table.mdc-elevation--z12 {
+  box-shadow:
+  0px 7px 8px -4px rgba(76, 175, 80, .2),
+  0px 12px 17px 2px rgba(76, 175, 80, .14),
+  0px 5px 22px 4px rgba(76, 175, 80, .12);
+}
+
+.mdl-data-table.mdc-elevation--z16 {
+  box-shadow:
+  0px 8px 10px -5px rgba(76, 175, 80, .2),
+  0px 16px 16px 2px rgba(76, 175, 80, .14),
+  0px 6px 30px 5px rgba(76, 175, 80, .12);
+}
+
+.mdl-data-table.mdc-elevation--z24 {
+  box-shadow:
+  0px 11px 15px -7px rgba(76, 175, 80, .2),
+  0px 24px 38px 3px rgba(76, 175, 80, .14),
+  0px 9px 46px 8px rgba(76, 175, 80, .12);
+}
+

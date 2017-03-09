@@ -1,56 +1,14 @@
 import React, { Component } from "react";
-import CandidateTable from "./CandidateTable";
-import election from "./election.json";
-import FileSaver from "file-saver";
-import SubmitButton from "./SubmitButton";
 
-class ArrowButton extends React.Component {
-  render() {
-    var disabled = true;
-    var title = "Next";
-    var tb_vld = this.props.table_valids;
-    var tb_vld_num;
-    var next_or_previous = 0;
-    for (let i = 0; i < tb_vld.length; i++) {
-      if (tb_vld[i]) {
-        tb_vld_num = i;
-      }
-    }
-    var dex = this.props.buttonNo;
-    var fnl_chc = this.props.final_choices;
-    var valid;
-    if (tb_vld_num - dex > 0) {
-      title = "Previous";
-      next_or_previous = 1;
-    }
-    if (next_or_previous) {
-      valid = tb_vld[dex] || tb_vld[dex + 1];
-    } else {
-      valid = (tb_vld[dex] || tb_vld[dex + 1]) && fnl_chc[dex];
-    }
-    disabled = !valid;
-    return (
-      <div
-        className="mdl-cell mdl-cell--1-col"
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center"
-        }}
-      >
-        <button
-          id={this.props.buttonNo + "button"}
-          className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
-          onClick={() =>
-            this.props.onClick(this.props.buttonNo, next_or_previous)}
-          disabled={disabled}
-        >
-          {title}
-        </button>
-      </div>
-    );
-  }
-}
+import CandidateTable from "./CandidateTable";
+
+import FileSaver from "file-saver";
+import SubmitButton from "./SubmitButton";=======
+
+import DesignHeading from "./DesignHeading";
+import ArrowButton from "./ArrowButton";
+
+import election from "./election.json";
 class Office extends React.Component {
   //Office is the logic layer that contains and distributes most of the information
   constructor(props) {
@@ -65,6 +23,8 @@ class Office extends React.Component {
   }
   //creates one candidate table
   renderCandidateTable(index) {
+    const {table_valids, final_choices} = this.state;
+    const inFocus = table_valids.indexOf(1);
     return (
       <CandidateTable
         onClick={(t, i) => this.handleClick(t, i)}
@@ -72,9 +32,12 @@ class Office extends React.Component {
         onPrevious={() => this.handlePrevious(index)}
         candidates={this.props.candidates}
         choiceNo={index + 1}
-        final_choices={this.state.final_choices}
-        valid={this.state.table_valids[index]}
-        key={index}
+        choice={this.state.final_choices[index]}
+        disabled={this.state.table_valids[index] === 0 ? true : false}
+        previousChoices={this.state.final_choices.slice(0, index)}
+        boldSelectedCandidate={true}
+        hidePreviouslySelectedCheckboxes={true}
+        inFocus={index === inFocus && final_choices[index] === null ? true : false}
         size={3}
       />
     );
@@ -122,15 +85,8 @@ class Office extends React.Component {
     //Certain properties are passed down, see CandidateTable for more info
     return (
       <div>
-        <h2
-          className="mdl-typography--title mdl-typography--text-center mdl-typography--text-capitalize"
-        >
-          {this.props.office}
-        </h2>
-        <p className="mdl-typography--body-1 mdl-typography--text-center">
-          Vote your first, second, and third choices
-        </p>
-        <div className="mdl-grid">
+        <DesignHeading />
+        <div className="mdc-layout-grid">
           {tables}
         </div>
       </div>
@@ -173,15 +129,6 @@ class Office extends React.Component {
         choices_temp[i] = null;
       }
     }
-    for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < this.props.candidates.length; j++) {
-        if (i === table_index ^ j === index) {
-          document.getElementById(
-            String(i) + this.props.candidates[j].name
-          ).checked = false;
-        }
-      }
-    }
     this.setState({
       timings: timings_temp,
       final_choices: choices_temp
@@ -192,7 +139,7 @@ class Office extends React.Component {
       if (1 - this.state.table_valids[j]) {
         for (let k = 0; k < this.props.candidates.length; k++) {
           document.getElementById(
-            String(j) + this.props.candidates[k].name
+            `${String(j)} ${this.props.candidates[k].name}`
           ).disabled = true;
         }
       }
@@ -204,22 +151,22 @@ class Office extends React.Component {
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < this.props.candidates.length; j++) {
         document.getElementById(
-          String(i) + this.props.candidates[j].name
+          `${String(i)} ${this.props.candidates[j].name}`
         ).disabled = false;
       }
     }
     for (let j = 0; j < this.props.candidates.length; j++) {
       if (this.props.candidates[j].name === this.state.final_choices[0]) {
         document.getElementById(
-          "1" + this.props.candidates[j].name
+          `1 ${this.props.candidates[j].name}`
         ).disabled = true;
         document.getElementById(
-          "2" + this.props.candidates[j].name
+          `2 ${this.props.candidates[j].name}`
         ).disabled = true;
       }
       if (this.props.candidates[j].name === this.state.final_choices[1]) {
         document.getElementById(
-          "2" + this.props.candidates[j].name
+          `2 ${this.props.candidates[j].name}`
         ).disabled = true;
       }
     }
@@ -227,17 +174,11 @@ class Office extends React.Component {
       if (1 - this.state.table_valids[j]) {
         for (let k = 0; k < this.props.candidates.length; k++) {
           document.getElementById(
-            String(j) + this.props.candidates[k].name
+            `${String(j)} ${this.props.candidates[k].name}`
           ).disabled = true;
         }
       }
     }
-    document
-      .querySelectorAll(".mdl-js-checkbox")
-      .forEach(element => element.MaterialCheckbox.checkToggleState());
-    document
-      .querySelectorAll(".mdl-js-checkbox")
-      .forEach(element => element.MaterialCheckbox.checkDisabled());
   }
 }
 
@@ -261,7 +202,7 @@ class Election extends Component {
 export default class ClaudiaZieglerAcemyanDesign extends Component {
   render() {
     return (
-      <div className="mdl-grid">
+      <div className="mdc-layout-grid">
         <Election />
       </div>
     );

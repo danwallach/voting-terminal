@@ -1,5 +1,8 @@
 import React, { Component } from "react";
+
 import CandidateTable from "./CandidateTable";
+import DesignHeading from "./DesignHeading";
+
 import election from "./election.json";
 import FileSaver from "file-saver";
 import SubmitButton from "./SubmitButton";
@@ -11,17 +14,17 @@ class Office extends React.Component {
     timings_temp.push(["Begin", new Date().getTime()]);
     this.state = {
       timings: timings_temp,
-      final_choices: [null, null, null]
+      choices: [null, null, null]
     };
   }
   //creates one candidate table
   renderCandidateTable(index) {
     return (
       <CandidateTable
-        onClick={(t, i) => this.handleClick(t, i)}
+        onClick={this.handleClick}
         candidates={this.props.candidates}
         choiceNo={index + 1}
-        key={index}
+        choice={this.state.choices[index]}
       />
     );
   }
@@ -42,12 +45,7 @@ class Office extends React.Component {
     //Certain properties are passed down, see CandidateTable for more info
     return (
       <div>
-        <h2 className="mdl-typography--title mdl-typography--text-center">
-          {this.props.office}
-        </h2>
-        <p className="mdl-typography--body-1 mdl-typography--text-center">
-          Vote for your first, second, and third choices
-        </p>
+        <DesignHeading />
         <div className="mdl-grid">
           {tables}
         </div>
@@ -65,37 +63,25 @@ class Office extends React.Component {
   //handleClick will then change the state of the checkboxvalues array
   //All boxes in the row and column of the focused box will be set to 0
   //The focused box itself will be toggled
-  handleClick(table_index, index) {
+  handleClick = (table_index, index) => {
     var timings_temp = this.state.timings.slice();
     timings_temp.push([table_index, index, new Date().getTime()]);
     var cand_name = this.props.candidates[index].name;
-    var choices_temp = this.state.final_choices.slice();
-    choices_temp[table_index] = cand_name;
+    var choices_temp = this.state.choices.slice();
+    if (choices_temp[table_index] === cand_name) {
+      choices_temp[table_index] = null;
+    } else {
+      choices_temp[table_index] = cand_name;
+    }
     for (let i = 0; i < 3; i++) {
       if (i !== table_index && choices_temp[i] === choices_temp[table_index]) {
         choices_temp[i] = null;
       }
     }
-    for (var i = 0; i < 3; i++) {
-      for (var j = 0; j < this.props.candidates.length; j++) {
-        if (i === table_index ^ j === index) {
-          document.getElementById(
-            String(i) + this.props.candidates[j].name
-          ).checked = false;
-        }
-      }
-    }
     this.setState({
       timings: timings_temp,
-      final_choices: choices_temp
+      choices: choices_temp
     });
-  }
-  //This function listens for an update and then searches through the document for all checkboxes
-  //Each checkboxe is then updated
-  componentDidUpdate() {
-    document
-      .querySelectorAll(".mdl-js-checkbox")
-      .forEach(element => element.MaterialCheckbox.checkToggleState());
   }
 }
 

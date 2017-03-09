@@ -1,0 +1,20 @@
+div.mdc-form-field {
+  width: 100%;
+}
+
+.mdc-checkbox-label {
+  width: 100%;
+  padding-left: 12px;
+}
+
+div.disabled+label {
+  opacity: .38;
+}
+
+.mdc-checkbox-label p {
+  margin-bottom: 0px;
+}
+
+.mdc-checkbox {
+  transform: scale(calc(20/14));
+}
