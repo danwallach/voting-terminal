@@ -13,3 +13,7 @@ div.disabled+label {
 .mdc-checkbox-label p {
   margin-bottom: 0px;
 }
+
+.mdc-checkbox {
+  transform: scale(1);
+}
