@@ -8,7 +8,7 @@ import election from "./election.json";
 class ArrowButton extends React.Component {
   render() {
     var disabled = true;
-    var title = "Next";
+    var title = "arrow_forward";
     var tb_vld = this.props.table_valids;
     var tb_vld_num;
     var next_or_previous = 0;
@@ -21,7 +21,7 @@ class ArrowButton extends React.Component {
     var fnl_chc = this.props.final_choices;
     var valid;
     if (tb_vld_num - dex > 0) {
-      title = "Previous";
+      title = "arrow_back";
       next_or_previous = 1;
     }
     if (next_or_previous) {
@@ -41,12 +41,12 @@ class ArrowButton extends React.Component {
       >
         <button
           id={this.props.buttonNo + "button"}
-          className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+          className={`mdl-button mdl-js-button mdl-button--raised ${title === "arrow_forward" && "mdl-button--colored"} mdl-js-ripple-effect`}
           onClick={() =>
             this.props.onClick(this.props.buttonNo, next_or_previous)}
           disabled={disabled}
         >
-          {title}
+          <i className="material-icons">{title}</i>
         </button>
       </div>
     );
