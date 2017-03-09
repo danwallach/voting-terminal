@@ -37,6 +37,9 @@ class ArrowButton extends React.Component {
           case "arrow_back":
             buttonCaption = "Return to your 1st choice";
             break;
+          default:
+            buttonCaption = "";
+            break;
         }
         break;
       case 1:
@@ -47,10 +50,13 @@ class ArrowButton extends React.Component {
           case "arrow_back":
             buttonCaption = "Return to your 2nd choice";
             break;
+          default:
+            buttonCaption = "";
+            break;
         }
         break;
-        buttonCaption = "Button 1";
-        break;
+        //buttonCaption = "Button 1";
+        //break;
       default:
         buttonCaption = "";
     }
