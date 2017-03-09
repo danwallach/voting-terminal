@@ -2,22 +2,7 @@ import React, { Component } from "react";
 import CandidateTable from "./CandidateTable";
 import election from "./election.json";
 import FileSaver from "file-saver";
-
-class SubmitButton extends React.Component {
-  render() {
-    var choices = this.props.final_choices;
-    var disable = "True";
-    if (choices[0] && choices[1] && choices[2]) {
-      disable = "";
-    }
-    return (
-      <button disabled={disable} onClick={() => this.props.onClick()}>
-        Submit
-      </button>
-    );
-  }
-}
-
+import SubmitButton from "./SubmitButton";
 class Office extends React.Component {
   //Office is the logic layer that contains and distributes most of the information
   constructor(props) {

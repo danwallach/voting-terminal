@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import CandidateTable from "./CandidateTable";
 import election from "./election.json";
 import FileSaver from "file-saver";
+import SubmitButton from "./SubmitButton";
 
 class ArrowButton extends React.Component {
   render() {
@@ -47,20 +48,6 @@ class ArrowButton extends React.Component {
           {title}
         </button>
       </div>
-    );
-  }
-}
-class SubmitButton extends React.Component {
-  render() {
-    var choices = this.props.final_choices;
-    var disable = "True";
-    if (choices[0] && choices[1] && choices[2]) {
-      disable = "";
-    }
-    return (
-      <button disabled={disable} onClick={() => this.props.onClick()}>
-        Submit
-      </button>
     );
   }
 }

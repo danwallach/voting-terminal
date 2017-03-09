@@ -2,21 +2,7 @@ import React, { Component } from "react";
 import CandidateTable from "./CandidateTable";
 import election from "./election.json";
 import FileSaver from "file-saver";
-
-class SubmitButton extends React.Component {
-  render() {
-    var choices = this.props.final_choices;
-    var disable = "True";
-    if (choices[0] && choices[1] && choices[2]) {
-      disable = "";
-    }
-    return (
-      <button disabled={disable} onClick={() => this.props.onClick()}>
-        Submit
-      </button>
-    );
-  }
-}
+import SubmitButton from "./SubmitButton";
 class Office extends React.Component {
   //Office is the logic layer that contains and distributes most of the information
   constructor(props) {
@@ -51,12 +37,6 @@ class Office extends React.Component {
     for (let i = 0; i < 3; i++) {
       tables.push(this.renderCandidateTable(i));
     }
-    tables.push(
-      <SubmitButton
-        final_choices={this.state.final_choices}
-        onClick={() => this.handleSubmit()}
-      />
-    );
 
     //Creation of three (San Fran allows 3) candidate tables
     //Certain properties are passed down, see CandidateTable for more info
@@ -70,6 +50,12 @@ class Office extends React.Component {
         </p>
         <div className="mdl-grid">
           {tables}
+        </div>
+        <div>
+          <SubmitButton
+            final_choices={this.state.final_choices}
+            onClick={() => this.handleSubmit()}
+          />
         </div>
       </div>
     );
