@@ -75,7 +75,7 @@ class CandidateTable extends React.Component {
     return (
       <div
         className={
-          `mdl-cell mdl-cell--${this.props.size}-col mdl-cell--8-col-tablet ${disabled && "disabled"}`
+          `mdc-layout-grid__cell mdc-layout-grid__cell--span-${this.props.size} mdc-layout-grid__cell--cell--span-8-tablet ${disabled && "disabled"}`
         }
       >
         <table

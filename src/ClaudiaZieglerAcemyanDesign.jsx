@@ -59,7 +59,7 @@ class ArrowButton extends React.Component {
     }
     return (
       <div
-        className="mdl-cell mdl-cell--1-col"
+        className="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle"
         style={{
           textAlign: "center"
         }}
@@ -146,7 +146,7 @@ class Office extends React.Component {
     return (
       <div>
         <DesignHeading />
-        <div className="mdl-grid">
+        <div className="mdc-layout-grid">
           {tables}
         </div>
       </div>
