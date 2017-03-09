@@ -19,7 +19,7 @@ class ResearcherPicker extends React.Component {
     const { subjectNumber } = this.state;
     const body = researchers.reduce(
       (rows, researcher) => rows.concat(
-        <Link to={researcher.route} subjectNumber={subjectNumber}>
+        <Link to={{ pathname: researcher.route, query: {subjectNumber: subjectNumber} }}>
           <div className="mdl-list__item mdl-card__actions mdl-card--border">
             <span className="mdl-list__item-primary-content">
               <i
