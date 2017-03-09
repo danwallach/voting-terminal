@@ -30,25 +30,57 @@ class ArrowButton extends React.Component {
       valid = (tb_vld[dex] || tb_vld[dex + 1]) && fnl_chc[dex];
     }
     disabled = !valid;
+    let buttonText = "";
+    switch (this.props.buttonNo) {
+      case 0:
+        switch (title) {
+          case "arrow_forward":
+            buttonText = "Go to your 2nd choice";
+            break;
+          case "arrow_back":
+            buttonText = "Return to your 1st choice";
+            break;
+        }
+        break;
+      case 1:
+        switch (title) {
+          case "arrow_forward":
+            buttonText = "Make your 3rd choice";
+            break;
+          case "arrow_back":
+            buttonText = "Return to your 2nd choice";
+            break;
+        }
+        break;
+        buttonText = "Button 1";
+        break;
+      default:
+        buttonText = "";
+    }
     return (
       <div
         className="mdl-cell mdl-cell--1-col"
         style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center"
+          textAlign: "center"
         }}
       >
-        <button
-          id={this.props.buttonNo + "button"}
-          className={`mdl-button mdl-js-button mdl-button--raised ${title === "arrow_forward" && "mdl-button--colored"} mdl-js-ripple-effect`}
-          onClick={() =>
-            this.props.onClick(this.props.buttonNo, next_or_previous)}
-          disabled={disabled}
-        >
-          <i className="material-icons">{title}</i>
-        </button>
-      </div>
+        <div>
+          <button
+            id={this.props.buttonNo + "button"}
+            className={`mdl-button mdl-js-button mdl-button--raised ${title === "arrow_forward" && "mdl-button--colored"} mdl-js-ripple-effect`}
+            onClick={() =>
+              this.props.onClick(this.props.buttonNo, next_or_previous)}
+              disabled={disabled}
+            >
+              <i className="material-icons">{title}</i>
+            </button>
+          </div>
+          <div>
+            <p className={`mdc-typography--caption ${disabled && "disabled"}`}>
+              {buttonText}
+            </p>
+          </div>
+        </div>
     );
   }
 }
