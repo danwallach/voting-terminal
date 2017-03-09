@@ -75,9 +75,10 @@ class Office extends React.Component {
         candidates={this.props.candidates}
         choiceNo={index + 1}
         choice={this.state.final_choices[index]}
-        final_choices={this.state.final_choices}
-        valid={this.state.table_valids[index]}
-        key={index}
+        disabled={this.state.table_valids[index] === 0 ? true : false}
+        previousChoices={this.state.final_choices.slice(0, index)}
+        boldSelectedCandidate={true}
+        hidePreviouslySelectedCheckboxes={true}
         size={3}
       />
     );
@@ -166,7 +167,7 @@ class Office extends React.Component {
       if (1 - this.state.table_valids[j]) {
         for (let k = 0; k < this.props.candidates.length; k++) {
           document.getElementById(
-            String(j) + this.props.candidates[k].name
+            `${String(j)} ${this.props.candidates[k].name}`
           ).disabled = true;
         }
       }
@@ -178,22 +179,22 @@ class Office extends React.Component {
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < this.props.candidates.length; j++) {
         document.getElementById(
-          String(i) + this.props.candidates[j].name
+          `${String(i)} ${this.props.candidates[j].name}`
         ).disabled = false;
       }
     }
     for (let j = 0; j < this.props.candidates.length; j++) {
       if (this.props.candidates[j].name === this.state.final_choices[0]) {
         document.getElementById(
-          "1" + this.props.candidates[j].name
+          `1 ${this.props.candidates[j].name}`
         ).disabled = true;
         document.getElementById(
-          "2" + this.props.candidates[j].name
+          `2 ${this.props.candidates[j].name}`
         ).disabled = true;
       }
       if (this.props.candidates[j].name === this.state.final_choices[1]) {
         document.getElementById(
-          "2" + this.props.candidates[j].name
+          `2 ${this.props.candidates[j].name}`
         ).disabled = true;
       }
     }
@@ -201,17 +202,11 @@ class Office extends React.Component {
       if (1 - this.state.table_valids[j]) {
         for (let k = 0; k < this.props.candidates.length; k++) {
           document.getElementById(
-            String(j) + this.props.candidates[k].name
+            `${String(j)} ${this.props.candidates[k].name}`
           ).disabled = true;
         }
       }
     }
-    document
-      .querySelectorAll(".mdl-js-checkbox")
-      .forEach(element => element.MaterialCheckbox.checkToggleState());
-    document
-      .querySelectorAll(".mdl-js-checkbox")
-      .forEach(element => element.MaterialCheckbox.checkDisabled());
   }
 }
 

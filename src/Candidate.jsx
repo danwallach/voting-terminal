@@ -9,7 +9,8 @@ import "./Candidate.css";
 const defaultProps = {
   checked: false,
   disabled: false,
-  bold: false
+  bold: false,
+  hiddenCheckbox: false,
 };
 
 class Candidate extends React.Component {
@@ -18,7 +19,7 @@ class Candidate extends React.Component {
   //checked tells the candidate whether its box should be checked
   //onClick passes a click event up to candidateTable with no parameters
   render() {
-    const { candidate, index, checked, disabled, bold, onClick } = this.props;
+    const { candidate, index, checked, disabled, bold, hiddenCheckbox, onClick } = this.props;
     return (
       <tr>
         <td className="mdl-data-table__cell--non-numeric">
@@ -28,6 +29,7 @@ class Candidate extends React.Component {
               onChange={onClick}
               checked={checked}
               disabled={disabled}
+              style={disabled && hiddenCheckbox ? {visibility: "hidden"} : {visibility: "visible"}}
             />
             <CheckboxLabel for={`${index} ${candidate.name}`}>
               <p
