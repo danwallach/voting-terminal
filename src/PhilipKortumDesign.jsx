@@ -1,14 +1,19 @@
 import React, { Component } from "react";
 import CandidateTable from "./CandidateTable";
 import election from "./election.json";
-import FileSaver from "file-saver"
+import FileSaver from "file-saver";
 
-class SubmitButton extends React.Component{
-  render(){
+class SubmitButton extends React.Component {
+  render() {
+    var choices = this.props.final_choices;
+    var disable = "True";
+    if (choices[0] && choices[1] && choices[2]) {
+      disable = "";
+    }
     return (
-    <button
-      onClick={() => this.props.onClick()}
-      >Submit</button>
+      <button disabled={disable} onClick={() => this.props.onClick()}>
+        Submit
+      </button>
     );
   }
 }
@@ -17,8 +22,8 @@ class Office extends React.Component {
   //Office is the logic layer that contains and distributes most of the information
   constructor(props) {
     super(props);
-    var timings_temp = []
-    timings_temp.push(["Begin",new Date().getTime()]);
+    var timings_temp = [];
+    timings_temp.push(["Begin", new Date().getTime()]);
     this.state = {
       timings: timings_temp,
       final_choices: [null, null, null],
@@ -28,7 +33,7 @@ class Office extends React.Component {
   //creates one candidate table
   renderCandidateTable(index) {
     return (
-      <div style={this.state.table_valids[index] ? {} : {display: "none"}}>
+      <div style={this.state.table_valids[index] ? {} : { display: "none" }}>
         <div className="mdl-grid">
           <CandidateTable
             onClick={(t, i) => this.handleClick(t, i)}
@@ -45,14 +50,20 @@ class Office extends React.Component {
           <button
             className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
             onClick={() => this.handlePrevious(index)}
-            style={index !== 0 ? {visibility: "visible"} : {visibility: "hidden"}}
+            style={
+              index !== 0 ? { visibility: "visible" } : { visibility: "hidden" }
+            }
           >
             Previous
           </button>
           <button
             className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
             onClick={() => this.handleNext(index)}
-            style={Object.assign({}, {float: "right"}, index !== 2 ? {visibility: "visible"} : {visibility: "hidden"})}
+            style={Object.assign(
+              {},
+              { float: "right" },
+              index !== 2 ? { visibility: "visible" } : { visibility: "hidden" }
+            )}
           >
             Next
           </button>
@@ -60,20 +71,25 @@ class Office extends React.Component {
       </div>
     );
   }
-  handleSubmit(){
-    var blob = new Blob([JSON.stringify(this.state.timings)], {typ: "text/plain; charset=utf-8"});
-    FileSaver.saveAs(blob,"Kortum"+String(new Date().getTime())+".txt");
+  handleSubmit() {
+    var blob = new Blob([JSON.stringify(this.state.timings)], {
+      typ: "text/plain; charset=utf-8"
+    });
+    FileSaver.saveAs(blob, "Kortum" + String(new Date().getTime()) + ".txt");
   }
-   render() {
+  render() {
     //Creates an array of three candidate tables
     var tables = [];
     for (let i = 0; i < 3; i++) {
       tables.push(this.renderCandidateTable(i));
     }
-     tables.push(<SubmitButton
-      onClick={() => this.handleSubmit()}
-      />);
-   //Creation of three (San Fran allows 3) candidate tables
+    tables.push(
+      <SubmitButton
+        final_choices={this.state.final_choices}
+        onClick={() => this.handleSubmit()}
+      />
+    );
+    //Creation of three (San Fran allows 3) candidate tables
     //Certain properties are passed down, see CandidateTable for more info
     return (
       <div>
@@ -85,7 +101,7 @@ class Office extends React.Component {
         <p className="mdl-typography--body-1 mdl-typography--text-center">
           Vote your first, second, and third choices
         </p>
-          {tables}
+        {tables}
       </div>
     );
   }
@@ -97,7 +113,7 @@ class Office extends React.Component {
   handleNext(index) {
     var date = new Date();
     var timings_temp = this.state.timings.slice();
-    timings_temp.push(["Next",date.getTime()]);
+    timings_temp.push(["Next", date.getTime()]);
     if (this.state.final_choices[index]) {
       var valid_temp = this.state.table_valids.slice();
       valid_temp[index] = 0;
@@ -111,19 +127,19 @@ class Office extends React.Component {
   handlePrevious(index) {
     var date = new Date();
     var timings_temp = this.state.timings.slice();
-    timings_temp.push(["Previous",date.getTime()]);
+    timings_temp.push(["Previous", date.getTime()]);
     var valid_temp = this.state.table_valids.slice();
     valid_temp[index] = 0;
     valid_temp[index - 1] = 1;
     this.setState({
       table_valids: valid_temp,
-      timings: timings_temp,
+      timings: timings_temp
     });
   }
   handleClick(table_index, index) {
     var date = new Date();
     var timings_temp = this.state.timings.slice();
-    timings_temp.push([table_index,index,date.getTime()]);
+    timings_temp.push([table_index, index, date.getTime()]);
     var cand_name = this.props.candidates[index].name;
     var choices_temp = this.state.final_choices.slice();
     if (choices_temp[table_index] === cand_name) {
@@ -147,7 +163,7 @@ class Office extends React.Component {
     }
     this.setState({
       final_choices: choices_temp,
-      timings: timings_temp,
+      timings: timings_temp
     });
   }
   //This function listens for an update and then searches through the document for all checkboxes
@@ -203,8 +219,6 @@ class Election extends Component {
 
 export default class PhilipKortumDesign extends Component {
   render() {
-    return (
-        <Election />
-    );
+    return <Election />;
   }
 }

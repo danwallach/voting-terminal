@@ -3,12 +3,17 @@ import CandidateTable from "./CandidateTable";
 import election from "./election.json";
 import FileSaver from "file-saver";
 
-class SubmitButton extends React.Component{
-  render(){
+class SubmitButton extends React.Component {
+  render() {
+    var choices = this.props.final_choices;
+    var disable = "True";
+    if (choices[0] && choices[1] && choices[2]) {
+      disable = "";
+    }
     return (
-    <button
-      onClick={() => this.props.onClick()}
-      >Submit</button>
+      <button disabled={disable} onClick={() => this.props.onClick()}>
+        Submit
+      </button>
     );
   }
 }
@@ -17,7 +22,7 @@ class Office extends React.Component {
   constructor(props) {
     super(props);
     var timings_temp = [];
-    timings_temp.push(["Begin",new Date().getTime()]);
+    timings_temp.push(["Begin", new Date().getTime()]);
     this.state = {
       timings: timings_temp,
       final_choices: [null, null, null]
@@ -34,9 +39,11 @@ class Office extends React.Component {
       />
     );
   }
-  handleSubmit(){
-    var blob = new Blob([JSON.stringify(this.state.timings)], {typ: "text/plain; charset=utf-8"});
-    FileSaver.saveAs(blob,"SF"+String(new Date().getTime())+".txt");
+  handleSubmit() {
+    var blob = new Blob([JSON.stringify(this.state.timings)], {
+      typ: "text/plain; charset=utf-8"
+    });
+    FileSaver.saveAs(blob, "SF" + String(new Date().getTime()) + ".txt");
   }
   render() {
     //Creates an array of three candidate tables
@@ -44,9 +51,12 @@ class Office extends React.Component {
     for (let i = 0; i < 3; i++) {
       tables.push(this.renderCandidateTable(i));
     }
-    tables.push(<SubmitButton
-      onClick={() => this.handleSubmit()}
-      />);
+    tables.push(
+      <SubmitButton
+        final_choices={this.state.final_choices}
+        onClick={() => this.handleSubmit()}
+      />
+    );
 
     //Creation of three (San Fran allows 3) candidate tables
     //Certain properties are passed down, see CandidateTable for more info
@@ -71,7 +81,7 @@ class Office extends React.Component {
   //The focused box itself will be toggled
   handleClick(table_index, index) {
     var timings_temp = this.state.timings.slice();
-    timings_temp.push([table_index,index,new Date().getTime()]);
+    timings_temp.push([table_index, index, new Date().getTime()]);
     var cand_name = this.props.candidates[index].name;
     var choices_temp = this.state.final_choices.slice();
     choices_temp[table_index] = cand_name;

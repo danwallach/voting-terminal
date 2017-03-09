@@ -50,12 +50,17 @@ class ArrowButton extends React.Component {
     );
   }
 }
-class SubmitButton extends React.Component{
-  render(){
+class SubmitButton extends React.Component {
+  render() {
+    var choices = this.props.final_choices;
+    var disable = "True";
+    if (choices[0] && choices[1] && choices[2]) {
+      disable = "";
+    }
     return (
-    <button
-      onClick={() => this.props.onClick()}
-      >Submit</button>
+      <button disabled={disable} onClick={() => this.props.onClick()}>
+        Submit
+      </button>
     );
   }
 }
@@ -87,9 +92,11 @@ class Office extends React.Component {
       />
     );
   }
-   handleSubmit(){
-    var blob = new Blob([JSON.stringify(this.state.timings)], {typ: "text/plain; charset=utf-8"});
-    FileSaver.saveAs(blob,"Claudia"+String(new Date().getTime())+".txt");
+  handleSubmit() {
+    var blob = new Blob([JSON.stringify(this.state.timings)], {
+      typ: "text/plain; charset=utf-8"
+    });
+    FileSaver.saveAs(blob, "Claudia" + String(new Date().getTime()) + ".txt");
   }
   render() {
     //Creates an array of three candidate tables
@@ -117,11 +124,14 @@ class Office extends React.Component {
         onClick={(i, n) => this.handleButton(i, n)}
       />
     );
-     tables.push(<SubmitButton
-      onClick={() => this.handleSubmit()}
-      />);
+    tables.push(
+      <SubmitButton
+        final_choices={this.state.final_choices}
+        onClick={() => this.handleSubmit()}
+      />
+    );
 
-   //Creation of three (San Fran allows 3) candidate tables
+    //Creation of three (San Fran allows 3) candidate tables
     //Certain properties are passed down, see CandidateTable for more info
     return (
       <div>
@@ -143,11 +153,11 @@ class Office extends React.Component {
     var temp_table_valid = this.state.table_valids.slice();
     var timings_temp = this.state.timings.slice();
     if (next_or_previous) {
-      timings_temp.push(["Previous",new Date().getTime()]);
+      timings_temp.push(["Previous", new Date().getTime()]);
       temp_table_valid[i + 1] = 0;
       temp_table_valid[i] = 1;
     } else {
-      timings_temp.push(["Next",new Date().getTime()]);
+      timings_temp.push(["Next", new Date().getTime()]);
       temp_table_valid[i] = 0;
       temp_table_valid[i + 1] = 1;
     }
@@ -163,7 +173,7 @@ class Office extends React.Component {
   //The focused box itself will be toggled
   handleClick(table_index, index) {
     var timings_temp = this.state.timings.slice();
-    timings_temp.push([table_index,index,new Date().getTime()]);
+    timings_temp.push([table_index, index, new Date().getTime()]);
     var cand_name = this.props.candidates[index].name;
     var choices_temp = this.state.final_choices.slice();
     if (choices_temp[table_index] === cand_name) {
