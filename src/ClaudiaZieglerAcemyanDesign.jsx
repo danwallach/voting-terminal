@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import CandidateTable from "./CandidateTable";
 
 import FileSaver from "file-saver";
-import SubmitButton from "./SubmitButton"
+import SubmitButton from "./SubmitButton";
 
 import DesignHeading from "./DesignHeading";
 import ArrowButton from "./ArrowButton";
@@ -23,7 +23,7 @@ class Office extends React.Component {
   }
   //creates one candidate table
   renderCandidateTable(index) {
-    const {table_valids, final_choices} = this.state;
+    const { table_valids, final_choices } = this.state;
     const inFocus = table_valids.indexOf(1);
     return (
       <CandidateTable
@@ -37,7 +37,9 @@ class Office extends React.Component {
         previousChoices={this.state.final_choices.slice(0, index)}
         boldSelectedCandidate={true}
         hidePreviouslySelectedCheckboxes={true}
-        inFocus={index === inFocus && final_choices[index] === null ? true : false}
+        inFocus={
+          index === inFocus && final_choices[index] === null ? true : false
+        }
         size={3}
       />
     );

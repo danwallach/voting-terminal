@@ -7,6 +7,8 @@ import election from "./election.json";
 import FileSaver from "file-saver";
 import SubmitButton from "./SubmitButton";
 import "./Button.css"
+import { browserHistory } from "react-router";
+
 class Office extends React.Component {
   //Office is the logic layer that contains and distributes most of the information
   constructor(props) {
@@ -55,7 +57,7 @@ class Office extends React.Component {
           />
         </div>
         <div className="button-row">
-          <div 
+          <div
             className="button-container"
             style={index !== 0 ? {visibility: "visible"} : {visibility: "hidden"}}
           >
@@ -73,7 +75,7 @@ class Office extends React.Component {
               </p>
             </div>
           </div>
-          <div 
+          <div
             className="button-container"
             style={Object.assign({}, {float: "right"}, index !== 2 ? {visibility: "visible"} : {visibility: "hidden"})}
           >
@@ -101,7 +103,8 @@ class Office extends React.Component {
       typ: "text/plain; charset=utf-8"
     });
     FileSaver.saveAs(blob, "Kortum" + String(new Date().getTime()) + ".txt");
-  }
+    browserHistory.push("/#/finalpage");
+ }
   render() {
     //Creates an array of three candidate tables
     var tables = [];
