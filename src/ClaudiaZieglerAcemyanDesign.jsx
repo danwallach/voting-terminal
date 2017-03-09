@@ -156,15 +156,6 @@ class Office extends React.Component {
         choices_temp[i] = null;
       }
     }
-    for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < this.props.candidates.length; j++) {
-        if (i === table_index ^ j === index) {
-          document.getElementById(
-            String(i) + this.props.candidates[j].name
-          ).checked = false;
-        }
-      }
-    }
     this.setState({
       timings: timings_temp,
       final_choices: choices_temp
