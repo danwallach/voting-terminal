@@ -2,88 +2,9 @@ import React, { Component } from "react";
 
 import CandidateTable from "./CandidateTable";
 import DesignHeading from "./DesignHeading";
+import ArrowButton from "./ArrowButton";
 
 import election from "./election.json";
-
-class ArrowButton extends React.Component {
-  render() {
-    var disabled = true;
-    var title = "arrow_forward";
-    var tb_vld = this.props.table_valids;
-    var tb_vld_num;
-    var next_or_previous = 0;
-    for (let i = 0; i < tb_vld.length; i++) {
-      if (tb_vld[i]) {
-        tb_vld_num = i;
-      }
-    }
-    var dex = this.props.buttonNo;
-    var fnl_chc = this.props.final_choices;
-    var valid;
-    if (tb_vld_num - dex > 0) {
-      title = "arrow_back";
-      next_or_previous = 1;
-    }
-    if (next_or_previous) {
-      valid = tb_vld[dex] || tb_vld[dex + 1];
-    } else {
-      valid = (tb_vld[dex] || tb_vld[dex + 1]) && fnl_chc[dex];
-    }
-    disabled = !valid;
-    let buttonText = "";
-    switch (this.props.buttonNo) {
-      case 0:
-        switch (title) {
-          case "arrow_forward":
-            buttonText = "Go to your 2nd choice";
-            break;
-          case "arrow_back":
-            buttonText = "Return to your 1st choice";
-            break;
-        }
-        break;
-      case 1:
-        switch (title) {
-          case "arrow_forward":
-            buttonText = "Make your 3rd choice";
-            break;
-          case "arrow_back":
-            buttonText = "Return to your 2nd choice";
-            break;
-        }
-        break;
-        buttonText = "Button 1";
-        break;
-      default:
-        buttonText = "";
-    }
-    return (
-      <div
-        className="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle"
-        style={{
-          textAlign: "center"
-        }}
-      >
-        <div>
-          <button
-            id={this.props.buttonNo + "button"}
-            className={`mdl-button mdl-js-button mdl-button--raised ${title === "arrow_forward" && "mdl-button--colored mdc-elevation--z12"} mdl-js-ripple-effect`}
-            onClick={() =>
-              this.props.onClick(this.props.buttonNo, next_or_previous)}
-              disabled={disabled}
-            >
-              <i className="material-icons">{title}</i>
-            </button>
-          </div>
-          <div>
-            <p className={`mdc-typography--caption ${disabled && "disabled"}`}>
-              {buttonText}
-            </p>
-          </div>
-        </div>
-    );
-  }
-}
 
 class Office extends React.Component {
   //Office is the logic layer that contains and distributes most of the information
@@ -265,7 +186,7 @@ class Election extends Component {
 export default class ClaudiaZieglerAcemyanDesign extends Component {
   render() {
     return (
-      <div className="mdl-grid">
+      <div className="mdc-layout-grid">
         <Election />
       </div>
     );
