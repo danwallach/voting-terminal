@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 
 import CandidateTable from "./CandidateTable";
+
+import FileSaver from "file-saver";
+import SubmitButton from "./SubmitButton";=======
+
 import DesignHeading from "./DesignHeading";
 import ArrowButton from "./ArrowButton";
 
 import election from "./election.json";
-
 class Office extends React.Component {
   //Office is the logic layer that contains and distributes most of the information
   constructor(props) {
@@ -39,6 +42,12 @@ class Office extends React.Component {
       />
     );
   }
+  handleSubmit() {
+    var blob = new Blob([JSON.stringify(this.state.timings)], {
+      typ: "text/plain; charset=utf-8"
+    });
+    FileSaver.saveAs(blob, "Claudia" + String(new Date().getTime()) + ".txt");
+  }
   render() {
     //Creates an array of three candidate tables
     var tables = [];
@@ -65,6 +74,13 @@ class Office extends React.Component {
         onClick={(i, n) => this.handleButton(i, n)}
       />
     );
+    tables.push(
+      <SubmitButton
+        final_choices={this.state.final_choices}
+        onClick={() => this.handleSubmit()}
+      />
+    );
+
     //Creation of three (San Fran allows 3) candidate tables
     //Certain properties are passed down, see CandidateTable for more info
     return (
@@ -80,11 +96,11 @@ class Office extends React.Component {
     var temp_table_valid = this.state.table_valids.slice();
     var timings_temp = this.state.timings.slice();
     if (next_or_previous) {
-      timings_temp.push(["Previous",new Date().getTime()]);
+      timings_temp.push(["Previous", new Date().getTime()]);
       temp_table_valid[i + 1] = 0;
       temp_table_valid[i] = 1;
     } else {
-      timings_temp.push(["Next",new Date().getTime()]);
+      timings_temp.push(["Next", new Date().getTime()]);
       temp_table_valid[i] = 0;
       temp_table_valid[i + 1] = 1;
     }
@@ -100,7 +116,7 @@ class Office extends React.Component {
   //The focused box itself will be toggled
   handleClick(table_index, index) {
     var timings_temp = this.state.timings.slice();
-    timings_temp.push([table_index,index,new Date().getTime()]);
+    timings_temp.push([table_index, index, new Date().getTime()]);
     var cand_name = this.props.candidates[index].name;
     var choices_temp = this.state.final_choices.slice();
     if (choices_temp[table_index] === cand_name) {
