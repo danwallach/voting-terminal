@@ -4,6 +4,7 @@ import CandidateTable from "./CandidateTable";
 import DesignHeading from "./DesignHeading";
 
 import election from "./election.json";
+import "./Design.css"
 
 class Office extends React.Component {
   //Office is the logic layer that contains and distributes most of the information
@@ -19,6 +20,22 @@ class Office extends React.Component {
   }
   //creates one candidate table
   renderCandidateTable(index) {
+    let previousButtonCaption = "";
+    let nextButtonCaption = "";
+    switch (index) {
+      case 0:
+        nextButtonCaption = "Go to your 2nd choice";
+        break;
+      case 1:
+        previousButtonCaption = "Return to your 1st choice";
+        nextButtonCaption = "Make your 3rd choice";
+        break;
+      case 2:
+        previousButtonCaption = "Return to your 2nd choice";
+        break;
+      default:
+        break;
+    }
     return (
       <div style={this.state.table_valids[index] ? {} : {display: "none"}}>
         <div className="mdl-grid">
@@ -29,26 +46,51 @@ class Office extends React.Component {
             candidates={this.props.candidates}
             choiceNo={index + 1}
             choice={this.state.final_choices[index]}
-            valid={this.state.table_valids[index]}
-            key={index}
+            disabled={this.state.table_valids[index] === 0 ? true : false}
+            previousChoices={this.state.final_choices.slice(0, index)}
+            boldSelectedCandidate={true}
+            hidePreviouslySelectedCheckboxes={true}
             size={12}
           />
         </div>
-        <div>
-          <button
-            className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
-            onClick={() => this.handlePrevious(index)}
+        <div className="button-row">
+          <div 
+            className="button-container"
             style={index !== 0 ? {visibility: "visible"} : {visibility: "hidden"}}
           >
-            Previous
-          </button>
-          <button
-            className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
-            onClick={() => this.handleNext(index)}
+            <div>
+              <button
+                className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                onClick={() => this.handlePrevious(index)}
+              >
+                <i className="material-icons">arrow_back</i>
+              </button>
+            </div>
+            <div>
+              <p className={`mdc-typography--caption`}>
+                {previousButtonCaption}
+              </p>
+            </div>
+          </div>
+          <div 
+            className="button-container"
             style={Object.assign({}, {float: "right"}, index !== 2 ? {visibility: "visible"} : {visibility: "hidden"})}
           >
-            Next
-          </button>
+            <div>
+              <button
+                className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+                onClick={() => this.handleNext(index)}
+                disabled={this.state.final_choices[index] === null ? true : false}
+              >
+                <i className="material-icons">arrow_forward</i>
+              </button>
+            </div>
+            <div>
+              <p className={`mdc-typography--caption ${this.state.final_choices[index] === null && "disabled"}`}>
+                {nextButtonCaption}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -115,51 +157,10 @@ class Office extends React.Component {
         choices_temp[i] = null;
       }
     }
-    for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < this.props.candidates.length; j++) {
-        if (i === table_index ^ j === index) {
-          document.getElementById(
-            String(i) + this.props.candidates[j].name
-          ).checked = false;
-        }
-      }
-    }
     this.setState({
       final_choices: choices_temp,
       timings: timings_temp,
     });
-  }
-  //This function listens for an update and then searches through the document for all checkboxes
-  //Each checkboxe is then updated
-  componentDidUpdate() {
-    for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < this.props.candidates.length; j++) {
-        document.getElementById(
-          String(i) + this.props.candidates[j].name
-        ).disabled = false;
-      }
-    }
-    for (let j = 0; j < this.props.candidates.length; j++) {
-      if (this.props.candidates[j].name === this.state.final_choices[0]) {
-        document.getElementById(
-          "1" + this.props.candidates[j].name
-        ).disabled = true;
-        document.getElementById(
-          "2" + this.props.candidates[j].name
-        ).disabled = true;
-      }
-      if (this.props.candidates[j].name === this.state.final_choices[1]) {
-        document.getElementById(
-          "2" + this.props.candidates[j].name
-        ).disabled = true;
-      }
-    }
-    document
-      .querySelectorAll(".mdl-js-checkbox")
-      .forEach(element => element.MaterialCheckbox.checkToggleState());
-    document
-      .querySelectorAll(".mdl-js-checkbox")
-      .forEach(element => element.MaterialCheckbox.checkDisabled());
   }
 }
 
