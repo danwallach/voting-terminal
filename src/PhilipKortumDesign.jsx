@@ -4,7 +4,7 @@ import CandidateTable from "./CandidateTable";
 import DesignHeading from "./DesignHeading";
 
 import election from "./election.json";
-import "./Design.css"
+import "./Button.css"
 
 class Office extends React.Component {
   //Office is the logic layer that contains and distributes most of the information
