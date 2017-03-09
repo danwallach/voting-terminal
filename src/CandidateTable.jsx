@@ -5,6 +5,9 @@ import "./CandidateTable.css";
 const defaultProps ={
   disabled: false,
   inFocus: false,
+  previousChoices: [],
+  boldSelectedCandidate: false,
+  hidePreviouslySelectedCheckboxes: false,
 }
 
 class CandidateTable extends React.Component {
@@ -18,13 +21,17 @@ class CandidateTable extends React.Component {
    */
   renderCandidate(candidate, index) {
     //Creation of a candidate, sending down properties
+    const {choiceNo, choice, previousChoices, boldSelectedCandidate, hidePreviouslySelectedCheckboxes} = this.props;
     return (
       <Candidate
         candidate={candidate}
         key={index}
-        tableNo={this.props.choiceNo - 1}
-        onClick={() => this.props.onClick(this.props.choiceNo - 1, index)}
-        checked={this.props.choice === candidate.name ? true : false}
+        index={choiceNo - 1}
+        onClick={() => this.props.onClick(choiceNo - 1, index)}
+        checked={choice === candidate.name ? true : false}
+        disabled={previousChoices.some(choice => choice === candidate.name)}
+        bold={boldSelectedCandidate && choice === candidate.name ? true : false}
+        hiddenCheckbox={hidePreviouslySelectedCheckboxes && previousChoices.some(choice => choice === candidate.name) ? true : false}
       />
     );
   }
@@ -68,11 +75,11 @@ class CandidateTable extends React.Component {
     return (
       <div
         className={
-          `mdl-cell mdl-cell--${this.props.size}-col mdl-cell--8-col-tablet ${disabled && "disabled"}`
+          `mdc-layout-grid__cell mdc-layout-grid__cell--span-${this.props.size} mdc-layout-grid__cell--cell--span-8-tablet ${disabled && "disabled"}`
         }
       >
         <table
-          className={`mdl-data-table mdl-js-data-table mdc-elevation-transition mdc-elevation--z${inFocus ? 8 : 2}`}
+          className={`mdl-data-table mdl-js-data-table mdc-elevation-transition mdc-elevation--z${inFocus ? 12 : 2}`}
           style={{ width: "100%" }}
         >
           <thead>

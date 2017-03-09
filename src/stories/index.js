@@ -16,11 +16,18 @@ import "../material.css";
 import "../material.js";
 import "../index.css"
 
-const candidates = [{
+const candidates = [
+  {
   "name": "Barack Obama",
   "party": "Democratic",
   "term": "2009–2017",
-}];
+  },
+  {
+    "name": "George W. Bush",
+    "party": "Republican",
+    "term": "2000–2009",
+  },
+];
 
 const candidate = candidates[0];
 
@@ -44,6 +51,12 @@ storiesOf('CandidateTable', module)
   .add('inFocus', () => (
     <CandidateTable choiceNo={1} candidates={candidates} inFocus={true}/>
   ))
+  .add('previousChoices', () => (
+    <CandidateTable choiceNo={1} candidates={candidates} previousChoices={["Barack Obama"]} />
+  ))
+  .add('previousChoices hidePreviouslySelectedCheckboxes', () => (
+    <CandidateTable choiceNo={1} candidates={candidates} previousChoices={["Barack Obama"]} hidePreviouslySelectedCheckboxes={true} />
+  ))
 
 storiesOf('Candidate', module)
   .add('default', () => (
@@ -57,6 +70,9 @@ storiesOf('Candidate', module)
   ))
   .add('bold disabled', () => (
     <Candidate candidate={candidate} checked={true} bold={true} disabled={true} />
+  ))
+  .add('hiddenCheckbox', () => (
+    <Candidate candidate={candidate} disabled={true} hiddenCheckbox={true}/>
   ))
 
 storiesOf('Checkbox', module)
