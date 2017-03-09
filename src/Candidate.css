@@ -2,8 +2,9 @@ div.mdc-form-field {
   width: 100%;
 }
 
-label {
+.mdc-checkbox-label {
   width: 100%;
+  padding-left: 12px;
 }
 
 div.disabled+label {
@@ -15,5 +16,5 @@ div.disabled+label {
 }
 
 .mdc-checkbox {
-  transform: scale(1);
+  transform: scale(calc(20/14));
 }
