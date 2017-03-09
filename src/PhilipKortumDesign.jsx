@@ -7,7 +7,7 @@ import election from "./election.json";
 import FileSaver from "file-saver";
 import SubmitButton from "./SubmitButton";
 import "./Button.css"
-import { browserHistory } from "react-router";
+import { hashHistory } from "react-router";
 
 class Office extends React.Component {
   //Office is the logic layer that contains and distributes most of the information
@@ -103,7 +103,7 @@ class Office extends React.Component {
       typ: "text/plain; charset=utf-8"
     });
     FileSaver.saveAs(blob, "Kortum" + String(new Date().getTime()) + ".txt");
-    browserHistory.push("/#/finalpage");
+    hashHistory.push("/finalpage");
  }
   render() {
     //Creates an array of three candidate tables

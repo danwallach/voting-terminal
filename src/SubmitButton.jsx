@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router";
 class SubmitButton extends React.Component {
   render() {
     var choices = this.props.final_choices;

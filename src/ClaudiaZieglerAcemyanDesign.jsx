@@ -9,6 +9,7 @@ import DesignHeading from "./DesignHeading";
 import ArrowButton from "./ArrowButton";
 
 import election from "./election.json";
+import { hashHistory } from "react-router";
 class Office extends React.Component {
   //Office is the logic layer that contains and distributes most of the information
   constructor(props) {
@@ -49,6 +50,7 @@ class Office extends React.Component {
       typ: "text/plain; charset=utf-8"
     });
     FileSaver.saveAs(blob, "Claudia" + String(new Date().getTime()) + ".txt");
+    hashHistory.push("/finalpage");
   }
   render() {
     //Creates an array of three candidate tables
