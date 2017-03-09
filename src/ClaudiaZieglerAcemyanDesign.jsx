@@ -186,7 +186,7 @@ class Election extends Component {
 export default class ClaudiaZieglerAcemyanDesign extends Component {
   render() {
     return (
-      <div className="mdl-grid">
+      <div className="mdc-layout-grid">
         <Election />
       </div>
     );

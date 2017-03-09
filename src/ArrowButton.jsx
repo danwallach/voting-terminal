@@ -56,7 +56,7 @@ class ArrowButton extends React.Component {
     }
     return (
       <div
-        className="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle button-container"
+        className="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle button-container"
       >
         <div>
           <button
