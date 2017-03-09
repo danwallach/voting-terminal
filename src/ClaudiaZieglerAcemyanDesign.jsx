@@ -1,5 +1,8 @@
 import React, { Component } from "react";
+
 import CandidateTable from "./CandidateTable";
+import DesignHeading from "./DesignHeading";
+
 import election from "./election.json";
 
 class ArrowButton extends React.Component {
@@ -109,14 +112,7 @@ class Office extends React.Component {
     //Certain properties are passed down, see CandidateTable for more info
     return (
       <div>
-        <h2
-          className="mdl-typography--title mdl-typography--text-center mdl-typography--text-capitalize"
-        >
-          {this.props.office}
-        </h2>
-        <p className="mdl-typography--body-1 mdl-typography--text-center">
-          Vote your first, second, and third choices
-        </p>
+        <DesignHeading />
         <div className="mdl-grid">
           {tables}
         </div>
