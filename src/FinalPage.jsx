@@ -4,7 +4,9 @@ class FinalPage extends React.Component {
     return (
       <div>
         <p>
+      <font size="30">
           Thank you for voting!
+      </font>
         </p>
       </div>
     );
