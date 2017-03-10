@@ -1,6 +1,7 @@
 import React from "react";
-
 import { hashHistory } from "react-router";
+
+import "./StartPage.css";
 
 const defaultProps = {
   location: {
@@ -19,6 +20,7 @@ class StartPage extends React.Component {
   render() {
     return (
       <button
+        id="start-button"
         className="mdc-button mdc-button--primary"
         onClick={this.handleClick}
       >
