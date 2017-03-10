@@ -47,7 +47,7 @@ class Office extends React.Component {
   }
   handleSubmit() {
     var timings = this.state.timings.slice();
-    timings.push["End",new Date().getTime()];
+    timings.push(["End",new Date().getTime()]);
     var blob = new Blob([JSON.stringify(timings)], {
       typ: "text/plain; charset=utf-8"
     });
