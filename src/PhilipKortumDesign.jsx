@@ -99,12 +99,14 @@ class Office extends React.Component {
     );
   }
   handleSubmit() {
-    var blob = new Blob([JSON.stringify(this.state.timings)], {
+  var timings = this.state.timings.slice();
+  timings.push(["End",new Date().getTime()]);
+    var blob = new Blob([JSON.stringify(timings)], {
       typ: "text/plain; charset=utf-8"
     });
-    FileSaver.saveAs(blob, "Kortum" + String(new Date().getTime()) + ".txt");
+    FileSaver.saveAs(blob, "Kortum" +this.props.subjectNumber +  ".txt");
     hashHistory.push("/finalpage");
- }
+  }
   render() {
     //Creates an array of three candidate tables
     var tables = [];
@@ -185,6 +187,7 @@ class Contest extends Component {
     return (
       <Office
         office={this.props.contest.office}
+        subjectNumber={this.props.subjectNumber}
         candidates={this.props.contest.candidates}
       />
     );
@@ -193,12 +196,16 @@ class Contest extends Component {
 
 class Election extends Component {
   render() {
-    return <Contest contest={election.contests[0]} />;
+    return <Contest
+    subjectNumber={this.props.subjectNumber}
+    contest={election.contests[0]} />;
   }
 }
 
 export default class PhilipKortumDesign extends Component {
   render() {
-    return <Election />;
+    return <Election
+    subjectNumber={this.props.location.query.subjectNumber}
+    />;
   }
 }

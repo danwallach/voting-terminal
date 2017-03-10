@@ -9,7 +9,7 @@ class ResearcherPicker extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      subjectNumber: null
+      subjectNumber: ''
     };
   }
   handleChange = e => {

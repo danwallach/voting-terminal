@@ -46,10 +46,12 @@ class Office extends React.Component {
     );
   }
   handleSubmit() {
-    var blob = new Blob([JSON.stringify(this.state.timings)], {
+    var timings = this.state.timings.slice();
+    timings.push["End",new Date().getTime()];
+    var blob = new Blob([JSON.stringify(timings)], {
       typ: "text/plain; charset=utf-8"
     });
-    FileSaver.saveAs(blob, "Claudia" + String(new Date().getTime()) + ".txt");
+    FileSaver.saveAs(blob, "Claudia" + this.props.subjectNumber + ".txt");
     hashHistory.push("/finalpage");
   }
   render() {
@@ -190,6 +192,7 @@ class Contest extends Component {
   render() {
     return (
       <Office
+      subjectNumber={this.props.subjectNumber}
         office={this.props.contest.office}
         candidates={this.props.contest.candidates}
       />
@@ -199,7 +202,9 @@ class Contest extends Component {
 
 class Election extends Component {
   render() {
-    return <Contest contest={election.contests[0]} />;
+    return <Contest
+    subjectNumber={this.props.subjectNumber}
+    contest={election.contests[0]} />;
   }
 }
 
@@ -207,7 +212,9 @@ export default class ClaudiaZieglerAcemyanDesign extends Component {
   render() {
     return (
       <div className="mdc-layout-grid">
-        <Election />
+        <Election
+      subjectNumber={this.props.location.query.subjectNumber}
+      />
       </div>
     );
   }
