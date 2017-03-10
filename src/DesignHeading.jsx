@@ -7,7 +7,7 @@ const DesignHeading = () => (
     <h2 className="mdc-typography--display1">
       Best Former President
     </h2>
-    <p className="mdl-typography--subheading2">
+    <p className="mdc-typography--subheading2">
       Vote for your first, second, and third choices
     </p>
   </div>
