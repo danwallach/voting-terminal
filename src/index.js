@@ -7,6 +7,8 @@ import ResearcherPicker from "./ResearcherPicker";
 import SanFranciscoDesign from "./SanFranciscoDesign";
 import ClaudiaZieglerAcemyanDesign from "./ClaudiaZieglerAcemyanDesign";
 import PhilipKortumDesign from "./PhilipKortumDesign";
+import StartPage from "./StartPage";
+import FinalPage from "./FinalPage";
 
 import "../node_modules/roboto-fontface/css/roboto/roboto-fontface.css";
 import "../node_modules/material-design-icons/iconfont/material-icons.css";
@@ -22,6 +24,8 @@ ReactDOM.render(
       <Route path="/sf" component={SanFranciscoDesign} />
       <Route path="/claudia" component={ClaudiaZieglerAcemyanDesign} />
       <Route path="/phil" component={PhilipKortumDesign} />
+      <Route path="/finalpage" component={FinalPage} />
+      <Route path="/startpage" component={StartPage} />
     </Route>
   </Router>,
   document.getElementById("root")

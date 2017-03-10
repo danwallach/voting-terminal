@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 import "./Button.css";
 
@@ -37,6 +37,9 @@ class ArrowButton extends React.Component {
           case "arrow_back":
             buttonCaption = "Return to your 1st choice";
             break;
+          default:
+            buttonCaption = "";
+            break;
         }
         break;
       case 1:
@@ -47,10 +50,13 @@ class ArrowButton extends React.Component {
           case "arrow_back":
             buttonCaption = "Return to your 2nd choice";
             break;
+          default:
+            buttonCaption = "";
+            break;
         }
         break;
-        buttonCaption = "Button 1";
-        break;
+      //buttonCaption = "Button 1";
+      //break;
       default:
         buttonCaption = "";
     }
@@ -61,20 +67,24 @@ class ArrowButton extends React.Component {
         <div>
           <button
             id={this.props.buttonNo + "button"}
-            className={`mdl-button mdl-js-button mdl-button--raised ${title === "arrow_forward" && "mdl-button--colored mdc-elevation--z12"} mdl-js-ripple-effect`}
+            className={
+              `mdl-button mdl-js-button mdl-button--raised ${title ===
+                "arrow_forward" &&
+                "mdl-button--colored mdc-elevation--z12"} mdl-js-ripple-effect`
+            }
             onClick={() =>
               this.props.onClick(this.props.buttonNo, next_or_previous)}
-              disabled={disabled}
-            >
-              <i className="material-icons">{title}</i>
-            </button>
-          </div>
-          <div>
-            <p className={`mdc-typography--caption ${disabled && "disabled"}`}>
-              {buttonCaption}
-            </p>
-          </div>
+            disabled={disabled}
+          >
+            <i className="material-icons">{title}</i>
+          </button>
         </div>
+        <div>
+          <p className={`mdc-typography--caption ${disabled && "disabled"}`}>
+            {buttonCaption}
+          </p>
+        </div>
+      </div>
     );
   }
 }

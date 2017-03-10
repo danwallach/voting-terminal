@@ -2,13 +2,13 @@ import React from "react";
 import Candidate from "./Candidate";
 import "./CandidateTable.css";
 
-const defaultProps ={
+const defaultProps = {
   disabled: false,
   inFocus: false,
   previousChoices: [],
   boldSelectedCandidate: false,
-  hidePreviouslySelectedCheckboxes: false,
-}
+  hidePreviouslySelectedCheckboxes: false
+};
 
 class CandidateTable extends React.Component {
   /*Creates a table with a header and a few Candidate objects
@@ -21,7 +21,13 @@ class CandidateTable extends React.Component {
    */
   renderCandidate(candidate, index) {
     //Creation of a candidate, sending down properties
-    const {choiceNo, choice, previousChoices, boldSelectedCandidate, hidePreviouslySelectedCheckboxes} = this.props;
+    const {
+      choiceNo,
+      choice,
+      previousChoices,
+      boldSelectedCandidate,
+      hidePreviouslySelectedCheckboxes
+    } = this.props;
     return (
       <Candidate
         candidate={candidate}
@@ -31,12 +37,17 @@ class CandidateTable extends React.Component {
         checked={choice === candidate.name ? true : false}
         disabled={previousChoices.some(choice => choice === candidate.name)}
         bold={boldSelectedCandidate && choice === candidate.name ? true : false}
-        hiddenCheckbox={hidePreviouslySelectedCheckboxes && previousChoices.some(choice => choice === candidate.name) ? true : false}
+        hiddenCheckbox={
+          hidePreviouslySelectedCheckboxes &&
+            previousChoices.some(choice => choice === candidate.name)
+            ? true
+            : false
+        }
       />
     );
   }
   render() {
-    const {disabled, inFocus} = this.props;
+    const { disabled, inFocus } = this.props;
     //Creating the head of the table
     const toOrdinal = {
       1: "First",
@@ -44,14 +55,24 @@ class CandidateTable extends React.Component {
       3: "Third"
     };
     const instructions = {
-      1: ["Vote for One", <span style={{visibility: "hidden"}}>: Must be different than your first and second choices</span>],
-      2: ["Vote for One: Must be different than your first choice", <span style={{visibility: "hidden"}}>and second s</span>],
+      1: [
+        "Vote for One",
+        (
+          <span style={{ visibility: "hidden" }}>
+            : Must be different than your first and second choices
+          </span>
+        )
+      ],
+      2: [
+        "Vote for One: Must be different than your first choice",
+        <span style={{ visibility: "hidden" }}>and second s</span>
+      ],
       3: "Vote for One: Must be different than your first and second choices"
     };
     const head = (
       <tr>
         <th>
-          <p className="mdc-typography--display3" style={{textAlign: "left"}}>
+          <p className="mdc-typography--display3" style={{ textAlign: "left" }}>
             {this.props.choiceNo}
             <span
               style={{ paddingLeft: "1ex" }}
@@ -60,7 +81,10 @@ class CandidateTable extends React.Component {
               {`${toOrdinal[this.props.choiceNo]} Choice`}
             </span>
           </p>
-          <p className="mdc-typography--subheading2" style={{textAlign: "left"}}>
+          <p
+            className="mdc-typography--subheading2"
+            style={{ textAlign: "left" }}
+          >
             {instructions[this.props.choiceNo]}
           </p>
         </th>
@@ -75,11 +99,16 @@ class CandidateTable extends React.Component {
     return (
       <div
         className={
-          `mdc-layout-grid__cell mdc-layout-grid__cell--span-${this.props.size} mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone ${disabled && "disabled"}`
+          `mdc-layout-grid__cell mdc-layout-grid__cell--span-${this.props.size} mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone ${disabled &&
+            "disabled"}`
         }
       >
         <table
-          className={`mdl-data-table mdl-js-data-table mdc-elevation-transition mdc-elevation--z${inFocus ? 12 : 2}`}
+          className={
+            `mdl-data-table mdl-js-data-table mdc-elevation-transition mdc-elevation--z${inFocus
+              ? 12
+              : 2}`
+          }
           style={{ width: "100%" }}
         >
           <thead>
@@ -94,7 +123,6 @@ class CandidateTable extends React.Component {
   }
 }
 
-CandidateTable.defaultProps = defaultProps
+CandidateTable.defaultProps = defaultProps;
 
 export default CandidateTable;
-
