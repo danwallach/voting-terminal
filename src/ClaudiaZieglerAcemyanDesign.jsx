@@ -80,12 +80,6 @@ class Office extends React.Component {
         onClick={(i, n) => this.handleButton(i, n)}
       />
     );
-    tables.push(
-      <SubmitButton
-        final_choices={this.state.final_choices}
-        onClick={() => this.handleSubmit()}
-      />
-    );
 
     //Creation of three (San Fran allows 3) candidate tables
     //Certain properties are passed down, see CandidateTable for more info
@@ -94,6 +88,12 @@ class Office extends React.Component {
         <DesignHeading />
         <div className="mdc-layout-grid">
           {tables}
+          <div className="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+            <SubmitButton
+              final_choices={this.state.final_choices}
+              onClick={() => this.handleSubmit()}
+            />
+          </div>
         </div>
       </div>
     );
