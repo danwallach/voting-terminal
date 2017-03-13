@@ -50,14 +50,14 @@ class Office extends React.Component {
     return (
       <div>
         <DesignHeading />
-        <div className="mdl-grid">
+        <div className="mdc-layout-grid">
           {tables}
-        </div>
-        <div>
-          <SubmitButton
-            final_choices={this.state.choices}
-            onClick={() => this.handleSubmit()}
-          />
+          <div className="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+            <SubmitButton
+              final_choices={this.state.choices}
+              onClick={() => this.handleSubmit()}
+            />
+          </div>
         </div>
       </div>
     );
