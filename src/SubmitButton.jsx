@@ -3,7 +3,9 @@ class SubmitButton extends React.Component {
   render() {
     var choices = this.props.final_choices;
     var disable = true;
-    if (choices[0] && choices[1] && choices[2]) {
+    if (choices === undefined) {
+      disable = false;
+    } else if (choices[0] && choices[1] && choices[2]) {
       disable = false;
     }
     return (

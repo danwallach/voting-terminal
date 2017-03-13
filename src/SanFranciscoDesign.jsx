@@ -54,7 +54,6 @@ class Office extends React.Component {
           {tables}
           <div className="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
             <SubmitButton
-              final_choices={this.state.choices}
               onClick={() => this.handleSubmit()}
             />
           </div>
