@@ -1,15 +1,14 @@
 import React, { Component } from "react";
+import { hashHistory } from "react-router";
+import FileSaver from "file-saver";
 
 import CandidateTable from "./CandidateTable";
-
-import FileSaver from "file-saver";
 import SubmitButton from "./SubmitButton";
-
 import DesignHeading from "./DesignHeading";
 import ArrowButton from "./ArrowButton";
 
 import election from "./election.json";
-import { hashHistory } from "react-router";
+import "./ClaudiaZieglerAcemyanDesign.css";
 class Office extends React.Component {
   //Office is the logic layer that contains and distributes most of the information
   constructor(props) {
