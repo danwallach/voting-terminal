@@ -105,9 +105,7 @@ class CandidateTable extends React.Component {
       >
         <table
           className={
-            `mdl-data-table mdl-js-data-table mdc-elevation-transition mdc-elevation--z${inFocus
-              ? 12
-              : 2}`
+            `mdl-data-table mdl-js-data-table mdc-elevation--z2 ${inFocus && "in-focus"}`
           }
           style={{ width: "100%" }}
         >
