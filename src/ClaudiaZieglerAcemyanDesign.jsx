@@ -38,7 +38,7 @@ class Office extends React.Component {
         boldSelectedCandidate={true}
         hidePreviouslySelectedCheckboxes={true}
         inFocus={
-          index === inFocus && final_choices[index] === null ? true : false
+          index === inFocus ? true : false
         }
         size={3}
       />
