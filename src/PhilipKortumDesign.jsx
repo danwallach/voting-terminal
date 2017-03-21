@@ -59,7 +59,7 @@ class Office extends React.Component {
         <div className="button-row">
           <div
             className="button-container"
-            style={index !== 0 ? {visibility: "visible"} : {visibility: "hidden"}}
+            style={index !== 0 ? {display: "inline-block"} : {display: "none"}}
           >
             <div>
               <button
@@ -77,7 +77,7 @@ class Office extends React.Component {
           </div>
           <div
             className="button-container"
-            style={Object.assign({}, {float: "right"}, index !== 2 ? {visibility: "visible"} : {visibility: "hidden"})}
+            style={Object.assign({}, {float: "right"}, index !== 2 ? {display: "inline-block"} : {display: "none"})}
           >
             <div>
               <button
@@ -93,6 +93,15 @@ class Office extends React.Component {
                 {nextButtonCaption}
               </p>
             </div>
+          </div>
+          <div
+            className="button-container"
+            style={Object.assign({}, {float: "right"}, index === 2 ? {display: "inline-block"} : {display: "none"})}
+          >
+            <SubmitButton
+              final_choices={this.state.final_choices}
+              onClick={() => this.handleSubmit()}
+            />
           </div>
         </div>
       </div>
@@ -113,12 +122,6 @@ class Office extends React.Component {
     for (let i = 0; i < 3; i++) {
       tables.push(this.renderCandidateTable(i));
     }
-    tables.push(
-      <SubmitButton
-        final_choices={this.state.final_choices}
-        onClick={() => this.handleSubmit()}
-      />
-    );
     //Creation of three (San Fran allows 3) candidate tables
     //Certain properties are passed down, see CandidateTable for more info
     return (

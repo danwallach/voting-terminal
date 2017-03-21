@@ -1,15 +1,14 @@
 import React, { Component } from "react";
+import { hashHistory } from "react-router";
+import FileSaver from "file-saver";
 
 import CandidateTable from "./CandidateTable";
-
-import FileSaver from "file-saver";
 import SubmitButton from "./SubmitButton";
-
 import DesignHeading from "./DesignHeading";
 import ArrowButton from "./ArrowButton";
 
 import election from "./election.json";
-import { hashHistory } from "react-router";
+import "./ClaudiaZieglerAcemyanDesign.css";
 class Office extends React.Component {
   //Office is the logic layer that contains and distributes most of the information
   constructor(props) {
@@ -39,7 +38,7 @@ class Office extends React.Component {
         boldSelectedCandidate={true}
         hidePreviouslySelectedCheckboxes={true}
         inFocus={
-          index === inFocus && final_choices[index] === null ? true : false
+          index === inFocus ? true : false
         }
         size={3}
       />
@@ -80,12 +79,6 @@ class Office extends React.Component {
         onClick={(i, n) => this.handleButton(i, n)}
       />
     );
-    tables.push(
-      <SubmitButton
-        final_choices={this.state.final_choices}
-        onClick={() => this.handleSubmit()}
-      />
-    );
 
     //Creation of three (San Fran allows 3) candidate tables
     //Certain properties are passed down, see CandidateTable for more info
@@ -94,6 +87,12 @@ class Office extends React.Component {
         <DesignHeading />
         <div className="mdc-layout-grid">
           {tables}
+          <div className="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+            <SubmitButton
+              final_choices={this.state.final_choices}
+              onClick={() => this.handleSubmit()}
+            />
+          </div>
         </div>
       </div>
     );

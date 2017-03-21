@@ -4,9 +4,13 @@
   white-space: normal;
 }
 
+.mdl-data-table th p {
+  color: var(--mdc-theme-text-primary-on-light,rgba(0,0,0,.87));
+}
+
 .disabled {
   pointer-events: none;
-  opacity: .38;
+  opacity: .54;
 }
 
 .mdl-data-table.mdc-elevation--z8 {
@@ -37,3 +41,6 @@
   0px 9px 46px 8px rgba(76, 175, 80, .12);
 }
 
+.mdl-data-table.in-focus {
+  border: 2px solid #4CAF50;
+}

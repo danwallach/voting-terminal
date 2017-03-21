@@ -1,0 +1,6 @@
+@media (min-width: 840px) {
+  .mdc-layout-grid .mdc-layout-grid__cell--span-3 {
+    width: calc(27.77778% - var(--mdc-layout-grid-gutter,16px))
+  }
+}
+

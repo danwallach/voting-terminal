@@ -50,7 +50,10 @@ class Candidate extends React.Component {
               >
                 {candidate.name}
               </p>
-              <p className={`mdc-typography--body${bold ? "2" : "1"}`}>
+              <p
+                className={`mdc-typography--body1`}
+                style={bold ? { fontWeight: 700 } : { fontWeight: 400 }}
+              >
                 {candidate.term}
                 <span style={{ float: "right" }}>
                   {candidate.party}
