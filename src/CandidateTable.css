@@ -6,6 +6,11 @@
 
 .mdl-data-table th p {
   color: var(--mdc-theme-text-primary-on-light,rgba(0,0,0,.87));
+  margin-bottom: 0px;
+}
+
+.mdl-data-table tr td {
+  padding: 6px 24px;
 }
 
 .disabled {
