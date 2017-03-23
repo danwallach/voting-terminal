@@ -10,7 +10,7 @@
 
 .disabled {
   pointer-events: none;
-  opacity: .46;
+  opacity: .5;
 }
 
 .mdl-data-table.mdc-elevation--z8 {
@@ -42,5 +42,5 @@
 }
 
 .mdl-data-table.in-focus {
-  border: 4px solid #4CAF50;
+  border: 8px solid #4CAF50;
 }
