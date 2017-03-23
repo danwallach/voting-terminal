@@ -32,9 +32,9 @@ class Office extends React.Component {
         onPrevious={() => this.handlePrevious(index)}
         candidates={this.props.candidates}
         choiceNo={index + 1}
-        choice={this.state.final_choices[index]}
+        choice={final_choices[index]}
         disabled={this.state.table_valids[index] === 0 ? true : false}
-        previousChoices={this.state.final_choices.slice(0, index)}
+        previousChoices={final_choices.slice(0, index)}
         boldSelectedCandidate={true}
         hidePreviouslySelectedCheckboxes={true}
         inFocus={
