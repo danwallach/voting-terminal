@@ -5,6 +5,6 @@ body {
 }
 
 :root {
-  --mdc-theme-primary: #4CAF50;
+  --mdc-theme-primary: rgba(87,178,34,1);
 }
 
