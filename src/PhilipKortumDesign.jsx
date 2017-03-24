@@ -16,11 +16,36 @@ class Office extends React.Component {
     super(props);
     var timings_temp = [];
     timings_temp.push(["Begin", new Date().getTime()]);
+
+    this.secondsElapsed = 0;
+    this.events = [];
+
     this.state = {
       timings: timings_temp,
       final_choices: [null, null, null],
       table_valids: [1, 0, 0]
     };
+  }
+  componentDidMount() {
+    this.timer = setInterval(() => this.secondsElapsed++, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+
+    const { subjectNumber, office } = this.props;
+    const { final_choices } = this.state;
+    const { events } = this;
+    firebase.database().ref(subjectNumber).set({
+      designer: "Philip Kortum",
+      events: events,
+      contests: [
+        {
+          office: office,
+          choices: final_choices
+        }
+      ]
+    });
   }
   //creates one candidate table
   renderCandidateTable(index) {
@@ -130,19 +155,14 @@ class Office extends React.Component {
     var blob = new Blob([JSON.stringify(timings)], {
       typ: "text/plain; charset=utf-8"
     });
-    const { subjectNumber, office } = this.props;
-    const { final_choices } = this.state;
-    firebase.database().ref(subjectNumber).set({
-      designer: "Philip Kortum",
-      events: timings,
-      contests: [
-        {
-          office: office,
-          choices: final_choices
-        }
-      ]
-    });
     FileSaver.saveAs(blob, "Kortum" + this.props.subjectNumber + ".txt");
+
+    const { events, secondsElapsed } = this;
+    this.events = [
+      ...events,
+      { event: "Submit", secondsElapsed: secondsElapsed }
+    ];
+
     hashHistory.push("/finalpage");
   }
   render() {
@@ -178,6 +198,12 @@ class Office extends React.Component {
         table_valids: valid_temp
       });
     }
+
+    const { events, secondsElapsed } = this;
+    this.events = [
+      ...events,
+      { event: "Next Button", secondsElapsed: secondsElapsed }
+    ];
   }
   handlePrevious(index) {
     var date = new Date();
@@ -190,6 +216,12 @@ class Office extends React.Component {
       table_valids: valid_temp,
       timings: timings_temp
     });
+
+    const { events, secondsElapsed } = this;
+    this.events = [
+      ...events,
+      { event: "Previous Button", secondsElapsed: secondsElapsed }
+    ];
   }
   handleClick(table_index, index) {
     var date = new Date();
@@ -207,6 +239,13 @@ class Office extends React.Component {
         choices_temp[i] = null;
       }
     }
+
+    const { events, secondsElapsed } = this;
+    this.events = [
+      ...events,
+      { choices: choices_temp, secondsElapsed: secondsElapsed }
+    ];
+
     this.setState({
       final_choices: choices_temp,
       timings: timings_temp
