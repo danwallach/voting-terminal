@@ -10,8 +10,16 @@ class ResearcherPicker extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      subjectNumber: ""
+      subjectNumber: "",
+      fullscreen: screenfull.isFullscreen
     };
+  }
+  componentDidMount() {
+    if (screenfull.enabled) {
+      screenfull.onchange(() => {
+        this.setState({ fullscreen: screenfull.isFullscreen });
+      });
+    }
   }
   handleChange = e => {
     this.setState({ subjectNumber: e.target.value });
@@ -22,7 +30,7 @@ class ResearcherPicker extends React.Component {
     }
   };
   render() {
-    const { subjectNumber } = this.state;
+    const { subjectNumber, fullscreen } = this.state;
     const body = researchers.reduce(
       (rows, researcher) =>
         rows.concat(
@@ -65,6 +73,7 @@ class ResearcherPicker extends React.Component {
         <i
           className="material-icons app-fab--absolute"
           onClick={this.handleClick}
+          style={fullscreen ? { display: "none" } : { display: "block" }}
         >
           fullscreen
         </i>
