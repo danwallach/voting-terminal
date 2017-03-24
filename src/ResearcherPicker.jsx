@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router";
 import { MDCTextfield } from "@material/textfield/dist/mdc.textfield";
+import screenfull from "screenfull";
 
 import researchers from "./researchers.json";
 import "./ResearcherPicker.css";
@@ -9,36 +10,50 @@ class ResearcherPicker extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      subjectNumber: ''
+      subjectNumber: "",
+      fullscreen: screenfull.isFullscreen
     };
+  }
+  componentDidMount() {
+    if (screenfull.enabled) {
+      screenfull.onchange(() => {
+        this.setState({ fullscreen: screenfull.isFullscreen });
+      });
+    }
   }
   handleChange = e => {
     this.setState({ subjectNumber: e.target.value });
   };
+  handleClick = () => {
+    if (screenfull.enabled) {
+      screenfull.request();
+    }
+  };
   render() {
-    const { subjectNumber } = this.state;
+    const { subjectNumber, fullscreen } = this.state;
     const body = researchers.reduce(
-      (rows, researcher) => rows.concat(
-        <Link
-          to={{
-            pathname: '/startpage',
-            query: { subjectNumber: subjectNumber, route: researcher.route }
-          }}
-        >
-          <div className="mdl-list__item mdl-card__actions mdl-card--border">
-            <span className="mdl-list__item-primary-content">
-              <i
-                style={{
-                  backgroundImage: "url(" + researcher.avatarUrl + ")",
-                  backgroundSize: "auto 40px"
-                }}
-                className="material-icons mdl-list__item-avatar"
-              />
-              <span>{researcher.name}</span>
-            </span>
-          </div>
-        </Link>
-      ),
+      (rows, researcher) =>
+        rows.concat(
+          <Link
+            to={{
+              pathname: "/startpage",
+              query: { subjectNumber: subjectNumber, route: researcher.route }
+            }}
+          >
+            <div className="mdl-list__item mdl-card__actions mdl-card--border">
+              <span className="mdl-list__item-primary-content">
+                <i
+                  style={{
+                    backgroundImage: "url(" + researcher.avatarUrl + ")",
+                    backgroundSize: "auto 40px"
+                  }}
+                  className="material-icons mdl-list__item-avatar"
+                />
+                <span>{researcher.name}</span>
+              </span>
+            </div>
+          </Link>
+        ),
       []
     );
     console.log(body);
@@ -55,6 +70,13 @@ class ResearcherPicker extends React.Component {
             Subject number
           </Textfield>
         </div>
+        <i
+          className="material-icons app-fab--absolute"
+          onClick={this.handleClick}
+          style={fullscreen ? { display: "none" } : { display: "block" }}
+        >
+          fullscreen
+        </i>
       </div>
     );
   }

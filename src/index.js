@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Router, Route, hashHistory, IndexRoute } from "react-router";
+import * as firebase from "firebase";
 
 import App from "./App";
 import ResearcherPicker from "./ResearcherPicker";
@@ -16,6 +17,15 @@ import "../node_modules/material-components-web/dist/material-components-web.min
 import "./material.css";
 import "./material.js";
 import "./index.css";
+
+var config = {
+  apiKey: "AIzaSyBLBU3wBuHy2UE1JwTjhSggdoBZ5uRJaoo",
+  authDomain: "voting-terminal.firebaseapp.com",
+  databaseURL: "https://voting-terminal.firebaseio.com",
+  storageBucket: "voting-terminal.appspot.com",
+  messagingSenderId: "890479886827"
+};
+firebase.initializeApp(config);
 
 ReactDOM.render(
   <Router history={hashHistory}>

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import * as firebase from "firebase";
 
 import CandidateTable from "./CandidateTable";
 import DesignHeading from "./DesignHeading";
@@ -6,7 +7,7 @@ import DesignHeading from "./DesignHeading";
 import election from "./election.json";
 import FileSaver from "file-saver";
 import SubmitButton from "./SubmitButton";
-import "./Button.css"
+import "./Button.css";
 import { hashHistory } from "react-router";
 
 class Office extends React.Component {
@@ -59,7 +60,9 @@ class Office extends React.Component {
         <div className="button-row">
           <div
             className="button-container"
-            style={index !== 0 ? {display: "inline-block"} : {display: "none"}}
+            style={
+              index !== 0 ? { display: "inline-block" } : { display: "none" }
+            }
           >
             <div>
               <button
@@ -77,26 +80,40 @@ class Office extends React.Component {
           </div>
           <div
             className="button-container"
-            style={Object.assign({}, {float: "right"}, index !== 2 ? {display: "inline-block"} : {display: "none"})}
+            style={Object.assign(
+              {},
+              { float: "right" },
+              index !== 2 ? { display: "inline-block" } : { display: "none" }
+            )}
           >
             <div>
               <button
                 className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
                 onClick={() => this.handleNext(index)}
-                disabled={this.state.final_choices[index] === null ? true : false}
+                disabled={
+                  this.state.final_choices[index] === null ? true : false
+                }
               >
                 <i className="material-icons">arrow_forward</i>
               </button>
             </div>
             <div>
-              <p className={`mdc-typography--caption ${this.state.final_choices[index] === null && "disabled"}`}>
+              <p
+                className={
+                  `mdc-typography--caption ${this.state.final_choices[index] === null && "disabled"}`
+                }
+              >
                 {nextButtonCaption}
               </p>
             </div>
           </div>
           <div
             className="button-container"
-            style={Object.assign({}, {float: "right"}, index === 2 ? {display: "inline-block"} : {display: "none"})}
+            style={Object.assign(
+              {},
+              { float: "right" },
+              index === 2 ? { display: "inline-block" } : { display: "none" }
+            )}
           >
             <SubmitButton
               final_choices={this.state.final_choices}
@@ -108,12 +125,24 @@ class Office extends React.Component {
     );
   }
   handleSubmit() {
-  var timings = this.state.timings.slice();
-  timings.push(["End",new Date().getTime()]);
+    var timings = this.state.timings.slice();
+    timings.push(["End", new Date().getTime()]);
     var blob = new Blob([JSON.stringify(timings)], {
       typ: "text/plain; charset=utf-8"
     });
-    FileSaver.saveAs(blob, "Kortum" +this.props.subjectNumber +  ".txt");
+    const { subjectNumber, office } = this.props;
+    const { final_choices } = this.state;
+    firebase.database().ref(subjectNumber).set({
+      designer: "Philip Kortum",
+      events: timings,
+      contests: [
+        {
+          office: office,
+          choices: final_choices
+        }
+      ]
+    });
+    FileSaver.saveAs(blob, "Kortum" + this.props.subjectNumber + ".txt");
     hashHistory.push("/finalpage");
   }
   render() {
@@ -127,7 +156,7 @@ class Office extends React.Component {
     return (
       <div>
         <DesignHeading />
-          {tables}
+        {tables}
       </div>
     );
   }
@@ -199,16 +228,17 @@ class Contest extends Component {
 
 class Election extends Component {
   render() {
-    return <Contest
-    subjectNumber={this.props.subjectNumber}
-    contest={election.contests[0]} />;
+    return (
+      <Contest
+        subjectNumber={this.props.subjectNumber}
+        contest={election.contests[0]}
+      />
+    );
   }
 }
 
 export default class PhilipKortumDesign extends Component {
   render() {
-    return <Election
-    subjectNumber={this.props.location.query.subjectNumber}
-    />;
+    return <Election subjectNumber={this.props.location.query.subjectNumber} />;
   }
 }

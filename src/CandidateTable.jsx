@@ -57,11 +57,9 @@ class CandidateTable extends React.Component {
     const instructions = {
       1: [
         "Vote for One",
-        (
-          <span style={{ visibility: "hidden" }}>
-            : Must be different than your first and second choices
-          </span>
-        )
+        <span style={{ visibility: "hidden" }}>
+          : Must be different than your first and second choices
+        </span>
       ],
       2: [
         "Vote for One: Must be different than your first choice",
@@ -72,11 +70,11 @@ class CandidateTable extends React.Component {
     const head = (
       <tr>
         <th>
-          <p className="mdc-typography--display3" style={{ textAlign: "left" }}>
+          <p className="mdc-typography--display2" style={{ textAlign: "left" }}>
             {this.props.choiceNo}
             <span
               style={{ paddingLeft: "1ex" }}
-              className="mdc-typography--display1"
+              className="mdc-typography--headline"
             >
               {`${toOrdinal[this.props.choiceNo]} Choice`}
             </span>
@@ -99,8 +97,7 @@ class CandidateTable extends React.Component {
     return (
       <div
         className={
-          `mdc-layout-grid__cell mdc-layout-grid__cell--span-${this.props.size} mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone ${disabled &&
-            "disabled"}`
+          `mdc-layout-grid__cell mdc-layout-grid__cell--span-${this.props.size} mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone ${disabled && "disabled"}`
         }
       >
         <table

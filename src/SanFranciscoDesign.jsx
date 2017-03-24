@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import * as firebase from "firebase";
 
 import CandidateTable from "./CandidateTable";
 import DesignHeading from "./DesignHeading";
@@ -31,11 +32,23 @@ class Office extends React.Component {
   }
   handleSubmit() {
     var timings = this.state.timings.slice();
-    timings.push(["End",new Date().getTime()]);
+    timings.push(["End", new Date().getTime()]);
     var blob = new Blob([JSON.stringify(timings)], {
       typ: "text/plain; charset=utf-8"
     });
     FileSaver.saveAs(blob, "SF" + this.props.subjectNumber + ".txt");
+    const { subjectNumber, office } = this.props;
+    const { choices } = this.state;
+    firebase.database().ref(subjectNumber).set({
+      designer: "San Francisco",
+      events: timings,
+      contests: [
+        {
+          office: office,
+          choices: choices
+        }
+      ]
+    });
     hashHistory.push("/finalpage");
   }
   render() {
@@ -53,9 +66,7 @@ class Office extends React.Component {
         <div className="mdc-layout-grid">
           {tables}
           <div className="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-            <SubmitButton
-              onClick={() => this.handleSubmit()}
-            />
+            <SubmitButton onClick={() => this.handleSubmit()} />
           </div>
         </div>
       </div>
@@ -92,7 +103,7 @@ class Contest extends Component {
   render() {
     return (
       <Office
-      subjectNumber={this.props.subjectNumber}
+        subjectNumber={this.props.subjectNumber}
         office={this.props.contest.office}
         candidates={this.props.contest.candidates}
       />
@@ -102,16 +113,17 @@ class Contest extends Component {
 
 class Election extends Component {
   render() {
-    return <Contest
-    subjectNumber={this.props.subjectNumber}
-    contest={election.contests[0]} />;
+    return (
+      <Contest
+        subjectNumber={this.props.subjectNumber}
+        contest={election.contests[0]}
+      />
+    );
   }
 }
 
 export default class SanFranciscoDesign extends Component {
   render() {
-    return <Election
-      subjectNumber={this.props.location.query.subjectNumber}/>;
+    return <Election subjectNumber={this.props.location.query.subjectNumber} />;
   }
 }
-

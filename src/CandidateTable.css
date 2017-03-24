@@ -6,11 +6,16 @@
 
 .mdl-data-table th p {
   color: var(--mdc-theme-text-primary-on-light,rgba(0,0,0,.87));
+  margin-bottom: 0px;
+}
+
+.mdl-data-table tr td {
+  padding: 6px 24px;
 }
 
 .disabled {
   pointer-events: none;
-  opacity: .54;
+  opacity: .5;
 }
 
 .mdl-data-table.mdc-elevation--z8 {
@@ -42,5 +47,5 @@
 }
 
 .mdl-data-table.in-focus {
-  border: 2px solid #4CAF50;
+  border: 8px solid #4CAF50;
 }

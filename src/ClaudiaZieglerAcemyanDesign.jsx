@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { hashHistory } from "react-router";
 import FileSaver from "file-saver";
+import * as firebase from "firebase";
 
 import CandidateTable from "./CandidateTable";
 import SubmitButton from "./SubmitButton";
@@ -37,20 +38,30 @@ class Office extends React.Component {
         previousChoices={final_choices.slice(0, index)}
         boldSelectedCandidate={true}
         hidePreviouslySelectedCheckboxes={true}
-        inFocus={
-          index === inFocus ? true : false
-        }
+        inFocus={index === inFocus ? true : false}
         size={3}
       />
     );
   }
   handleSubmit() {
     var timings = this.state.timings.slice();
-    timings.push(["End",new Date().getTime()]);
+    timings.push(["End", new Date().getTime()]);
     var blob = new Blob([JSON.stringify(timings)], {
       typ: "text/plain; charset=utf-8"
     });
     FileSaver.saveAs(blob, "Claudia" + this.props.subjectNumber + ".txt");
+    const { subjectNumber, office } = this.props;
+    const { final_choices } = this.state;
+    firebase.database().ref(subjectNumber).set({
+      designer: "Claudia Ziegler Acemyan",
+      events: timings,
+      contests: [
+        {
+          office: office,
+          choices: final_choices
+        }
+      ]
+    });
     hashHistory.push("/finalpage");
   }
   render() {
@@ -191,7 +202,7 @@ class Contest extends Component {
   render() {
     return (
       <Office
-      subjectNumber={this.props.subjectNumber}
+        subjectNumber={this.props.subjectNumber}
         office={this.props.contest.office}
         candidates={this.props.contest.candidates}
       />
@@ -201,9 +212,12 @@ class Contest extends Component {
 
 class Election extends Component {
   render() {
-    return <Contest
-    subjectNumber={this.props.subjectNumber}
-    contest={election.contests[0]} />;
+    return (
+      <Contest
+        subjectNumber={this.props.subjectNumber}
+        contest={election.contests[0]}
+      />
+    );
   }
 }
 
@@ -211,9 +225,7 @@ export default class ClaudiaZieglerAcemyanDesign extends Component {
   render() {
     return (
       <div className="mdc-layout-grid">
-        <Election
-      subjectNumber={this.props.location.query.subjectNumber}
-      />
+        <Election subjectNumber={this.props.location.query.subjectNumber} />
       </div>
     );
   }
