@@ -13,14 +13,38 @@ import "./ClaudiaZieglerAcemyanDesign.css";
 class Office extends React.Component {
   //Office is the logic layer that contains and distributes most of the information
   constructor(props) {
+    super(props);
     var timings_temp = [];
     timings_temp.push(["Begin", new Date().getTime()]);
-    super(props);
+    this.secondsElapsed = 0;
+    this.events = [];
     this.state = {
       timings: timings_temp,
       final_choices: [null, null, null],
       table_valids: [1, 0, 0]
     };
+  }
+
+  componentDidMount() {
+    this.timer = setInterval(() => this.secondsElapsed++, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+
+    const { subjectNumber, office } = this.props;
+    const { final_choices } = this.state;
+    const { events } = this;
+    firebase.database().ref(subjectNumber).set({
+      designer: "Claudia Ziegler Acemyan",
+      events: events,
+      contests: [
+        {
+          office: office,
+          choices: final_choices
+        }
+      ]
+    });
   }
   //creates one candidate table
   renderCandidateTable(index) {
@@ -50,18 +74,13 @@ class Office extends React.Component {
       typ: "text/plain; charset=utf-8"
     });
     FileSaver.saveAs(blob, "Claudia" + this.props.subjectNumber + ".txt");
-    const { subjectNumber, office } = this.props;
-    const { final_choices } = this.state;
-    firebase.database().ref(subjectNumber).set({
-      designer: "Claudia Ziegler Acemyan",
-      events: timings,
-      contests: [
-        {
-          office: office,
-          choices: final_choices
-        }
-      ]
-    });
+
+    const { events, secondsElapsed } = this;
+    this.events = [
+      ...events,
+      { event: "Submit", secondsElapsed: secondsElapsed }
+    ];
+
     hashHistory.push("/finalpage");
   }
   render() {
@@ -120,6 +139,16 @@ class Office extends React.Component {
       temp_table_valid[i] = 0;
       temp_table_valid[i + 1] = 1;
     }
+
+    const { events, secondsElapsed } = this;
+    this.events = [
+      ...events,
+      {
+        event: next_or_previous ? "Previous Button" : "Next Button",
+        secondsElapsed: secondsElapsed
+      }
+    ];
+
     this.setState({
       timings: timings_temp,
       table_valids: temp_table_valid
@@ -145,56 +174,17 @@ class Office extends React.Component {
         choices_temp[i] = null;
       }
     }
+
+    const { events, secondsElapsed } = this;
+    this.events = [
+      ...events,
+      { choices: choices_temp, secondsElapsed: secondsElapsed }
+    ];
+
     this.setState({
       timings: timings_temp,
       final_choices: choices_temp
     });
-  }
-  componentDidMount() {
-    for (let j = 0; j < 3; j++) {
-      if (1 - this.state.table_valids[j]) {
-        for (let k = 0; k < this.props.candidates.length; k++) {
-          document.getElementById(
-            `${String(j)} ${this.props.candidates[k].name}`
-          ).disabled = true;
-        }
-      }
-    }
-  }
-  //This function listens for an update and then searches through the document for all checkboxes
-  //Each checkboxe is then updated
-  componentDidUpdate() {
-    for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < this.props.candidates.length; j++) {
-        document.getElementById(
-          `${String(i)} ${this.props.candidates[j].name}`
-        ).disabled = false;
-      }
-    }
-    for (let j = 0; j < this.props.candidates.length; j++) {
-      if (this.props.candidates[j].name === this.state.final_choices[0]) {
-        document.getElementById(
-          `1 ${this.props.candidates[j].name}`
-        ).disabled = true;
-        document.getElementById(
-          `2 ${this.props.candidates[j].name}`
-        ).disabled = true;
-      }
-      if (this.props.candidates[j].name === this.state.final_choices[1]) {
-        document.getElementById(
-          `2 ${this.props.candidates[j].name}`
-        ).disabled = true;
-      }
-    }
-    for (let j = 0; j < 3; j++) {
-      if (1 - this.state.table_valids[j]) {
-        for (let k = 0; k < this.props.candidates.length; k++) {
-          document.getElementById(
-            `${String(j)} ${this.props.candidates[k].name}`
-          ).disabled = true;
-        }
-      }
-    }
   }
 }
 
