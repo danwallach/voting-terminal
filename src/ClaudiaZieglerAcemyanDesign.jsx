@@ -35,9 +35,10 @@ class Office extends React.Component {
     const { subjectNumber, office } = this.props;
     const { final_choices } = this.state;
     const { events } = this;
-    firebase.database().ref(subjectNumber+"Claudia").set({
+    firebase.database().ref().push().set({
       designer: "Claudia Ziegler Acemyan",
       events: events,
+        subjectNumber: subjectNumber,
       contests: [
         {
           office: office,
