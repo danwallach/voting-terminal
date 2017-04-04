@@ -2,6 +2,13 @@ import React from "react";
 import { hashHistory } from "react-router";
 
 class FinalPage extends React.Component {
+    /**
+     * This final page contains a secret method to return to the initial page
+     * It displays "You voted! Thank You!"
+     * By pressing the "e" in vot_e_d 5 times, it returns you to the start page using hashhistory
+     * A span contains the e, on clicking the span, the onClick() function increases a state variable by 1
+     * On hitting 5, it sends you back
+     */
   constructor() {
     super();
     this.state = { counter: 0 };
