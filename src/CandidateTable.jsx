@@ -11,16 +11,34 @@ const defaultProps = {
 };
 
 class CandidateTable extends React.Component {
-  /*Creates a table with a header and a few Candidate objects
-   *Contains the properties onClick, this_table_check_values, and candidates
-   *when onClick is called by child candidate, the function is sent up to Office
-   *the function is sent with parameters indicating which table was clicked, and the index within that table
-   *this_table_check_values has the check values for each table,
-   *This is sent down to each candidate
-   *The candidates names are also sent down to each candidate
-   */
+    /**
+     * Creates one candidate table
+     * For each Researcher's UI, there are three tables generated
+     * The properties and choices made in "previous" tables affect later ones
+     * The Researcher parent passes down many properties to the tables they create
+     */
   renderCandidate(candidate, index) {
-    //Creation of a candidate, sending down properties
+    /**
+     * This function creates a candidate object to be added to the candidate table
+     * Many properties are passed down to the candidate
+     * candidate is the name of the candidate
+     * key is the index within the table (the third candidate is key #2, etc)
+     * index is the number of the table (each voting UI only has three tables, so index can be 0,1, or 2)
+     * onClick is interesting. It passes down the onClick function
+     * Whenever the child calls the onClick function, it instead does the function that was passed down to it
+     * In this case, the candidate child calls onclick, which calls candidatetables onClick
+     * Both Candidate and CandidateTable have the onClick function stored within their props
+     * CandidateTable's onClick is itself passed from the Researcher that created the table
+     * so Candidate calls Candidate Table, which calls the onClick within the researcher
+     * checked determines whether the candidate's checkbox should be checked
+     * this uses the variable "choice", which is the name of the chosen candidate, passed down from the Researcher
+     * disabled uses a lambda function to see if the choice for this table was one of the choices for any of the earlier tables
+     * If so, the checkbox should be disabled
+     * bold determines whether the candidate name should be bolded
+     * This depends on the researcher, and is only if that candidate is the current choice
+     * hiddenCheckbox determines if the checkbox next to the Candidate should be hidden
+     * hiddenCheckbox also depends on the researcher, and also is only hidden if the choice for this table matches choices from a previous table
+     */
     const {
       choiceNo,
       choice,
@@ -67,6 +85,7 @@ class CandidateTable extends React.Component {
       ],
       3: "Vote for One: Must be different than your first and second choices"
     };
+      //this.props.choiceNo is the index of the table
     const head = (
       <tr>
         <th>
@@ -88,7 +107,7 @@ class CandidateTable extends React.Component {
         </th>
       </tr>
     );
-    //Creates an array of candidates, calls renderCandidate function
+    //Creates an array with all of the candidates
     var rows = [];
     this.props.candidates.forEach((candidate, index) => {
       rows.push(this.renderCandidate(candidate, index));
