@@ -16,7 +16,7 @@ class Office extends React.Component {
     super(props);
     var timings_temp = [];
     timings_temp.push(["Begin", new Date().getTime()]);
-    this.secondsElapsed = 0;
+    this.msElapsed = 0;
     this.events = [];
     this.state = {
       timings: timings_temp,
@@ -26,7 +26,7 @@ class Office extends React.Component {
   }
 
   componentDidMount() {
-    this.timer = setInterval(() => this.secondsElapsed++, 1000);
+    this.timer = setInterval(() => this.msElapsed++, 1);
   }
 
   componentWillUnmount() {
@@ -76,10 +76,10 @@ class Office extends React.Component {
     });
     FileSaver.saveAs(blob, "Claudia" + this.props.subjectNumber + ".txt");
 
-    const { events, secondsElapsed } = this;
+    const { events, msElapsed } = this;
     this.events = [
       ...events,
-      { event: "Submit", secondsElapsed: secondsElapsed }
+      { event: "Submit", secondsElapsed: msElapsed /1000}
     ];
 
     hashHistory.push("/finalpage");
@@ -141,12 +141,12 @@ class Office extends React.Component {
       temp_table_valid[i + 1] = 1;
     }
 
-    const { events, secondsElapsed } = this;
+    const { events, msElapsed } = this;
     this.events = [
       ...events,
       {
         event: next_or_previous ? "Previous Button" : "Next Button",
-        secondsElapsed: secondsElapsed
+        secondsElapsed: msElapsed/1000
       }
     ];
 
@@ -176,10 +176,10 @@ class Office extends React.Component {
       }
     }
 
-    const { events, secondsElapsed } = this;
+    const { events, msElapsed } = this;
     this.events = [
       ...events,
-      { choices: choices_temp, secondsElapsed: secondsElapsed }
+      { choices: choices_temp, secondsElapsed: msElapsed /1000}
     ];
 
     this.setState({

@@ -1,0 +1,20 @@
+This is the ranked choice UI created by Brian and Kutub
+This project was built for Dr. Wallach, Dr. Acemyan, and Dr. Kortum of Rice University
+The purpose of this project was to test different voting UIs
+This project can track when buttons are pressed, and downloads that data as a txt file
+The best UI will be chosen based on the button press information
+The project, deployed, can be found at abriantran.github.io/voting-terminal
+This project was built using React.js, a javascript framework
+React uses a parent-child hierarchy of classes and objects of those classes
+Any object can have props (properties) and/or a state
+These are both variable storage, but state will re-render an object when it is updated
+The classes in this project are based on the Google Civic Data API
+In addition, the json data this project reads in is formatted like the Google Civic Data API suggests
+The general layout of this Project is as such:
+StartPage.jsx is the, well, start page. It references ResearcherPicker.jsx
+This file has the two researchers and the "default" San Francisco Style voting UI
+Using the start page, you can choose which UI you wish to see
+Each researcher (default San Francisco is considered a researcher for consistency) has their own jsx file with different logic
+Each Researcher jsx refers to the same CandidateTable class as children
+The CandidateTable class has candidates.jsx as a child
+There are other children and references, but these are the main ones

@@ -17,7 +17,7 @@ class Office extends React.Component {
     var timings_temp = [];
     timings_temp.push(["Begin", new Date().getTime()]);
 
-    this.secondsElapsed = 0;
+    this.msElapsed = 0;
     this.events = [];
 
     this.state = {
@@ -27,7 +27,7 @@ class Office extends React.Component {
     };
   }
   componentDidMount() {
-    this.timer = setInterval(() => this.secondsElapsed++, 1000);
+    this.timer = setInterval(() => this.msElapsed+=1, 1);
   }
 
   componentWillUnmount() {
@@ -158,10 +158,10 @@ class Office extends React.Component {
     });
     FileSaver.saveAs(blob, "Kortum" + this.props.subjectNumber + ".txt");
 
-    const { events, secondsElapsed } = this;
+    const { events, msElapsed } = this;
     this.events = [
       ...events,
-      { event: "Submit", secondsElapsed: secondsElapsed }
+      { event: "Submit", secondsElapsed: msElapsed /1000}
     ];
 
     hashHistory.push("/finalpage");
@@ -200,10 +200,10 @@ class Office extends React.Component {
       });
     }
 
-    const { events, secondsElapsed } = this;
+    const { events, msElapsed } = this;
     this.events = [
       ...events,
-      { event: "Next Button", secondsElapsed: secondsElapsed }
+      { event: "Next Button", secondsElapsed: msElapsed /1000}
     ];
   }
   handlePrevious(index) {
@@ -218,10 +218,10 @@ class Office extends React.Component {
       timings: timings_temp
     });
 
-    const { events, secondsElapsed } = this;
+    const { events, msElapsed } = this;
     this.events = [
       ...events,
-      { event: "Previous Button", secondsElapsed: secondsElapsed }
+      { event: "Previous Button", secondsElapsed: msElapsed /1000}
     ];
   }
   handleClick(table_index, index) {
@@ -241,10 +241,10 @@ class Office extends React.Component {
       }
     }
 
-    const { events, secondsElapsed } = this;
+    const { events, msElapsed } = this;
     this.events = [
       ...events,
-      { choices: choices_temp, secondsElapsed: secondsElapsed }
+      { choices: choices_temp, secondsElapsed: msElapsed /1000}
     ];
 
     this.setState({
