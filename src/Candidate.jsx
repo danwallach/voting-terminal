@@ -14,10 +14,12 @@ const defaultProps = {
 };
 
 class Candidate extends React.Component {
-  //Creates a candidate. Contains a checkbox and a candidate title
-  //Contains the proporties onClick and checked
-  //checked tells the candidate whether its box should be checked
-  //onClick passes a click event up to candidateTable with no parameters
+  /**
+   * Creates a candidate. Contains a checkbox and a candidate title
+   * Contains the proporties onClick and checked
+   * checked tells the candidate whether its box should be checked
+   * onClick passes a click event up to candidateTable with no parameters
+   */
   render() {
     const {
       candidate,

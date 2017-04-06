@@ -10,9 +10,11 @@ class ArrowButton extends React.Component {
     var tb_vld = this.props.table_valids;
     var tb_vld_num;
     var next_or_previous = 0;
-    //Loops through each table, checking if they are valid or not
-    //Valid means the currently focused, non disabled table
-    //Sets tb_valid_num to the number of the valid table
+    /**
+     * Loops through each table, checking if they are valid or not
+     * Valid means the currently focused, non disabled table
+     * Sets tb_valid_num to the number of the valid table
+     */
     for (let i = 0; i < tb_vld.length; i++) {
       if (tb_vld[i]) {
         tb_vld_num = i;
