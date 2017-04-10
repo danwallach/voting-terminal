@@ -236,7 +236,7 @@ class Election extends Component {
 export default class ClaudiaZieglerAcemyanDesign extends Component {
   render() {
     return (
-      <div className="mdc-layout-grid">
+      <div className="mdl-grid">
         <Election subjectNumber={this.props.location.query.subjectNumber} />
       </div>
     );
