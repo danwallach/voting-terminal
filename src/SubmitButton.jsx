@@ -1,6 +1,10 @@
 import React from "react";
 class SubmitButton extends React.Component {
   render() {
+    /**
+     * A submit button. Disabled if enough choices have not been picked
+     * If clicked, sends onClick function up to parent
+     */
     var choices = this.props.final_choices;
     var disable = true;
     if (choices === undefined) {

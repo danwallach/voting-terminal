@@ -2,6 +2,7 @@ import React from "react";
 
 import "./DesignHeading.css";
 
+//Creation of the heading over the website
 const DesignHeading = () => (
   <div className="heading">
     <h2 className="mdc-typography--display1">

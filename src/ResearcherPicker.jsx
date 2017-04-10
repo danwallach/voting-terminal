@@ -1,11 +1,12 @@
 import React from "react";
-import { Link } from "react-router";
+import { Link,hashHistory,Route } from "react-router";
 import { MDCTextfield } from "@material/textfield/dist/mdc.textfield";
 import screenfull from "screenfull";
 
+
 import researchers from "./researchers.json";
 import "./ResearcherPicker.css";
-
+//This page allows you to choose a researcher to run, allows you to make the screen fullscreen, and allows you to enter a subject number
 class ResearcherPicker extends React.Component {
   constructor(props) {
     super(props);
@@ -31,29 +32,32 @@ class ResearcherPicker extends React.Component {
   };
   render() {
     const { subjectNumber, fullscreen } = this.state;
+    //Choosing the researchers, if no subject number is chosen, it alerts that
+    //Otherwise it pushes you to that researcher's page
     const body = researchers.reduce(
-      (rows, researcher) =>
-        rows.concat(
-          <Link
-            to={{
-              pathname: "/startpage",
-              query: { subjectNumber: subjectNumber, route: researcher.route }
-            }}
-          >
-            <div className="mdl-list__item mdl-card__actions mdl-card--border">
-              <span className="mdl-list__item-primary-content">
-                <i
-                  style={{
-                    backgroundImage: "url(" + researcher.avatarUrl + ")",
-                    backgroundSize: "auto 40px"
-                  }}
-                  className="material-icons mdl-list__item-avatar"
-                />
-                <span>{researcher.name}</span>
-              </span>
-            </div>
-          </Link>
-        ),
+      (rows, researcher) => rows.concat(
+        <div
+          onClick={() => {
+            if (!this.state.subjectNumber) {
+              alert("No subject number chosen");
+            } else {
+              hashHistory.push(`${researcher.route}?subjectNumber=${ subjectNumber }`);
+            }
+          }}
+          className="mdl-list__item mdl-card__actions mdl-card--border"
+        >
+          <span className="mdl-list__item-primary-content">
+            <i
+              style={{
+                backgroundImage: "url(" + researcher.avatarUrl + ")",
+                backgroundSize: "auto 40px"
+              }}
+              className="material-icons mdl-list__item-avatar"
+            />
+            <span>{researcher.name}</span>
+          </span>
+        </div>
+      ),
       []
     );
     console.log(body);
@@ -81,7 +85,7 @@ class ResearcherPicker extends React.Component {
     );
   }
 }
-
+//Creation of a textfield allowing you to enter a subject number
 class Textfield extends React.Component {
   componentDidMount() {
     MDCTextfield.attachTo(document.querySelector(".mdc-textfield"));

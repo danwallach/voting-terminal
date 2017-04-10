@@ -8,8 +8,10 @@ import election from "./election.json";
 import FileSaver from "file-saver";
 import SubmitButton from "./SubmitButton";
 import { hashHistory } from "react-router";
+//San Francisco style is the most programmatically simple,
+//it therefore contains the least logic
+//See ClaudiaAcemyan design for code documentation
 class Office extends React.Component {
-  //Office is the logic layer that contains and distributes most of the information
   constructor(props) {
     super(props);
     var timings_temp = [];
@@ -46,11 +48,6 @@ class Office extends React.Component {
       ]
     });
   }
-  //Whenever a candidate detects a click, it sends that fact to CandidateTable
-  //CandidateTable sends that up to Office with the table_index and index
-  //handleClick will then change the state of the checkboxvalues array
-  //All boxes in the row and column of the focused box will be set to 0
-  //The focused box itself will be toggled
   handleClick = (table_index, index) => {
     var timings_temp = this.state.timings.slice();
     timings_temp.push([table_index, index, new Date().getTime()]);

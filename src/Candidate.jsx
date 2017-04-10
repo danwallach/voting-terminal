@@ -16,9 +16,15 @@ const defaultProps = {
 class Candidate extends React.Component {
   /**
    * Creates a candidate. Contains a checkbox and a candidate title
-   * Contains the proporties onClick and checked
+   * Contains many properties controlling behavior
    * checked tells the candidate whether its box should be checked
    * onClick passes a click event up to candidateTable with no parameters
+   * candidate is the name of the candidate
+   * index is where it is within the table
+   * disabled is whether or not the checkbox should be clickable
+   * under certain designs, the checkbox should be hidden next to the candidate name
+   * this is the hiddenCheckbox variable
+   * The checkbox should only be hidden if the candidate is also disabled
    */
   render() {
     const {

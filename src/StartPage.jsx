@@ -12,7 +12,8 @@ const defaultProps = {
     }
   }
 };
-
+//Creation of a button that allows the participant to start the study
+//Pressing the button sends you to the researcher's website
 class StartPage extends React.Component {
   handleClick = () => {
     const { route, subjectNumber } = this.props.location.query;

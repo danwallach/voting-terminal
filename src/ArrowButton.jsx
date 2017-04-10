@@ -23,14 +23,18 @@ class ArrowButton extends React.Component {
     var dex = this.props.buttonNo;
     var fnl_chc = this.props.final_choices;
     var valid;
-    //Titles the arrow using the index of the button and the index of the focused valid table
-    //Changes the value of the variable checking if the button is a next button or a previous button
+    /**
+     * Titles the arrow using the index of the button and the index of the focused valid table
+     * Changes the value of the variable checking if the button is a next button or a previous button
+     */
     if (tb_vld_num - dex > 0) {
       title = "arrow_back";
       next_or_previous = 1;
     }
-    //Determines if the button is a valid button to be clicked
-    //A button is valid if either table next to it is valid
+    /**
+     * Determines if the button is a valid button to be clicked
+     * A button is valid if either table next to it is valid
+     */
     if (next_or_previous) {
       valid = tb_vld[dex] || tb_vld[dex + 1];
     } else {
@@ -65,8 +69,6 @@ class ArrowButton extends React.Component {
             break;
         }
         break;
-      //buttonCaption = "Button 1";
-      //break;
       default:
         buttonCaption = "";
     }
